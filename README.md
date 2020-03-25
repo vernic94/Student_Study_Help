@@ -2,3 +2,7 @@
 Minilab i kursen II1302
 
 
+Deltagarna:
+
+
+Fariba Yazdani
