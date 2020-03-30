@@ -1,8 +1,11 @@
-# gitlab_II1302
-Minilab i kursen II1302
+# student-study-help
+projektgrupp 5's projekt i kursen "Projekt och projektmetoder" II1302
 
 
-Deltagarna:
-
-
+Deltagare:
+Agnes Altin
+Amanda Baza
 Fariba Yazdani
+Lou Jönsson
+Saga Harnesk
+Vera Nicolaou
