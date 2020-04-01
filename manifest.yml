@@ -1,5 +1,5 @@
- applications:
- - name: student-study-help
-   random-route: true
-   memory: 128M
-   buildpack: sdk-for-nodejs
+applications:
+- name: student-study-help
+  random-route: true
+  memory: 128M
+  buildpack: sdk-for-nodejs
