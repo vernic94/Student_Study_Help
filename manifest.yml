@@ -1,7 +1,6 @@
 applications:
 - name: student-study-help
   random-route: true
-  path: build/
   memory: 64M
   instances: 1
   disk_quota: 1024M
