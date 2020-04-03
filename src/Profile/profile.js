@@ -1,5 +1,7 @@
 /* Profile page shows current user's account
 
+Responsible: Agnes
+
 ITERATION 2
 Should consist of: 
 - email?, password, school (list?)
