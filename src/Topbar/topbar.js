@@ -3,7 +3,7 @@
 ITERATION 2
 Should consist of: 
 - links to other pages: map, my profile, create study session
-- header ?
-- Side/top bar (?)
+- header 
+- Side/top bar 
 
 */
