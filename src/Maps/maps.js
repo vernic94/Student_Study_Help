@@ -12,3 +12,17 @@ Must not be handled (this iteration):
 - Filter function (where you choose different parammeters)
 
 */
+
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./maps.css";
+
+class CreateAccount extends Component {
+  render() {
+    return (
+      <h1>MAPS PAGE</h1>
+    );
+  }
+}
+
+export default CreateAccount;

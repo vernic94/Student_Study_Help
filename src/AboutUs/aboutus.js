@@ -7,3 +7,17 @@ Should consist of:
 - Maybe short description of why we are making this project
 
 */
+
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./aboutus.css";
+
+class AboutUs extends Component {
+  render() {
+    return (
+      <h1>ABOUT US PAGE</h1>
+    );
+  }
+}
+
+export default AboutUs;
