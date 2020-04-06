@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Profile from './Profile/profile';
-import ProfileEditor from './ProfileEditor/profileEditor';
+import { BrowserRouter } from "react-router-dom";
 
 /*
 ReactDOM.render(
@@ -25,9 +24,9 @@ ReactDOM.render(
 
 /*
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 */

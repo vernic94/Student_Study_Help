@@ -13,3 +13,17 @@ Must not be handled (this iteration):
 - Store user in database
 
 */
+
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./studysession.css";
+
+class StudySession extends Component {
+  render() {
+    return (
+      <h1>CREATE STUDY SESSION PAGE</h1>
+    );
+  }
+}
+
+export default StudySession;
