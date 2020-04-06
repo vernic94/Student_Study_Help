@@ -11,3 +11,17 @@ Must not be handled (this iteration):
 - Account username and password from database, and therefore not 100% functional login function
 
 */
+
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./welcome.css";
+
+class Welcome extends Component {
+  render() {
+    return (
+      <h1>WELCOME PAGE</h1>
+    );
+  }
+}
+
+export default Welcome;

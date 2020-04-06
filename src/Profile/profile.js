@@ -14,3 +14,17 @@ Must not be handled (this iteration):
 - Get user information from database 
 
 */
+
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./profile.css";
+
+class Profile extends Component {
+  render() {
+    return (
+      <h1>PROFILE PAGE</h1>
+    );
+  }
+}
+
+export default Profile;

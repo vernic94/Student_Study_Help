@@ -7,3 +7,18 @@ Should consist of:
 - Side/top bar 
 
 */
+
+
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./topbar.css";
+
+class Topbar extends Component {
+  render() {
+    return (
+      <h1>TOP BAR!!</h1>
+    );
+  }
+}
+
+export default Topbar;

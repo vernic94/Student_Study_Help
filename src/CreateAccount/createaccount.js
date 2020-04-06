@@ -22,6 +22,7 @@ Must not be handled (this iteration):
 
 */
 
+<<<<<<< HEAD
 import React, { Component } from 'react';
 /*import { Link } from "react-router-dom";*/
 
@@ -49,3 +50,18 @@ class CreateAccount extends Component{
 
 export default CreateAccount;
 
+=======
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./createaccount.css";
+
+class CreateAccount extends Component {
+  render() {
+    return (
+      <h1>CREATE ACCOUNT PAGE</h1>
+    );
+  }
+}
+
+export default CreateAccount;
+>>>>>>> master
