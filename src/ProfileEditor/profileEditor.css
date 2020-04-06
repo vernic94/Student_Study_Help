@@ -1,0 +1,29 @@
+.ProfileEditorContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+/**************************************************/
+/*                    Buttons                     */
+/**************************************************/
+
+.Button{
+    align-self: center;
+    text-align: center;
+    width: 120px;
+}
+
+.ButtonSave{
+    align-self: center;
+    text-align: center;
+    width: 100px;
+}
+
+.ButtonCancel{
+    align-self: center;
+    text-align: center;
+    width: 100px;
+}
+
+/**************************************************/

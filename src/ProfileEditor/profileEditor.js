@@ -27,7 +27,7 @@ class ProfileEditor extends Component {
 	render(){
 		return(
             <div className="ProfileEditorContainer">
-                <button type="button">Return to Profile</button>
+                <button className="Button" type="button">Return to Profile</button>
                 <div className="UsernameEditor">
                     <label for="fname">Username:</label>
                     <input type="text" id="username" name="username"></input>
@@ -55,8 +55,10 @@ class ProfileEditor extends Component {
                 </div>
                 <div className="CoursesEditor">
                 </div>
-                <button type="button">Save Changes</button>
-                <button type="button">Cancel</button>
+                <div className="SaveCancel">
+                    <button className="ButtonSave" type="submit">Save</button>
+                    <button className="ButtonCancel" type="reset">Cancel</button>
+                </div>
             </div>
         );
 	}
