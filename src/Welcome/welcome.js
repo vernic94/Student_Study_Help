@@ -34,7 +34,8 @@ class Welcome extends Component {
                     </input>
                     <label htmlFor="inputPassword" className="sr-only">Password</label>
                     <input type="password" id="inputPassword" className="form-control" placeholder="Password" required/>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <button className="btn btn-lg  btn-block" type="submit"
+                            style={{backgroundColor: "#56CCF2"}}>Sign in</button>
                 </form>
                 <div className="mb-3">
                     <label><h5>To create an account click here.</h5>
