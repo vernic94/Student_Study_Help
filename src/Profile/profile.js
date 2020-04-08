@@ -20,11 +20,27 @@ import { Link } from "react-router-dom";
 import "./profile.css";
 
 class Profile extends Component {
-  render() {
-    return (
-      <h1>PROFILE PAGE</h1>
-    );
-  }
+	//constructor(props){}
+	
+	render(){
+		return(
+            <div className="ProfileContainer">
+                <div className="Edit">
+                    <button type="button">Edit Profile</button>
+                </div>
+                <h1>Username</h1>
+                <div className="ProfileInfo">
+                    <div className="ProfileBiography">
+                        <p><i>Biography...</i></p>
+                    </div>
+                    <p>School(s)</p>
+                    <p>Subjects</p>
+                    <p>Classes</p>
+                    <p>Study sessions</p>
+                </div>
+            </div>
+        );
+	}
 }
 
 export default Profile;
