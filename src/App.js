@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        <Route exact path="/" component={ProfileEditor} />
+        <Route exact path="/" component={Welcome} />
         <Route path="/aboutus" component={AboutUs}/>
         <Route path="/create-account" component={CreateAccount}/>
         <Route path="/maps" component={Maps}/>
