@@ -30,7 +30,7 @@ export class Topbar extends React.Component{
                                 Navigation links where "to" is what
                                  departmentpage the link navigates to
                                 */}
-                                <Link t= "/">Home</Link>
+                                <Link to= "/">Home</Link>
                                 <Link to="profile">Profile</Link>
                                 <Link to="create-study-session">Study Session</Link>
                                 <Link to="maps">Map</Link>
