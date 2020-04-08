@@ -4,6 +4,14 @@
     text-align: center;
 }
 
+.ProfileBiography{
+    background-color: #3b4250;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 500px;
+    font-size: 16px;
+}
+
 .Edit{
     text-align: right;
 }

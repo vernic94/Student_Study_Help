@@ -29,9 +29,11 @@ class Profile extends Component {
                     <button type="button">Edit Profile</button>
                 </div>
                 <h1>Username</h1>
-                <div>
-                    <p><i>Biography...</i></p>
-                    <p>School</p>
+                <div className="ProfileInfo">
+                    <div className="ProfileBiography">
+                        <p><i>Biography...</i></p>
+                    </div>
+                    <p>School(s)</p>
                     <p>Subjects</p>
                     <p>Classes</p>
                     <p>Study sessions</p>

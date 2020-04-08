@@ -15,6 +15,14 @@ Should consist of:
 - header 
 - Side/top bar 
 
+Collection - User
+Fields:
+- username
+- biogrphy
+- school(s)
+- subjects
+- courses
+
 */
 
 import React, { Component } from "react";
@@ -34,7 +42,10 @@ class ProfileEditor extends Component {
                 </div>
                 <div className="BiographyEditor">
                     <label for="fname">Biography:</label>
-                    <input type="text" id="biography" name="biography"></input>
+                    <br></br>
+                    <textarea id="biography" rows="5" cols="50">
+                        Biography
+                    </textarea>
                 </div>
                 <div className="SchoolEditor">
                     <select id="schools">
@@ -61,7 +72,7 @@ class ProfileEditor extends Component {
                 </div>
             </div>
         );
-	}
+    }
 }
 
 export default ProfileEditor;
