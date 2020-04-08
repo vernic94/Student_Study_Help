@@ -21,7 +21,7 @@ export class Topbar extends React.Component{
 
     render(){
         return(
-            <Navbar bg="dark" expanded="lg">
+            <Navbar bg="dark" expanded="lg" className="topbar">
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id = "basic-navbar-nav">
                     <Nav>

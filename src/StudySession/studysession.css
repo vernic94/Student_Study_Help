@@ -1,0 +1,40 @@
+.studysession-page{
+    height: 100vh;
+    width: 100%;
+}
+
+.choice-btns{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.studysession-description{
+    margin-bottom: 30px;
+}
+
+.description-box{
+    margin-top: 10px;
+    width: 300px;
+    height: 100px;
+}
+
+.studysession-btn{
+    margin-top: 30px;
+}
+
+
+/* plan study session paramters */
+
+.time-box{
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+.location-box{
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.location-list{
+    margin-left: 5px;
+}

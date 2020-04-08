@@ -20,7 +20,6 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        <Topbar/>
         <Route exact path="/" component={Welcome} />
         <Route path="/aboutus" component={AboutUs}/>
         <Route path="/maps" component={Maps}/>

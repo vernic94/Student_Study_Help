@@ -16,11 +16,17 @@ Must not be handled (this iteration):
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./maps.css";
+import Topbar from "../Topbar/topbar"
+
 
 class CreateAccount extends Component {
   render() {
     return (
-      <h1>MAPS PAGE</h1>
+      <div className="maps-page">
+          <Topbar/>
+         <h1>MAPS PAGE</h1>
+      </div>
+
     );
   }
 }
