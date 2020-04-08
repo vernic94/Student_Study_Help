@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom'
 import {Navbar, Nav} from 'react-bootstrap'
+import { Link } from "react-router-dom";
+import "./topbar.css";
 
 /* 
     Code to handle the topbar logic, which is a 
@@ -24,6 +26,7 @@ Should consist of:
 - Side/top bar 
 
 */
+
 class Topbar extends React.Component{
     constructor(props){
         super(props);
@@ -59,3 +62,6 @@ class Topbar extends React.Component{
     }
 
 }
+
+export default Topbar;
+

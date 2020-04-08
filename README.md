@@ -2,13 +2,13 @@
 projektgrupp 5's projekt i kursen "Projekt och projektmetoder" II1302
 
 
-Deltagare:
-Agnes Altin
-Amanda Baza
-Fariba Yazdani
-Lou Jönsson
-Saga Harnesk
-Vera Nicolaou
+Deltagare:<br />
+Agnes Altin<br />
+Amanda Baza<br />
+Fariba Yazdani<br />
+Lou Jönsson<br />
+Saga Harnesk<br />
+Vera Nicolaou<br />
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
