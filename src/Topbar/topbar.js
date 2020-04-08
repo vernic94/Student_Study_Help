@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom'
 import {Navbar, Nav} from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import "./topbar.css";
@@ -30,7 +29,7 @@ export class Topbar extends React.Component{
                                 Navigation links where "to" is what
                                  departmentpage the link navigates to
                                 */}
-                                <Link to= "/">Home</Link>
+                              
                                 <Link to="profile">Profile</Link>
                                 <Link to="create-study-session">Study Session</Link>
                                 <Link to="maps">Map</Link>
