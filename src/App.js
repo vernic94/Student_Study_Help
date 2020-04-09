@@ -10,6 +10,8 @@ import ProfileEditor from "./ProfileEditor/profileEditor";
 import Maps from "./Maps/maps";
 import StudySession from "./StudySession/studysession";
 
+import {Topbar} from './Topbar/topbar'
+
 import { Link } from "react-router-dom";
 
 function App() {
@@ -17,13 +19,14 @@ function App() {
     <div className="App">
       <header className="App-header">
 
+        <Topbar/>
         <Route exact path="/" component={Welcome} />
         <Route path="/aboutus" component={AboutUs}/>
-        <Route path="/create-account" component={CreateAccount}/>
         <Route path="/maps" component={Maps}/>
         <Route path="/profile" component={Profile}/>
         <Route path="/profileEditor" component={ProfileEditor}/>
         <Route path="/create-study-session" component={StudySession}/>
+        <Route path="/create-account" component={CreateAccount}/>
 
       </header>
     </div>
