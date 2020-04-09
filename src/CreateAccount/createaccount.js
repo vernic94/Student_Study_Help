@@ -16,7 +16,7 @@ Must not be handled (this iteration):
 
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import Topbar from "../Topbar/topbar"
+import "./createaccount.css";
 
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
@@ -78,7 +78,6 @@ class CreateAccount extends Component{
 		return (
 
  		  <div className="CreateAccount">
- 		  	<Topbar/>
  		  	<h1>Create Account</h1>
 			<label>Email:</label>
 			<input type="text" onChange={e=> this.setState({username: e.target.value})}/>
