@@ -3,19 +3,11 @@
 Responsible: Saga
 
 ITERATION 2
-<<<<<<< HEAD
-Should consist of:
-- You should be able to type in parameters (input function), username?, email?, password, school (list?)
-- Login button, when onClick -> profile page ?
-- header ?
-- Side/top bar (?)
-=======
 Should consist of:
 - You should be able to type in parameters (input function), email, password
 - Create account/Sign up button, when onClick -> profile page
 - header
 - Top bar
->>>>>>> master
 
 Must not be handled (this iteration):
 - Store user in database
@@ -29,24 +21,39 @@ import Topbar from "../Topbar/topbar"
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
+    authDomain: "student-study-help.firebaseapp.com",
+    databaseURL: "https://student-study-help.firebaseio.com",
+    projectId: "student-study-help",
+    storageBucket: "student-study-help.appspot.com",
+    messagingSenderId: "284363914579",
+    appId: "1:284363914579:web:7bec55fc128b5ab3cb35a6",
+    measurementId: "G-YPH7CP209E"
+  };
+
 class CreateAccount extends Component{
 	constructor(props){
 	  super(props);
 	  this.state={
-		users: [],
+		user: "",
 	    username:"",
 	    password: "",
 	    correct: false,
 	    change: false,
 	    status: "NULL"
 	  }
+	  global.firebase.initializeApp(firebaseConfig);
+	  this.db = global.firebase.firestore();
+	  this.users = this.db.collection("users");
     }
     addHandler=()=>{
 		this.createUser();
     }
 
-    userExists(){
-		/*check if user already exists*/
+    userExist(){
+		return false;
 	}
 
     confirmPassword(){
@@ -54,11 +61,13 @@ class CreateAccount extends Component{
 	}
 
     createUser(){
-		//let users = this.state.users;
-	    bcrypt.hash(this.state.password, saltRounds, (err, hash) => {
-			this.setState({users: [this.state.username,hash]});
+		//let username = this.state.username;
+		bcrypt.hash(this.state.password, saltRounds, (err, hash) => {
+			this.users.doc(this.state.username).set({
+				password: hash
+			});
+			console.log(this.state.username, this.state.password);
 		});
-		console.log(this.state.users);
 	}
 
 	render() {
@@ -79,9 +88,9 @@ class CreateAccount extends Component{
 			<label>Confirm password:</label>
 			<input type="password" />
 
-			<Link to="/profile" onClick={this.addHandler}>
-				<button className="logBtn">Create user</button>
-   		    </Link>
+
+				<button className="logBtn" onClick={this.addHandler}>Create user</button>
+
 
 	  	  </div>
 		);

@@ -27,7 +27,7 @@ class Welcome extends Component {
                      height="200vh">
                 </img>
                 <form className="form-signin">
-                    <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <h2 className="h3 mb-3 font-weight-normal">Please sign in</h2>
                     <label htmlFor="inputEmail" className="sr-only">Email address</label>
                     <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required
                            autoFocus>
@@ -38,8 +38,11 @@ class Welcome extends Component {
                             style={{backgroundColor: "#56CCF2"}}>Sign in</button>
                 </form>
                 <div className="mb-3">
-                    <label><h5>To create an account click here.</h5>
-                    </label>
+                    <Link to="/create-account">
+                        <label>
+                            <h6>Create account</h6>
+                        </label>
+                    </Link>
                 </div>
             </div>
         );

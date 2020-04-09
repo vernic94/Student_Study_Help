@@ -14,12 +14,12 @@ import {Topbar} from './Topbar/topbar'
 
 import { Link } from "react-router-dom";
 
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
 
-        <Topbar/>
         <Route exact path="/" component={Welcome} />
         <Route path="/aboutus" component={AboutUs}/>
         <Route path="/maps" component={Maps}/>
