@@ -28,12 +28,13 @@ export class Topbar extends React.Component{
                                 {/*
                                 Navigation links where "to" is what
                                  departmentpage the link navigates to
+                                 and "&nbsp;" adds a space after the Link.
                                 */}
                               
-                                <Link to="profile">Profile</Link>
-                                <Link to="create-study-session">Study Session</Link>
-                                <Link to="maps">Map</Link>
-                                <Link to="aboutus">AboutUs</Link>
+                                <Link to="profile">Profile</Link>&nbsp; 
+                                <Link to="create-study-session">Study Session</Link>&nbsp; 
+                                <Link to="maps">Map</Link>&nbsp;
+                                <Link to="aboutus">About Us</Link>
                            
                     </Nav>
                 </Navbar.Collapse>
