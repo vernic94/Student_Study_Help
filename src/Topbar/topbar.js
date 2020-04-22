@@ -18,7 +18,6 @@ export class Topbar extends React.Component{
         super(props);
         this.state = {}
     }
-
     render(){
         return(
             <Navbar bg="dark" expanded="lg" className="topbar">
@@ -30,19 +29,16 @@ export class Topbar extends React.Component{
                                  departmentpage the link navigates to
                                  and "&nbsp;" adds a space after the Link.
                                 */}
-                              
                                 <Link to="profile">Profile</Link>&nbsp; 
-                                <Link to="create-study-session">Study Session</Link>&nbsp; 
+                                <Link to="create-study-session">Create Study Session</Link>&nbsp;
+                                <Link to="study-session">Study Session</Link>&nbsp;
                                 <Link to="maps">Map</Link>&nbsp;
                                 <Link to="aboutus">About Us</Link>
-                           
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
             );       
     }
-
 }
-
 export default Topbar;
 
