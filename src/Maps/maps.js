@@ -19,16 +19,29 @@ import "./maps.css";
 import Topbar from "../Topbar/topbar"
 
 
-class CreateAccount extends Component {
+class Maps extends Component {
+  componentDidMount(){
+    var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoibG91am9ucyIsImEiOiJjazk4YWFqMngwMHFsM2ptbmFjaXc0M3ZqIn0.LoaiIt1kyXpMu6IdfcMikQ';
+    var map = new mapboxgl.Map({
+      container: 'test',
+      style: 'mapbox://styles/mapbox/streets-v11'
+    });
+  }
   render() {
+
+
+
     return (
       <div className="maps-page">
           <Topbar/>
          <h1>MAPS PAGE</h1>
+         <div id="test"></div>
       </div>
 
     );
   }
 }
 
-export default CreateAccount;
+export default Maps;

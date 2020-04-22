@@ -65,8 +65,10 @@ class StudySession extends Component {
           </select>
 
           <div className="studysession-description">
-            <p>Note: </p>
-            <input className="description-box" type="text"></input>
+            <p className="Note-text">Note: </p>
+            <textarea  className="description-box" id="description" rows="5" cols="100">
+                            Description
+            </textarea><br/>
           </div>
 
           <div className="btnDiv">
@@ -87,9 +89,13 @@ class StudySession extends Component {
                 <option value="KTH-kista">KTH Kista</option>
                 <option value="KTH-flemingsberg">KTH Flemingsberg</option>
                 <option value="KTH-sodertalje">KTH Södertälje</option>
-              </select>
-            <br/>Description : <input className="description-box" type="text" name="description" /><br />
-            <input className="studysession-btn" type="submit" value="Plan study session" />
+              </select><br/>
+            <textarea  className="description-box" id="description" rows="5" cols="100">
+                            Description
+            </textarea><br/>
+            <Link to="/maps">
+              <input className="studysession-btn" type="submit" value="Plan study session" />
+            </Link>
           </form>;
         break;
       default:

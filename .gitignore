@@ -27,5 +27,5 @@ yarn-error.log*
 /node_modules/
 
 .idea
-
-
+package.json
+package-lock.json

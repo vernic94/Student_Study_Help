@@ -30,7 +30,9 @@ class Profile extends Component {
                 <Topbar/>
                 <div className="ProfileContainer">
                     <div className="Edit">
-                        <button type="button">Edit Profile</button>
+                        <Link to="/profileEditor">
+                            <button type="button">Edit Profile</button>
+                        </Link>
                     </div>
                     <h1>Username</h1>
                     <div className="ProfileInfo">
