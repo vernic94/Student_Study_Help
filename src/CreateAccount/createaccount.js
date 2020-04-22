@@ -16,22 +16,8 @@ Must not be handled (this iteration):
 
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import Topbar from "../Topbar/topbar"
-
-const bcrypt = require("bcryptjs");
-const saltRounds = 10;
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
-    authDomain: "student-study-help.firebaseapp.com",
-    databaseURL: "https://student-study-help.firebaseio.com",
-    projectId: "student-study-help",
-    storageBucket: "student-study-help.appspot.com",
-    messagingSenderId: "284363914579",
-    appId: "1:284363914579:web:7bec55fc128b5ab3cb35a6",
-    measurementId: "G-YPH7CP209E"
-  };
+import "./createaccount.css";
+import modelInstance from "../data/Model";
 
 class CreateAccount extends Component{
 	constructor(props){
@@ -44,30 +30,13 @@ class CreateAccount extends Component{
 	    change: false,
 	    status: "NULL"
 	  }
-	  global.firebase.initializeApp(firebaseConfig);
-	  this.db = global.firebase.firestore();
-	  this.users = this.db.collection("users");
     }
     addHandler=()=>{
-		this.createUser();
+		modelInstance.addUser(this.state.username,this.state.password);
     }
-
-    userExist(){
-		return false;
-	}
 
     confirmPassword(){
 		/*check confirm password*/
-	}
-
-    createUser(){
-		//let username = this.state.username;
-		bcrypt.hash(this.state.password, saltRounds, (err, hash) => {
-			this.users.doc(this.state.username).set({
-				password: hash
-			});
-			console.log(this.state.username, this.state.password);
-		});
 	}
 
 	render() {
@@ -78,10 +47,9 @@ class CreateAccount extends Component{
 		return (
 
  		  <div className="CreateAccount">
- 		  	<Topbar/>
  		  	<h1>Create Account</h1>
 			<label>Email:</label>
-			<input type="text" onChange={e=> this.setState({username: e.target.value})}/>
+			<input type="email" placeholder="Email address" required autoFocus onChange={e=> this.setState({username: e.target.value})}/>
 			<label>Password:</label>
 			<input type="password" onChange={e=> this.setState({password: e.target.value, change: true})}/>
 			{msg}
