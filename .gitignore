@@ -1,4 +1,9 @@
-.DS_STORE
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# api key
+src/data/firebaseConfig.js
+
+# dependencies
 node_modules
 scripts/flow/*/.flowconfig
 *~
@@ -29,8 +34,5 @@ yarn-error.log*
 /node_modules/
 
 .idea
-package.json
-package-lock.json
-package-lock.json
 package.json
 package-lock.json
