@@ -17,15 +17,21 @@
 }
 
 .ProfileBiography{
+    overflow-y: auto;
+    max-height: 100px;
     background-color: #3b4250;
-    padding-top: 15px;
+    padding-top: 12px;
     padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 0px;
     width: 600px;
-    font-size: 16px;
+    font-size: 15px;
     margin: auto;
     margin-bottom: 10px;
+}
+
+.ProfileParagraph{
+    margin: 1px;
 }
 
 .BioParagraph{

@@ -30,13 +30,14 @@ class Profile extends Component {
         this.state = {
             username: "",
             biography: "",
-            school: "",
-            subject: "",
+            school: [],
+            subject: [],
             pfpurl: ""
         }
     }
 
     componentDidMount(){
+        
         var firebaseConfig = {
             apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
             authDomain: "student-study-help.firebaseapp.com",
@@ -84,10 +85,10 @@ class Profile extends Component {
                         <div className="ProfileBiography">
                             <p className="BioParagraph"><i>{this.state.biography}</i></p>
                         </div>
-                        <p>{"Schools: " + this.state.school}</p>
-                        <p>{"Subjects: " + this.state.subject}</p>
-                        <p>Classes</p>
-                        <p>Study sessions</p>
+                        <p className="ProfileParagraph">{"Schools: " + this.state.school}</p>
+                        <p className="ProfileParagraph">{"Subjects: " + this.state.subject}</p>
+                        <p className="ProfileParagraph">Courses</p>
+                        <p className="ProfileParagraph">My Study sessions</p>
                     </div>
                 </div>
             </div>
