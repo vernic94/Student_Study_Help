@@ -1,7 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# api key
+src/data/firebaseConfig.js
+
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.js
 
@@ -23,3 +26,7 @@ yarn-debug.log*
 yarn-error.log*
 /node_modules/
 src/data/firebaseConfig.js
+
+.idea
+package.json
+package-lock.json
