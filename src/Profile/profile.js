@@ -30,8 +30,8 @@ class Profile extends Component {
         this.state = {
             username: "",
             biography: "",
-            school: "",
-            subject: "",
+            school: [],
+            subject: [],
             pfpurl: ""
         }
     }
@@ -88,7 +88,7 @@ class Profile extends Component {
                         <p className="ProfileParagraph">{"Schools: " + this.state.school}</p>
                         <p className="ProfileParagraph">{"Subjects: " + this.state.subject}</p>
                         <p className="ProfileParagraph">Courses</p>
-                        <p className="ProfileParagraph">Study sessions</p>
+                        <p className="ProfileParagraph">My Study sessions</p>
                     </div>
                 </div>
             </div>

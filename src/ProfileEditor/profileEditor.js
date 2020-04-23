@@ -41,8 +41,8 @@ class ProfileEditor extends Component {
         this.state = {
             username: "",
             biography: "",
-            school: "",
-            subject: "",
+            school: [],
+            subject: [],
             pfpurl: ""
         }
     }
@@ -74,7 +74,7 @@ class ProfileEditor extends Component {
                 biography: doc.data().bio,
                 school: doc.data().school,
                 subject: doc.data().subjects,
-                pfpurl: doc.data().pfpurl
+                pfpurl: doc.data().pfpurl,
             })
         })
     }
@@ -83,10 +83,6 @@ class ProfileEditor extends Component {
         event.preventDefault();
         const db = firebase.firestore();
         const docRef = db.collection("users").doc("KPPhw1QDS3j7HtfQhPQP");
-
-        let nam = event.target.name;
-        let val = event.target.value;
-        this.setState({[nam]: val});
 
         docRef.update({
             name: this.state.username,
@@ -105,7 +101,41 @@ class ProfileEditor extends Component {
     inputHandler = (event) => {
         let nam = event.target.name;
         let val = event.target.value;
-        this.setState({[nam]: val});
+        let exists = false;
+
+        if(nam === "school"){
+            for(let i=0; i < this.state.school.length; i++){
+                if(this.state.school[i] === val){
+                    console.log("Already exists!")
+                    exists = true;
+                }
+            }
+        }
+
+        if(nam === "subject"){
+            for(let i=0; i < this.state.subject.length; i++){
+                if(this.state.subject[i] === val){
+                    console.log("Already exists!")
+                    exists = true;
+                }
+            }
+        }
+
+        if(exists != false && nam === "school"){
+            console.log("Do nothing!")
+        }else if(exists != false && nam === "subject"){
+            console.log("Do nothing!")
+        }else if(exists === false && nam === "school"){
+            let arr = this.state.school;
+            arr = arr.push(val);
+            console.log(this.state.school)
+        }else if(exists === false && nam === "subject"){
+            let arr = this.state.subject;
+            arr = arr.push(val);
+            console.log(this.state.subject)
+        }else{
+            this.setState({[nam]: val});
+        }
     }
 	
 	render(){
@@ -136,17 +166,17 @@ class ProfileEditor extends Component {
                     <div className="SchoolEditor">
                         <label>
                             Select schools:
-                            <select name="school" className="SchoolSelect" value={this.state.school} onChange={this.inputHandler}>
-                                <option value="Kungliga Tekniska Högskolan">Kungliga Tekniska Högskolan</option>
+                            <select name="school" className="SchoolSelect" onChange={this.inputHandler}>
                                 <option value="Stockholms Universitet">Stockholms Universitet</option>
-                                <option value="Karonlinska">Karonlinska</option>
+                                <option value="Karolinska">Karonlinska</option>
+                                <option value="Kungliga Tekniska Högskolan">Kungliga Tekniska Högskolan</option>
                             </select>
                         </label>
                     </div>
                     <div className="SubjectEditor">
                         <label>
                             Select subjects:
-                            <select name="subject" className="SubjectSelect" value={this.state.subject} onChange={this.inputHandler}>
+                            <select name="subject" className="SubjectSelect" onChange={this.inputHandler}>
                                 <option value="Maths">Maths</option>
                                 <option value="Biology">Biology</option>
                                 <option value="Economy">Economy</option>
