@@ -61,6 +61,7 @@ class Model extends ObservableModel {
 	}
 	logout(){
 		this.currentUser = null;
+		console.log(this.currentUser);
 	}
 
 

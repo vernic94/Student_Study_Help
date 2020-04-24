@@ -38,7 +38,7 @@ export class Topbar extends React.Component{
                                 <Link to="create-study-session">Study Session</Link>
                                 <Link to="maps">Map</Link>
                                 <Link to="aboutus">AboutUs</Link>
-                                <Link to="welcome" onClick={this.logoutHandler}>Logout</Link>
+                                <Link to="/" onClick={this.logoutHandler}>Logout</Link>
 
                     </Nav>
                 </Navbar.Collapse>
