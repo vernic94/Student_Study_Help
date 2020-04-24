@@ -1,9 +1,9 @@
 import ObservableModel from "./ObservableModel";
 import { firebaseConfig } from "./firebaseConfig";
-
+/*
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
-
+*/
 class Model extends ObservableModel {
 	constructor() {
 		super();
@@ -13,21 +13,49 @@ class Model extends ObservableModel {
 	    this.users = this.db.collection("users");
 	}
 
+	userExist(email) {
+		console.log(email);
+		return this.users.doc(email)
+			.get()
+			.then(user => { return user.exists; })
+			.catch(e => console.log(e));
+	}
+    createUser(email, pass, firstName, lastName){
+		/*bcrypt.genSalt(saltRounds, function(err, salt){
+			bcrypt.hash(password, salt, function(err, hash) {
+				console.log(hash);*/
+				this.users.doc(email).set({
+					firstname: firstName,
+					lastname: lastName,
+					password: pass
+				});
+/*			});
+		});		*/
+	}
+	authUser(email, pass){
+		console.log("authUser called");
+		let auth = false;
+		//let hash = "";
+		//console.log(password, hash);
+		return this.users.doc(email)
+			.get()
+			.then(user => {
+				if(user.exists){
+					console.log("user exist");
+					if (user.data().password===pass){
+						console.log("correct pass");
+						auth = true;
+						console.log("check pass " + auth);
+					}
+					this.notifyObservers({ type: "login", userExist: true, correct: auth });
+				}
+				else{
+					this.notifyObservers({ type: "login", userExist: false });
+				}
+			})
 
-    userExist(){
-		return false;
-		/*check if user already exists*/
 	}
 
-
-
-    createUser(){
-		bcrypt.hash(this.state.password, saltRounds, (err, hash) => {
-			this.users.doc(this.state.username).set({
-				password: hash
-			});
-		});
-	}
 
 }
 // Export an instance of model
