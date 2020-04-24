@@ -31,7 +31,7 @@ export class Topbar extends React.Component{
                                 */}
                                 <Link to="profile">Profile</Link>&nbsp; 
                                 <Link to="create-study-session">Create Study Session</Link>&nbsp;
-                                <Link to="maps">Find Study Session</Link>&nbsp;
+                                <Link to="find-study-session">Find Study Session</Link>&nbsp;
                                 <Link to="aboutus">About Us</Link>
                     </Nav>
                 </Navbar.Collapse>

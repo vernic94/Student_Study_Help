@@ -22,7 +22,7 @@ function App() {
 
         <Route exact path="/" component={Welcome} />
         <Route path="/aboutus" component={AboutUs}/>
-        <Route path="/maps" component={Maps}/>
+        <Route path="/find-study-session" component={Maps}/>
         <Route path="/profile" component={Profile}/>
         <Route path="/profileEditor" component={ProfileEditor}/>
         <Route path="/create-study-session" component={StudySession}/>

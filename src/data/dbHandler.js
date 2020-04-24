@@ -1,14 +1,14 @@
 //import firebase from "firebase/app";
 import "firebase/firestore";
 import {firebaseConfig} from "./firebaseConfig";
+import * as firebase from "firebase";
 /**
  var description=
  var endtime=
  var starttime=
  var subject=
 **/
-
-
+/**
 class dbHandler {
     function
 
@@ -44,5 +44,5 @@ ref.on("value", function(snapshot) {
 }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
 });
-
+**/
 
