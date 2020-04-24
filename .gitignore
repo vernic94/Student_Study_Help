@@ -32,3 +32,6 @@ package-lock.json
 *.xml
 .idea/workspace.xml
 *.snap
+package-lock.json
+*.json
+*.json
