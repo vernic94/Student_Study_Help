@@ -128,17 +128,55 @@ class ProfileEditor extends Component {
         }else if(exists === false && nam === "school"){
             let arr = this.state.school;
             arr = arr.push(val);
-            console.log(this.state.school)
+            console.log(this.state.school);
         }else if(exists === false && nam === "subject"){
             let arr = this.state.subject;
             arr = arr.push(val);
-            console.log(this.state.subject)
+            console.log(this.state.subject);
         }else{
             this.setState({[nam]: val});
         }
     }
+
+    remove = (e) =>{
+        console.log(e.target.value);
+        let index;
+        let stateCopy = [];
+        let val = e.target.value;
+        let arrVal = val.split("select", 2);
+        console.log(arrVal);
+
+        if(arrVal[0] === "school"){
+            stateCopy = this.state.school;
+            index = this.state.school.indexOf(arrVal[1]);
+            if (index > -1) {
+                stateCopy = stateCopy.splice(index, 1);
+            }
+        }
+
+        if(arrVal[0] === "subject"){
+            stateCopy = this.state.subject;
+            index = this.state.subject.indexOf(arrVal[1]);
+            if (index > -1) {
+                stateCopy = stateCopy.splice(index, 1);
+            }
+        }
+        
+        this.props.history.push('/profileEditor');
+    }
 	
 	render(){
+        let selectedSchools = [];
+        let selectedSubjects = [];
+
+        for(let i = 0; i < this.state.school.length; i++){
+            selectedSchools.push(<p className="RemoveSchool">{this.state.school[i]}<button type="button" className="ButtonRemove" value={"schoolselect" + this.state.school[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
+        }
+
+        for(let i = 0; i < this.state.subject.length; i++){
+            selectedSubjects.push(<p className="RemoveSubject">{this.state.subject[i]}<button type="button" className="ButtonRemove" value={"subjectselect" + this.state.subject[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
+        }
+
 		return(
             <div className="profileEditor-page">
                 <Topbar/>
@@ -153,7 +191,7 @@ class ProfileEditor extends Component {
                     <div className="BiographyEditor">
                         <label>Biography:
                             <br></br>
-                            <textarea type="text" className="BiographyTextArea" name="biography" value={this.state.biography} rows="5" cols="50" onChange={this.inputHandler}></textarea>
+                            <textarea type="text" className="BiographyTextArea" name="biography" value={this.state.biography} rows="4" cols="50" onChange={this.inputHandler}></textarea>
                         </label>
                     </div>
                     <div className="PfpEditor">
@@ -166,6 +204,7 @@ class ProfileEditor extends Component {
                     <div className="SchoolEditor">
                         <label>
                             Select schools:
+                            <div className="Selected">{selectedSchools}</div>
                             <select name="school" className="SchoolSelect" onChange={this.inputHandler}>
                                 <option value="Stockholms Universitet">Stockholms Universitet</option>
                                 <option value="Karolinska">Karonlinska</option>
@@ -176,6 +215,7 @@ class ProfileEditor extends Component {
                     <div className="SubjectEditor">
                         <label>
                             Select subjects:
+                            <div className="Selected">{selectedSubjects}</div>
                             <select name="subject" className="SubjectSelect" onChange={this.inputHandler}>
                                 <option value="Maths">Maths</option>
                                 <option value="Biology">Biology</option>

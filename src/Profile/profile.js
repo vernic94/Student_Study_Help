@@ -32,7 +32,8 @@ class Profile extends Component {
             biography: "",
             school: [],
             subject: [],
-            pfpurl: ""
+            pfpurl: "",
+            session: {}
         }
     }
 
@@ -65,9 +66,32 @@ class Profile extends Component {
                 pfpurl: doc.data().pfpurl
             })
         })
+
+        var sessionRef = db.collection("study_session").doc("MNp5SAPffkhquzCiX4Qy");
+        sessionRef.get().then(doc => {
+            this.setState({
+                session: doc.data()
+            })
+        })
+
     }
 	
 	render(){
+        console.log(this.state.session);
+
+        let mysession = [];
+
+        let date = this.state.session.startTime;
+        console.log(date);
+        //console.log(date.toDate());
+
+        mysession.push(<div className="StudySession">
+                <p>{this.state.session.subject}</p>
+                <p>{this.state.session.description}</p>
+                <p>{"Start time: " + this.state.session.startTime}</p>
+                <p>{"End time: " + this.state.session.endTime}</p>
+            </div>);
+        
 		return(
             <div className="profile-page">
                 <Topbar/>
@@ -87,8 +111,9 @@ class Profile extends Component {
                         </div>
                         <p className="ProfileParagraph">{"Schools: " + this.state.school}</p>
                         <p className="ProfileParagraph">{"Subjects: " + this.state.subject}</p>
-                        <p className="ProfileParagraph">Courses</p>
-                        <p className="ProfileParagraph">My Study sessions</p>
+                        <p className="ProfileParagraph">Courses:</p>
+                        <p className="MySessions">My Study Sessions</p>
+                        <div>{mysession}</div>
                     </div>
                 </div>
             </div>

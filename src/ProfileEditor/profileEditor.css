@@ -1,6 +1,7 @@
 .profileEditor-page{
-    height: 100vh;
+    
     width: 100%;
+    margin-bottom: 50px;
 }
 
 .ProfileEditorContainer{
@@ -50,23 +51,56 @@
     background-color: #3a3f4b;
     border-color: #4f5461;
     color: whitesmoke;
-    margin-left: 5px;
 }
 
 .SubjectSelect{
     background-color: #3a3f4b;
     border-color: #4f5461;
     color: whitesmoke;
-    margin-left: 5px;
+    margin-bottom: 15px;
+}
+
+.Selected{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.RemoveSchool{
+    display: flex;
+    font-size: smaller;
+    background-color: #4f5461;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-top: 8px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: whitesmoke;
+}
+
+.RemoveSubject{
+    display: flex;
+    font-size: smaller;
+    background-color: #4f5461;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-top: 8px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: whitesmoke;
 }
 
 /**************************************************/
 /*                    Buttons                     */
 /**************************************************/
 
-.Button{
-    text-align: center;
-    width: 120px;
+.ButtonRemove{
+    background: none;
+    border: none;
+    color: whitesmoke;
+}
+
+.ButtonRemove:hover{
+    color: #6586da;
 }
 
 .ButtonSave{
