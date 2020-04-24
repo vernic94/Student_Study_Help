@@ -8,6 +8,7 @@ class Model extends ObservableModel {
 	constructor() {
 		super();
 
+		this.currentUser = null;
 	    global.firebase.initializeApp(firebaseConfig);
 	    this.db = global.firebase.firestore();
 	    this.users = this.db.collection("users");
@@ -29,6 +30,8 @@ class Model extends ObservableModel {
 					lastname: lastName,
 					password: pass
 				});
+				this.currentUser = email;
+				console.log(this.currentUser);
 /*			});
 		});		*/
 	}
@@ -44,8 +47,9 @@ class Model extends ObservableModel {
 					console.log("user exist");
 					if (user.data().password===pass){
 						console.log("correct pass");
+						this.currentUser = email;
 						auth = true;
-						console.log("check pass " + auth);
+						console.log("check pass " + auth + this.currentUser);
 					}
 					this.notifyObservers({ type: "login", userExist: true, correct: auth });
 				}
@@ -55,6 +59,10 @@ class Model extends ObservableModel {
 			})
 
 	}
+	logout(){
+		this.currentUser = null;
+	}
+
 
 
 }
