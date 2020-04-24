@@ -28,7 +28,12 @@ yarn-error.log*
 /node_modules/
 
 .idea
+<<<<<<< HEAD
 
 
 =======
 >>>>>>> master
+=======
+package.json
+package-lock.json
+>>>>>>> f2e4eba5474ea3a8e86096343ee4ae4324a0284e
