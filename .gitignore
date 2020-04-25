@@ -9,10 +9,10 @@ node_modules
 .pnp.js
 
 # testing
-/coverage
+coverage
 
 # production
-/build
+build
 
 # misc
 .DS_Store
@@ -31,3 +31,5 @@ yarn-error.log*
 package.json
 package-lock.json
 src/data/firebaseConfig.js
+package.json
+package-lock.json
