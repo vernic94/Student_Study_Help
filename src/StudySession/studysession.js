@@ -18,12 +18,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./studysession.css";
 import Topbar from "../Topbar/topbar"
+import modelInstance from "../data/Model";
 
 class StudySession extends Component {
   constructor(props) {
     super(props);
     this.state = {
       status: "LOADING"
+      
     };
   }
 
@@ -66,8 +68,7 @@ class StudySession extends Component {
 
           <div className="studysession-description">
             <p className="Note-text">Note: </p>
-            <textarea  className="description-box" id="description" rows="5" cols="100">
-                            Description
+            <textarea  className="description-box" placeholder="Description of study session" id="description" rows="5" cols="100">
             </textarea><br/>
           </div>
 
