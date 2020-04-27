@@ -1,9 +1,9 @@
 import ObservableModel from "./ObservableModel";
 import { firebaseConfig } from "./firebaseConfig";
-/*
+
 const bcrypt = require("bcryptjs");
-const saltRounds = 10;
-*/
+const salt = bcrypt.genSaltSync(10);
+
 class Model extends ObservableModel {
 	constructor() {
 		super();
@@ -22,30 +22,27 @@ class Model extends ObservableModel {
 			.catch(e => console.log(e));
 	}
     createUser(email, pass, firstName, lastName){
-		/*bcrypt.genSalt(saltRounds, function(err, salt){
-			bcrypt.hash(password, salt, function(err, hash) {
-				console.log(hash);*/
-				this.users.doc(email).set({
-					firstname: firstName,
-					lastname: lastName,
-					password: pass
-				});
-				this.currentUser = email;
-				console.log(this.currentUser);
-/*			});
-		});		*/
+		let hash = bcrypt.hashSync(pass, salt);
+		console.log(hash);
+		this.users.doc(email).set({
+			firstname: firstName,
+			lastname: lastName,
+			password: hash
+		});
+		this.currentUser = email;
+		console.log(this.currentUser);
 	}
 	authUser(email, pass){
 		console.log("authUser called");
 		let auth = false;
-		//let hash = "";
-		//console.log(password, hash);
+		let hash = "";
 		return this.users.doc(email)
 			.get()
 			.then(user => {
 				if(user.exists){
 					console.log("user exist");
-					if (user.data().password===pass){
+					hash = user.data().password;
+					if (bcrypt.compareSync(pass, hash)){
 						console.log("correct pass");
 						this.currentUser = email;
 						auth = true;
@@ -69,7 +66,6 @@ class Model extends ObservableModel {
 
 	planStudySession(){
 	}
-
 
 
 }
