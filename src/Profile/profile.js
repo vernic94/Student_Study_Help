@@ -71,7 +71,7 @@ class Profile extends Component {
         let mysession = [];
 
         let date = this.state.session.startTime;
-        console.log(date);
+        console.log(date + "testing");
         //console.log(date.toDate());
 
         mysession.push(<div className="StudySession">
