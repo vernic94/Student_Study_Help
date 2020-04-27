@@ -10,6 +10,8 @@ import Maps from "./Maps/maps";
 import StudySession from "./StudySession/studysession";
 import ProfileEditor from "./ProfileEditor/profileEditor";
 
+import {Topbar} from './Topbar/topbar'
+
 import { Link } from "react-router-dom";
 
 
