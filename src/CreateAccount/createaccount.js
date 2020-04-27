@@ -1,4 +1,4 @@
-/* Create account page (accessible from Welcome page - Sign up button)
+/* Create account page (accessible from Welcome page - Sign up button) 
 
 Responsible: Saga
 
@@ -14,7 +14,7 @@ Must not be handled (this iteration):
 
 */
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Topbar from "../Topbar/topbar"
 
