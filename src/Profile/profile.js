@@ -8,8 +8,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./profile.css";
 import Topbar from "../Topbar/topbar"
-//import firebase from 'firebase';
-import firebase from "firebase/app";
+import firebase from 'firebase';
+//import firebase from "firebase/app";
 import "firebase/firestore";
 
 class Profile extends Component {
