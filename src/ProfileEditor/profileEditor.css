@@ -1,36 +1,126 @@
 .profileEditor-page{
-    height: 100vh;
+    
     width: 100%;
+    margin-bottom: 50px;
 }
 
 .ProfileEditorContainer{
     display: flex;
     flex-direction: column;
     text-align: left;
+    font-size: medium;
     margin-left: 400px; /*change later*/
     margin-top: 40px; /*change later*/
 }
 
+.UsernameInput{
+    background-color: #3a3f4b; 
+    border-color: #4f5461;  
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+.PfpUrlInput{
+    background-color: #3a3f4b; 
+    border-color: #4f5461;  
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 5px; 
+    margin-top: 5px;
+    width: 430px;   
+}
+
+.BiographyTextArea{
+    background-color: #3a3f4b;
+    border-color: #4f5461;
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: small;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.SchoolSelect{
+    background-color: #3a3f4b;
+    border-color: #4f5461;
+    color: whitesmoke;
+}
+
+.SubjectSelect{
+    background-color: #3a3f4b;
+    border-color: #4f5461;
+    color: whitesmoke;
+    margin-bottom: 15px;
+}
+
+.Selected{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.RemoveSchool{
+    display: flex;
+    font-size: smaller;
+    background-color: #4f5461;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-top: 8px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: whitesmoke;
+}
+
+.RemoveSubject{
+    display: flex;
+    font-size: smaller;
+    background-color: #4f5461;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-top: 8px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: whitesmoke;
+}
 
 /**************************************************/
 /*                    Buttons                     */
 /**************************************************/
 
-.Button{
-    text-align: center;
-    width: 120px;
+.ButtonRemove{
+    background: none;
+    border: none;
+    color: whitesmoke;
+}
+
+.ButtonRemove:hover{
+    color: #6586da;
 }
 
 .ButtonSave{
     align-self: center;
     text-align: center;
     width: 60px;
+    background-color: whitesmoke;
+    border-radius: 2px;
+    border-style: solid;
+    margin-right: 2px;
 }
 
 .ButtonCancel{
     align-self: center;
     text-align: center;
     width: 60px;
+    background-color: whitesmoke;
+    border-radius: 2px;
+    border-style: solid;
+    margin-left: 2px;
 }
 
 /**************************************************/

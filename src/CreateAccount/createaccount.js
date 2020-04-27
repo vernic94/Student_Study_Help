@@ -16,82 +16,67 @@ Must not be handled (this iteration):
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Topbar from "../Topbar/topbar"
-
-const bcrypt = require("bcryptjs");
-const saltRounds = 10;
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
-    authDomain: "student-study-help.firebaseapp.com",
-    databaseURL: "https://student-study-help.firebaseio.com",
-    projectId: "student-study-help",
-    storageBucket: "student-study-help.appspot.com",
-    messagingSenderId: "284363914579",
-    appId: "1:284363914579:web:7bec55fc128b5ab3cb35a6",
-    measurementId: "G-YPH7CP209E"
-  };
+import "./createaccount.css";
+import modelInstance from "../data/Model";
 
 class CreateAccount extends Component{
 	constructor(props){
 	  super(props);
 	  this.state={
-		user: "",
-	    username:"",
+		firstName: "",
+		lastName: "",
+	    email: "",
 	    password: "",
-	    correct: false,
-	    change: false,
-	    status: "NULL"
+	    check: "",
+	    status: "NULL",
+	    userExist: false
 	  }
-	  global.firebase.initializeApp(firebaseConfig);
-	  this.db = global.firebase.firestore();
-	  this.users = this.db.collection("users");
     }
     addHandler=()=>{
-		this.createUser();
+		modelInstance.createUser(this.state.email,this.state.password,this.state.firstName,this.state.lastName);
     }
-
-    userExist(){
-		return false;
-	}
-
-    confirmPassword(){
-		/*check confirm password*/
-	}
-
-    createUser(){
-		//let username = this.state.username;
-		bcrypt.hash(this.state.password, saltRounds, (err, hash) => {
-			this.users.doc(this.state.username).set({
-				password: hash
-			});
-			console.log(this.state.username, this.state.password);
-		});
+    componentDidUpdate(){
+		if (this.state.status==="EMAIL"&&this.state.email!=""){
+			modelInstance.userExist(this.state.email)
+				.then((response) => {
+					this.setState({status: "NULL", userExist: response});
+				});
+		}
 	}
 
 	render() {
 		let msg = null;
-		if ( this.state.change==true&&this.state.password.length<8 ){
-			msg = <p>your password should be at least 8 characters long</p>
+		let linkTo = "/create-account";
+		let btn = <button className="logBtn" disabled>Create user</button>
+		if (this.state.userExist===true){
+			msg = <p>user already exist</p>
+		}
+		if (this.state.status==="CHECK"&&this.state.password===this.state.check&&this.state.userExist===false){
+			btn = <button className="logBtn" onClick={this.addHandler}>Create user</button>
+			linkTo = "/profile";
 		}
 		return (
 
  		  <div className="CreateAccount">
- 		  	<Topbar/>
  		  	<h1>Create Account</h1>
-			<label>Email:</label>
-			<input type="text" onChange={e=> this.setState({username: e.target.value})}/>
-			<label>Password:</label>
-			<input type="password" onChange={e=> this.setState({password: e.target.value, change: true})}/>
-			{msg}
-			<label>Confirm password:</label>
-			<input type="password" />
 
+            <form className="CreateAccountForm">
+ 		  		<label>First name:</label>
+				<input type="text" placeholder="First name" required onChange={e=> this.setState({firstName: e.target.value})}/>
+				<label>Last name:</label>
+				<input type="text" placeholder="Last name" onChange={e=> this.setState({lastName: e.target.value})}/>
+				<label>Email:</label>
+				{msg}
+				<input type="email" placeholder="Email address" required autoFocus onChange={e=> this.setState({status: "EMAIL", email: e.target.value})}/>
+				<label>Password:</label>
+				<input type="password" onChange={e=> this.setState({password: e.target.value, status : "PASS"})}/>
 
-				<button className="logBtn" onClick={this.addHandler}>Create user</button>
-
-
+				<label>Confirm password:</label>
+				<input type="password" onChange={e=> this.setState({check: e.target.value, status : "CHECK"})}/>
+				<Link to={linkTo}>
+					{btn}
+				</Link>
+			</form>
 	  	  </div>
 		);
  }

@@ -3,28 +3,16 @@ import {NavLink} from 'react-router-dom'
 import {Navbar, Nav} from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import "./topbar.css";
+import modelInstance from "../data/Model";
 
-/* 
-    Code to handle the topbar logic, which is a 
-    navigation/menu sticked on top where the 
-    user can navigate between pages as: "Home", 
-    "Profile", "Create Study session".
-    
+/*
+    Code to handle the topbar logic, which is a
+    navigation/menu sticked on top where the
+    user can navigate between the pages: "Home",
+    "Profile", "Create Study session", "Map" and "About".
+
     2020-04-06
     @Aurthor Amanda Baza
-*/
-/* 
-menu that should (fråga gruppen) be accessible from whereever you are on the webpage. 
-
-ITERATION 2
-Should consist of: 
-- links to other pages: 
-    map, 
-    my profile, 
-    create study session
-- header 
-- Side/top bar 
-
 */
 
 class Topbar extends React.Component{
@@ -32,36 +20,35 @@ class Topbar extends React.Component{
         super(props);
         this.state = {}
     }
+    logoutHandler=()=>{
+		modelInstance.logout();
+    }
 
     render(){
         return(
-            <Navbar bg="dark" expanded="lg" className="topbar">
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id = "basic-navbar-nav">
-                    <Nav
-                        onSelect={(selectedKey) => alert("A page was selected")}
-                        defaultActiveKey="/home"
-                    >
-                                <Nav.Link href="/home">Home</Nav.Link>
-                                <Nav.Link eventKey="profile">Profile</Nav.Link>
-                                <Nav.Link eventKey="study-session">Study Session</Nav.Link>
-                                <Nav.Link eventKey="map">Map</Nav.Link>
-                                <Nav.Link eventKey="about-us">AboutUs</Nav.Link>
-                           
+            <Navbar className="topbar">
+                <Navbar.Toggle />
+                <Navbar.Collapse>
+                    <Nav class="topbar-nav">
+                                {/*
+                                Navigation links where "to" is what
+                                page the link navigates to
+                                and "&nbsp;" adds a space after the Link.
+                                */}
+                                <Link class="link" to="profile">Profile</Link>&nbsp;
+                                <Link class="link" to="create-study-session">Create Study Session</Link>&nbsp;
+                                <Link class="link" to="find-study-session">Find Study Session</Link>&nbsp;
+                                <Link class="link" to="aboutus">About Us</Link>
+                                <Link class="link"to="/" onClick={this.logoutHandler}>Logout</Link>
+
                     </Nav>
                 </Navbar.Collapse>
-            </Navbar>
+                <img className="topbar-icon" src={require("../images/student-study-help-1.png")}
+                     height="40vh">
+                </img>
+            </Navbar>     
             );
-            /* 
-
-            <nav class="top-bar" data-topbar role="navigation" sticky="top" defaultActiveKey="/home">
-            </nav>
-              Include activeKey="/home"????
-            */
-       
     }
-
 }
-
 export default Topbar;
 
