@@ -1,5 +1,6 @@
 {
   "name": "student-study-help",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,17 +9,19 @@
     "@testing-library/user-event": "^7.2.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.4.1",
-    "react": "^16.13.1",
+    "firebase": "^7.14.1",
+    "mapbox-gl": "^1.9.1",
+    "react": "^16.8.1",
     "react-bootstrap": "^1.0.0",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1"
+    "react-dom": "^16.8.1",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "node node_modules/react-scripts/scripts/start.js",
+    "build": "node node_modules/react-scripts/scripts/build.js",
+    "test": "node node_modules/react-scripts/scripts/test.js",
+    "eject": "node node_modules/react-scripts/scripts/eject.js",
     "build-prd": "cross-env GENERATE_SOURCEMAP=false react-scripts build"
   },
   "eslintConfig": {
