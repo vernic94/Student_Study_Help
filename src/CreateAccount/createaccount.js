@@ -23,43 +23,60 @@ class CreateAccount extends Component{
 	constructor(props){
 	  super(props);
 	  this.state={
-		user: "",
-	    username:"",
+		firstName: "",
+		lastName: "",
+	    email: "",
 	    password: "",
-	    correct: false,
-	    change: false,
-	    status: "NULL"
+	    check: "",
+	    status: "NULL",
+	    userExist: false
 	  }
     }
     addHandler=()=>{
-		modelInstance.addUser(this.state.username,this.state.password);
+		modelInstance.createUser(this.state.email,this.state.password,this.state.firstName,this.state.lastName);
     }
-
-    confirmPassword(){
-		/*check confirm password*/
+    componentDidUpdate(){
+		if (this.state.status==="EMAIL"&&this.state.email!=""){
+			modelInstance.userExist(this.state.email)
+				.then((response) => {
+					this.setState({status: "NULL", userExist: response});
+				});
+		}
 	}
 
 	render() {
 		let msg = null;
-		if ( this.state.change==true&&this.state.password.length<8 ){
-			msg = <p>your password should be at least 8 characters long</p>
+		let linkTo = "/create-account";
+		let btn = <button className="logBtn" disabled>Create user</button>
+		if (this.state.userExist===true){
+			msg = <p>user already exist</p>
+		}
+		if (this.state.status==="CHECK"&&this.state.password===this.state.check&&this.state.userExist===false){
+			btn = <button className="logBtn" onClick={this.addHandler}>Create user</button>
+			linkTo = "/profile";
 		}
 		return (
 
  		  <div className="CreateAccount">
  		  	<h1>Create Account</h1>
-			<label>Email:</label>
-			<input type="email" placeholder="Email address" required autoFocus onChange={e=> this.setState({username: e.target.value})}/>
-			<label>Password:</label>
-			<input type="password" onChange={e=> this.setState({password: e.target.value, change: true})}/>
-			{msg}
-			<label>Confirm password:</label>
-			<input type="password" />
 
+            <form className="CreateAccountForm">
+ 		  		<label>First name:</label>
+				<input type="text" placeholder="First name" required onChange={e=> this.setState({firstName: e.target.value})}/>
+				<label>Last name:</label>
+				<input type="text" placeholder="Last name" onChange={e=> this.setState({lastName: e.target.value})}/>
+				<label>Email:</label>
+				{msg}
+				<input type="email" placeholder="Email address" required autoFocus onChange={e=> this.setState({status: "EMAIL", email: e.target.value})}/>
+				<label>Password:</label>
+				<input type="password" onChange={e=> this.setState({password: e.target.value, status : "PASS"})}/>
 
-				<button className="logBtn" onClick={this.addHandler}>Create user</button>
-
-
+				<label>Confirm password:</label>
+				<input type="password" onChange={e=> this.setState({check: e.target.value, status : "CHECK"})}/>
+				<Link to={linkTo}>
+					{btn}
+				</Link>
+			</form>
 	  	  </div>
 		);
  }
