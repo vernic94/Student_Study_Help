@@ -9,6 +9,7 @@ import Profile from "./Profile/profile";
 import Maps from "./Maps/maps";
 import StudySession from "./StudySession/studysession";
 import FindStudySession from "./FindStudySession/findstudysession";
+import ProfileEditor from "./ProfileEditor/profileEditor";
 
 import {Topbar} from './Topbar/topbar'
 

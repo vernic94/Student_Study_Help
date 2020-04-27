@@ -1,13 +1,16 @@
-/* Welcome page/Start page 
+/* Welcome page/Start page
 
 Responsible: Fariba
 */
 
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
 import "./welcome.css";
 import modelInstance from "../data/Model";
 import { Redirect } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class Welcome extends Component {
 	constructor(props){
