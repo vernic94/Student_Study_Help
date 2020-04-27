@@ -8,7 +8,9 @@ import AboutUs from "./AboutUs/aboutus";
 import Profile from "./Profile/profile";
 import Maps from "./Maps/maps";
 import StudySession from "./StudySession/studysession";
-import ProfileEditor from "./ProfileEditor/profileEditor";
+import FindStudySession from "./FindStudySession/findstudysession";
+
+import {Topbar} from './Topbar/topbar'
 
 import { Link } from "react-router-dom";
 
@@ -20,7 +22,7 @@ function App() {
 
         <Route exact path="/" component={Welcome} />
         <Route path="/aboutus" component={AboutUs}/>
-        <Route path="/find-study-session" component={Maps}/>
+        <Route path="/find-study-session" component={FindStudySession}/>
         <Route path="/profile" component={Profile}/>
         <Route path="/profileEditor" component={ProfileEditor}/>
         <Route path="/create-study-session" component={StudySession}/>
