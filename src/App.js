@@ -6,15 +6,12 @@ import Welcome from "./Welcome/welcome";
 import CreateAccount from "./CreateAccount/createaccount";
 import AboutUs from "./AboutUs/aboutus";
 import Profile from "./Profile/profile";
+import ProfileEditor from "./ProfileEditor/profileEditor";
 import Maps from "./Maps/maps";
 import StudySession from "./StudySession/studysession";
 import FindStudySession from "./FindStudySession/findstudysession";
-import ProfileEditor from "./ProfileEditor/profileEditor";
-
 import {Topbar} from './Topbar/topbar'
-
 import { Link } from "react-router-dom";
-
 
 function App() {
   return (
