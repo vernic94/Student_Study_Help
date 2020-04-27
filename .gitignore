@@ -29,8 +29,6 @@ src/data/firebaseConfig.js
 
 .idea
 *.json
-package.json
-package-lock.json
 src/data/firebaseConfig.js
 package.json
 package-lock.json
