@@ -1,9 +1,21 @@
 import ObservableModel from "./ObservableModel";
-import { firebaseConfig } from "./firebaseConfig";
+import { API_KEY } from "./firebaseConfig";
 /*
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 */
+
+const firebaseConfig = {
+	apiKey: API_KEY,
+	authDomain: "student-study-help.firebaseapp.com",
+	databaseURL: "https://student-study-help.firebaseio.com/",
+	projectId: "student-study-help",
+	storageBucket: "student-study-help.appspot.com",
+	messagingSenderId: "284363914579",
+	appId: "1:284363914579:web:7bec55fc128b5ab3cb35a6",
+	measurementId: "G-YPH7CP209E"
+};
+
 class Model extends ObservableModel {
 	constructor() {
 		super();
