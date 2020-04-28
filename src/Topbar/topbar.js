@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {NavLink} from 'react-router-dom'
 import {Navbar, Nav} from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import "./topbar.css";
@@ -15,38 +16,35 @@ import modelInstance from "../data/Model";
 */
 
 export class Topbar extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {}
-    }
     logoutHandler=()=>{
 		modelInstance.logout();
     }
 
     render(){
         return(
-            <Navbar bg="dark" expanded="lg" className="topbar">
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id = "basic-navbar-nav">
-                    <Nav>
+            <Navbar bg="dark" className="topbar">
+                <Navbar.Toggle />
+                <Navbar.Collapse>
+                    <Nav class="topbar-nav">
                                 {/*
                                 Navigation links where "to" is what
-                                 departmentpage the link navigates to
+                                page the link navigates to
+                                and "&nbsp;" adds a space after the Link.
                                 */}
-
-                                <Link to="profile">Profile</Link>
-                                <Link to="create-study-session">Study Session</Link>
-                                <Link to="maps">Map</Link>
-                                <Link to="aboutus">AboutUs</Link>
-                                <Link to="/" onClick={this.logoutHandler}>Logout</Link>
+                                <Link class="topbar-button" to="profile">Profile</Link>&nbsp;
+                                <Link class="topbar-button" to="create-study-session">Create Study Session</Link>&nbsp;
+                                <Link class="topbar-button" to="find-study-session">Find Study Session</Link>&nbsp;
+                                <Link class="topbar-button" to="aboutus">About Us</Link>&nbsp;
+                                <Link class="topbar-button" to="/" onClick={this.logoutHandler}>Logout</Link>
 
                     </Nav>
                 </Navbar.Collapse>
-            </Navbar>
+                <img className="topbar-icon" src={require("../images/student-study-help-2.png")}
+                     height="35vh">
+                </img>
+            </Navbar>     
             );
     }
-
 }
-
 export default Topbar;
 

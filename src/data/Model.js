@@ -64,6 +64,12 @@ class Model extends ObservableModel {
 		console.log(this.currentUser);
 	}
 
+	createStudySession(){
+	}
+
+	planStudySession(){
+	}
+
 
 
 }

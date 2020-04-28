@@ -1,4 +1,39 @@
-.aboutus-page{
+.AboutUs{
     height: 100vh;
     width: 100%;
+    overflow-y: auto;
+}
+.Boxed {
+    width: 90%;
+    margin: auto;
+    font-size: 20px;
+}
+.BoxedText {
+    text-align: left;
+}
+.ContactInfo{
+    margin-left: 20%;
+    text-align: left;
+
+}
+.UnderH3{
+    font-size: 80%;
+}
+@media screen and (max-width: 700px) {
+    .Boxed {
+        border: 1px;
+        width: 90%;
+        margin: auto;
+        font-size:10px;
+    }
+
+    .AboutUsH1{
+        font-size:25px;
+    }
+    .AboutUsH3{
+        font-size:15px;
+    }
+    .UnderH3{
+        font-size: 12px;
+    }
 }
