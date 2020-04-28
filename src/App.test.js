@@ -7,9 +7,6 @@ test('renders learn react link', () => {
   const linkElement = getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
-import React from 'react';
-import { shallow } from 'enzyme';
-import App from './App';
 
 describe('First React component test with Enzyme', () => {
    it('renders without crashing', () => {

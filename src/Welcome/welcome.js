@@ -7,7 +7,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import "./welcome.css";
 import modelInstance from "../data/Model";
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -64,12 +64,11 @@ class Welcome extends Component {
         		break;
 		}
         return (
-            <div>
-                <img className="mb-4" src={require("../images/student-study-help-1.png")}
+            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-10">
+                <img className="mb-12" src={require("../images/student-study-help-1.png")}
                      height="200vh">
                 </img>
-
-                    <h2 className="h3 mb-3 font-weight-normal">Please sign in</h2>
+                    <h2 className="h3 mb-6 font-weight-normal">Please Sign In</h2>
                     {msg}
                     <label htmlFor="inputEmail" className="sr-only">Email address</label>
                     <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required
@@ -78,13 +77,11 @@ class Welcome extends Component {
                     <label htmlFor="inputPassword" className="sr-only">Password</label>
                     <input type="password" id="inputPassword" className="form-control" placeholder="Password"
                     	required onChange={e=> this.setState({password: e.target.value})}/>
-                    <button className="btn btn-lg  btn-block"
-                            style={{backgroundColor: "#56CCF2"}} onClick={this.loginHandler}>Sign in</button>
-
+                    <button className="btn btn-lg  btn-block btn-primary" onClick={this.loginHandler}>Sign in</button>
                 <div className="mb-3">
                     <Link to="/create-account">
                         <label>
-                            <h6>Create account</h6>
+                            <h6>Create Account</h6>
                         </label>
                     </Link>
                 </div>
@@ -94,7 +91,6 @@ class Welcome extends Component {
 }
 
 export default Welcome;
-
 
 
 /*
