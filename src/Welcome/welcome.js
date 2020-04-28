@@ -24,7 +24,7 @@ class Welcome extends Component {
 	  }
     }
 	loginHandler=()=>{
-		modelInstance.authUser(this.state.email, this.state.password);
+		modelInstance.login(this.state.email, this.state.password);
 	}
 	componentDidMount(){
 		modelInstance.addObserver(this);

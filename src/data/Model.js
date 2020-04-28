@@ -1,38 +1,43 @@
 import ObservableModel from "./ObservableModel";
-import { firebaseConfig } from "./firebaseConfig";
+//import { firebaseConfig } from "./firebaseConfig";
+import dbHandlerInstance from "./dbHandler";
 
-const bcrypt = require("bcryptjs");
-const salt = bcrypt.genSaltSync(10);
+//const bcrypt = require("bcryptjs");
+//const salt = bcrypt.genSaltSync(10);
 
 class Model extends ObservableModel {
 	constructor() {
 		super();
 
 		this.currentUser = null;
-	    global.firebase.initializeApp(firebaseConfig);
-	    this.db = global.firebase.firestore();
-	    this.users = this.db.collection("users");
+	    //global.firebase.initializeApp(firebaseConfig);
+	    //this.db = global.firebase.firestore();
+	    //this.users = this.db.collection("users");
 	}
 
 	userExist(email) {
-		console.log(email);
-		return this.users.doc(email)
-			.get()
-			.then(user => { return user.exists; })
-			.catch(e => console.log(e));
+		return dbHandlerInstance.userExist(email);
 	}
     createUser(email, pass, firstName, lastName){
-		let hash = bcrypt.hashSync(pass, salt);
-		console.log(hash);
-		this.users.doc(email).set({
-			firstname: firstName,
-			lastname: lastName,
-			password: hash
-		});
+		dbHandlerInstance.createUser(email, pass, firstName, lastName);
 		this.currentUser = email;
 		console.log(this.currentUser);
 	}
-	authUser(email, pass){
+	login(email, pass){
+		let auth = false;
+		if (!this.userExist(email)){
+			this.notifyObservers({ type: "login", userExist: false });
+		}
+		else {
+			auth = dbHandlerInstance.authUser(email, pass);
+			this.notifyObservers({ type: "login", userExist: true, correct: auth });
+			console.log("login correct: " + auth);
+			this.currentUser = email;
+		}
+	}
+
+
+/*	authUser(email, pass){
 		console.log("authUser called");
 		let auth = false;
 		let hash = "";
@@ -55,6 +60,12 @@ class Model extends ObservableModel {
 				}
 			})
 
+	}
+*/
+	changePassword(email, newPass){
+		dbHandlerInstance.changePassword(email, newPass);
+	}
+	removeUser(email){
 	}
 	logout(){
 		this.currentUser = null;

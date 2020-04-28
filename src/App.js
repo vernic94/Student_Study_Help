@@ -10,6 +10,7 @@ import ProfileEditor from "./ProfileEditor/profileEditor";
 import Maps from "./Maps/maps";
 import StudySession from "./StudySession/studysession";
 import FindStudySession from "./FindStudySession/findstudysession";
+import NewPassword from "./NewPassword/newpassword";
 
 import {Topbar} from './Topbar/topbar'
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/profileEditor" component={ProfileEditor}/>
         <Route path="/create-study-session" component={StudySession}/>
         <Route path="/create-account" component={CreateAccount}/>
+        <Route path="/change-password" component={NewPassword}/>
 
       </header>
     </div>
