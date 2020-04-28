@@ -96,7 +96,9 @@ class Profile extends Component {
         console.log(end);
 
         mysession.push(<div className="StudySession">
-                <p className="SessionTitle"><b>{this.state.session.subject}</b></p>
+                <div className="TitleBlock">
+                    <p className="SessionTitle"><b>{this.state.session.subject}</b></p>
+                </div>
                 <p className="SessionDesc">{this.state.session.description}</p>
                 <p className="Date">{"Start time: " + start}
                 <br></br>
