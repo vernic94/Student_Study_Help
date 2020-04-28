@@ -1,0 +1,14 @@
+.studySessionsPage{
+
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.studySessionsContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: medium;
+    margin-left: 400px; /*change later*/
+    margin-top: 40px; /*change later*/
+}

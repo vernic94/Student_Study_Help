@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import "./studysessions.css";
-import Topbar from "../Topbar/topbar"
 import {firebaseConfig} from "../data/firebaseConfig";
 
 
@@ -25,7 +24,7 @@ class StudySessions extends React.Component {
 
     formatDate(date) {
         if (date != "") {
-         return  date.getFullYear()+"-"+ (date.getMonth()+1)+"-"+ date.getDay()+" kl "+date.getHours()+ ":"+ date.getMinutes();
+            return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
         }
         return "";
     }
@@ -45,34 +44,36 @@ class StudySessions extends React.Component {
     }
 
     render() {
-        return <div>
+        return (
+            <div className="studySessionsPage">
+                <div className="studySessionsContainer">
+                    <div>
+                        <table className="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">Creator</th>
+                                <th scope="col">Subject</th>
+                                <th scope="col">Start Time</th>
+                                <th scope="col">End Time</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-            <table className="table table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">Creator</th>
-                    <th scope="col">Subject</th>
-                    <th scope="col">Start Time</th>
-                    <th scope="col">End Time</th>
-                    <th scope="col">Description</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                {this.state.sessions.map((value, index) => {
-                    return <tr key={index}>
-                        <th scope="row">{value.creator}</th>
-                        <td>{value.subject}</td>
-                        <td>{this.formatDate(this.convertToTime(value.startTime))}</td>
-                        <td>{this.formatDate(this.convertToTime(value.endTime))}</td>
-                        <td>{value.description}</td>
-                    </tr>
-                })}
-                </tbody>
-            </table>
-
-
-        </div>
+                            {this.state.sessions.map((value, index) => {
+                                return <tr key={index}>
+                                    <td>{value.creator}</td>
+                                    <td>{value.subject}</td>
+                                    <td>{this.formatDate(this.convertToTime(value.startTime))}</td>
+                                    <td>{this.formatDate(this.convertToTime(value.endTime))}</td>
+                                    <td>{value.description}</td>
+                                </tr>
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>);
     }
 }
 
