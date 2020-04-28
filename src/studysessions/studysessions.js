@@ -15,16 +15,31 @@ class StudySessions extends React.Component {
     }
 
 
+    convertToTime(firebaseTimeStamp) {
+        if (firebaseTimeStamp != undefined) {
+            return firebaseTimeStamp.toDate();
+
+        }
+        return "";
+    }
+
+    formatDate(date) {
+        if (date != "") {
+         return  date.getFullYear()+"-"+ (date.getMonth()+1)+"-"+ date.getDay()+" kl "+date.getHours()+ ":"+ date.getMinutes();
+        }
+        return "";
+    }
+
     componentDidMount() {
         let db = global.firebase.firestore();
-        var ss = [];
+        var study_sessions = [];
         db.collection('study_session').get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
-                    ss.push(doc.data());
+                    study_sessions.push(doc.data());
                 })
             }).then(() => {
-                this.setState({sessions: ss})
+                this.setState({sessions: study_sessions})
             }
         );
     }
@@ -48,8 +63,8 @@ class StudySessions extends React.Component {
                     return <tr key={index}>
                         <th scope="row">{value.creator}</th>
                         <td>{value.subject}</td>
-                        <td>{/*value.startTime*/}</td>
-                        <td>{/*{value.endTime}*/}</td>
+                        <td>{this.formatDate(this.convertToTime(value.startTime))}</td>
+                        <td>{this.formatDate(this.convertToTime(value.endTime))}</td>
                         <td>{value.description}</td>
                     </tr>
                 })}
