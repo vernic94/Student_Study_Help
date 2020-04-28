@@ -1,4 +1,5 @@
 .studysession-page{
+    height: 100vh;
     width: 100%;
 }
 
@@ -37,8 +38,6 @@
     width: 200px;
 }
 
-.location-map{
-    width: 20vw;
-    height: 0.5vh;
-    margin: auto;
+.location-list{
+    margin-left: 5px;
 }
