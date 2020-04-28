@@ -13,6 +13,7 @@ import StudySession from "./StudySession/studysession";
 import {Topbar} from './Topbar/topbar'
 
 import { Link } from "react-router-dom";
+import MapMarkers from './MapMarkers/mapMarkers';
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
         <Route path="/profileEditor" component={ProfileEditor}/>
         <Route path="/create-study-session" component={StudySession}/>
         <Route path="/create-account" component={CreateAccount}/>
-
+        <Route path="/map-markers" component={MapMarkers}/>
       </header>
     </div>
   );
