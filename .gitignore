@@ -26,11 +26,10 @@ yarn-debug.log*
 yarn-error.log*
 /node_modules/
 src/data/firebaseConfig.js
+student-study-help.iml
 
 .idea
 *.json
-package.json
-package-lock.json
 src/data/firebaseConfig.js
 package.json
 package-lock.json
