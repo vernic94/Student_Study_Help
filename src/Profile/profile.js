@@ -68,13 +68,18 @@ class Profile extends Component {
             })
         })
 
+        /*
         var sessionRef = db.collection("study_session").doc("vb07M9l74D91iTfNFDCy");
         sessionRef.get().then(doc => {
             this.setState({
                 session: doc.data()
             })
         })
+        */
 
+        db.collection("study_session").get().then(snapshot => {
+            console.log(snapshot):
+        })
     }
 
     convertToTime(timestamp) {
