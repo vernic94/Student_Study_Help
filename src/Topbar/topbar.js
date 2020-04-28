@@ -15,15 +15,7 @@ import modelInstance from "../data/Model";
     @Aurthor Amanda Baza
 */
 
-<<<<<<< HEAD
-class Topbar extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {}
-    }
-=======
 export class Topbar extends React.Component{
->>>>>>> development_new
     logoutHandler=()=>{
 		modelInstance.logout();
     }

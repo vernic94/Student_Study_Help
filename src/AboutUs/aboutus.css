@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-.aboutus-page{
-=======
 .AboutUs{
     height: 100vh;
->>>>>>> development_new
     width: 100%;
     overflow-y: auto;
 }
