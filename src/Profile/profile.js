@@ -38,7 +38,8 @@ class Profile extends Component {
     }
 
     componentDidMount(){
-        
+
+
         var firebaseConfig = {
             apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
             authDomain: "student-study-help.firebaseapp.com",
@@ -67,7 +68,7 @@ class Profile extends Component {
             })
         })
 
-        var sessionRef = db.collection("study_session").doc("MNp5SAPffkhquzCiX4Qy");
+        var sessionRef = db.collection("study_session").doc("vb07M9l74D91iTfNFDCy");
         sessionRef.get().then(doc => {
             this.setState({
                 session: doc.data()
@@ -75,25 +76,31 @@ class Profile extends Component {
         })
 
     }
+
+    convertToTime(timestamp) {
+        let t = new Date(timestamp * 1000);
+        let minutes = "0" + t.getMinutes();
+        let date = eval(t.getFullYear() - 1969) + '-' + eval(t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + minutes.substr(-2);
+        return date;
+    }
 	
 	render(){
         console.log(this.state.session);
 
         let mysession = [];
+        let start = this.convertToTime(this.state.session.startTime);
+        let end = this.convertToTime(this.state.session.endTime);
 
-
-        let date = this.state.session.startTime;
-        //date = date.seconds;
-        
         //new Date(this.state.session.startTime.seconds * 1000).toLocaleDateString("sv-SE");
-        console.log(date);
-        //console.log(date.toDate());
+        console.log(start);
+        console.log(end);
 
         mysession.push(<div className="StudySession">
-                <p>{this.state.session.subject}</p>
-                <p>{this.state.session.description}</p>
-                <p>{"Start time: " + this.state.session.startTime}</p>
-                <p>{"End time: " + this.state.session.endTime}</p>
+                <p className="SessionTitle"><b>{this.state.session.subject}</b></p>
+                <p className="SessionDesc">{this.state.session.description}</p>
+                <p className="Date">{"Start time: " + start}
+                <br></br>
+                {"End time: " + end}</p>
             </div>);
         
 		return(

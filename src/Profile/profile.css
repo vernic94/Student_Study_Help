@@ -62,3 +62,27 @@
     margin-top: 20px;
     font-size: x-large;
 }
+
+.StudySession{
+    background-color: #22242c;
+    width: 200px;
+    padding-top: 8px;
+    padding-bottom: 2px;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.SessionTitle{
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(173, 155, 130);
+}
+
+.SessionDesc{
+    font-size: 14px;
+}
+
+.Date{
+    font-size: 10px;
+}
