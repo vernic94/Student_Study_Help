@@ -2,6 +2,17 @@
 
 Responsible: Agnes
 
+ITERATION 2
+Should consist of: 
+- email?, password, school (list?)
+- Edit profile button ?
+- Additional information such as deescription, editable stuff like courses
+- header 
+- Side/top bar 
+
+Must not be handled (this iteration):
+- Get user information from database 
+
 */
 
 import React, { Component } from "react";
@@ -70,8 +81,12 @@ class Profile extends Component {
 
         let mysession = [];
 
+
         let date = this.state.session.startTime;
-        console.log(date + "testing");
+        //date = date.seconds;
+        
+        //new Date(this.state.session.startTime.seconds * 1000).toLocaleDateString("sv-SE");
+        console.log(date);
         //console.log(date.toDate());
 
         mysession.push(<div className="StudySession">

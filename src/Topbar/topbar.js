@@ -15,17 +15,13 @@ import modelInstance from "../data/Model";
 */
 
 export class Topbar extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {}
-    }
     logoutHandler=()=>{
 		modelInstance.logout();
     }
 
     render(){
         return(
-            <Navbar className="topbar">
+            <Navbar bg="dark" className="topbar">
                 <Navbar.Toggle />
                 <Navbar.Collapse>
                     <Nav class="topbar-nav">
@@ -34,16 +30,16 @@ export class Topbar extends React.Component{
                                 page the link navigates to
                                 and "&nbsp;" adds a space after the Link.
                                 */}
-                                <Link class="link" to="profile">Profile</Link>&nbsp;
-                                <Link class="link" to="create-study-session">Create Study Session</Link>&nbsp;
-                                <Link class="link" to="find-study-session">Find Study Session</Link>&nbsp;
-                                <Link class="link" to="aboutus">About Us</Link>
-                                <Link class="link"to="/" onClick={this.logoutHandler}>Logout</Link>
+                                <Link class="topbar-button" to="profile">Profile</Link>&nbsp;
+                                <Link class="topbar-button" to="create-study-session">Create Study Session</Link>&nbsp;
+                                <Link class="topbar-button" to="find-study-session">Find Study Session</Link>&nbsp;
+                                <Link class="topbar-button" to="aboutus">About Us</Link>&nbsp;
+                                <Link class="topbar-button" to="/" onClick={this.logoutHandler}>Logout</Link>
 
                     </Nav>
                 </Navbar.Collapse>
-                <img className="topbar-icon" src={require("../images/student-study-help-1.png")}
-                     height="40vh">
+                <img className="topbar-icon" src={require("../images/student-study-help-2.png")}
+                     height="35vh">
                 </img>
             </Navbar>     
             );

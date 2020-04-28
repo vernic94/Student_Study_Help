@@ -11,11 +11,8 @@ import Maps from "./Maps/maps";
 import StudySession from "./StudySession/studysession";
 import FindStudySession from "./FindStudySession/findstudysession";
 import NewPassword from "./NewPassword/newpassword";
-
 import {Topbar} from './Topbar/topbar'
-
 import { Link } from "react-router-dom";
-
 
 function App() {
   return (
@@ -37,4 +34,3 @@ function App() {
 }
 
 export default App;
-

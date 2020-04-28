@@ -82,4 +82,5 @@ class Model extends ObservableModel {
 }
 // Export an instance of model
 const modelInstance = new Model();
+
 export default modelInstance;

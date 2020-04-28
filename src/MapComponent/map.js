@@ -15,7 +15,9 @@ class MapComponent extends Component {
     mapboxgl.accessToken = 'pk.eyJ1IjoibG91am9ucyIsImEiOiJjazk4YWFqMngwMHFsM2ptbmFjaXc0M3ZqIn0.LoaiIt1kyXpMu6IdfcMikQ';
     var map = new mapboxgl.Map({
       container: 'map-comp',
-      style: 'mapbox://styles/mapbox/streets-v11'
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [18.063240, 59.334591], // starting position
+      zoom: 10
     });
   }
   render() {

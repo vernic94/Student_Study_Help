@@ -1,5 +1,4 @@
 /* Map page (acccessible from menu)
-
 Responsible:
 */
 
