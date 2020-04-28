@@ -21,8 +21,8 @@ class MapMarkers extends Component {
         var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-96, 37.8],
-        zoom: 3
+        center: [18.063240, 59.334591],
+        zoom: 12
         });
 
         var geojson = {
@@ -31,10 +31,10 @@ class MapMarkers extends Component {
                     type: 'Feature',
                     geometry: {
                     type: 'Point',
-                    coordinates: [-77.032, 38.913]
+                    coordinates: [17.949388635580192, 59.40483317212755]
                     },
                     properties: {
-                        title: 'Mapbox',
+                        title: 'KTH-campuses',
                         description: 'KTH Kista'
                     }
                 },
@@ -42,17 +42,17 @@ class MapMarkers extends Component {
                     type: 'Feature',
                     geometry: {
                     type: 'Point',
-                    coordinates: [-122.414, 37.776]
+                    coordinates: [18.07222775, 59.3464415]
                     },
                     properties: {
-                    title: 'Mapbox',
+                    title: 'KTH-campuses',
                     description: 'KTH campus (Valhallavägen)'
                     },       
                 },{
                     type: 'Feature',
                     geometry: {
                     type: 'Point',
-                    coordinates: [-122.414, 37.776]
+                    coordinates: [ 17.939299780423454, 59.21897400230449]
                     },
                     properties: {
                     title: 'Mapbox',
@@ -63,7 +63,7 @@ class MapMarkers extends Component {
                     type: 'Feature',
                     geometry: {
                     type: 'Point',
-                    coordinates: [-122.414, 37.776]
+                    coordinates: [17.620576, 59.201889]
                     },
                     properties: {
                     title: 'Mapbox',
@@ -74,7 +74,7 @@ class MapMarkers extends Component {
                     type: 'Feature',
                     geometry: {
                     type: 'Point',
-                    coordinates: [-122.414, 37.776]
+                    coordinates: [18.023689876335794, 59.35055597960692]
                     },
                     properties: {
                     title: 'Mapbox',
