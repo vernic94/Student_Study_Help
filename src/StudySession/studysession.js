@@ -16,10 +16,13 @@ class StudySession extends Component {
     super(props);
     this.state = {
       status: "LOADING",
-      description: null, 
-      startTime: null,
-      endTime: null,
-      location: null
+     /* description: "fghjkjhgbvfvghjkhg gujgjhg", */
+      startTime: "063723837600.000000000",
+      endTime: "063723848400.000000000",
+      location: "test", 
+      longitude: 18,
+      latitude: 20,
+      subject: "IV1350"
     };
   }
 
@@ -42,6 +45,11 @@ class StudySession extends Component {
     console.log("STUDY SESSION SHOULD BE CREATED");
   }
 
+  submit(){
+    console.log("hej");
+    modelInstance.createStudySession(this.state.startTime, this.state.endTime, this.state.location);
+  }
+
   render() {
     let studySessionParameters = null;
 
@@ -55,7 +63,6 @@ class StudySession extends Component {
           <div className="location-parameter">
           <label for="location">Location: </label>
           <div className="location-map">
-            <Map/>
           </div>
           </div>
           <div className="studysession-description">
@@ -65,7 +72,7 @@ class StudySession extends Component {
           </div>
 
           <div className="btnDiv">
-            <Link to="/maps">
+            <Link to="/find-study-session">
               <button onClick={() => this.createStudySession()} className="studysession-btn">Create a study session</button>
             </Link>
           </div>
@@ -78,12 +85,13 @@ class StudySession extends Component {
             End time : <input className="time-box" type="text" name="endTime" onChange={e => this.setState({endTime: e.target.value})}/><br />
             <div className="location-map">
               <p>            Location :  </p>
-            <Map/>
           </div>
-              <textarea  className="description-box" placeholder="Description of study session" id="description" rows="5" cols="100">
+          <div>
+              <textarea  className="description-box" placeholder="Description of study session" onChange={e => this.setState({description: e.target.value})} id="description" rows="5" cols="100">
             </textarea><br/>
-            <Link to="/maps">
-              <input className="studysession-btn" type="submit" value="Plan study session" />
+            </div>
+            <Link to="/find-study-session">
+              <button className="studysession-btn" type="submit" onClick={this.submit}>Plan study session</button>
             </Link>
           </form>;
         break;
