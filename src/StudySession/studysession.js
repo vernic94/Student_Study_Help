@@ -113,8 +113,8 @@ class StudySession extends Component {
           <p>Create a current study session or plan a study session for the future!</p>
           
           <div className="choice-btns">
-            <button onClick={() => this.choiceCreateStudySession()}>Create a study session</button>
-            <button onClick={() => this.choicePlanStudySession()}>Plan a study session</button>
+            <button class="choice-btn" onClick={() => this.choiceCreateStudySession()}>Create a study session</button>
+            <button class="choice-btn" onClick={() => this.choicePlanStudySession()}>Plan a study session</button>
           </div>
 
           <div className="studySessionParameters">
