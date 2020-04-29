@@ -15,6 +15,9 @@ class Model extends ObservableModel {
 	    //this.users = this.db.collection("users");
 	}
 
+	getCurrentUser() {
+		return this.currentUser;
+	}
 	async userExist(email) {
 		let userExist = await dbHandlerInstance.userExist(email);
 		console.log("user exist response: " + userExist);
