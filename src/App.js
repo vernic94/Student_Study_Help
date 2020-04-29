@@ -28,6 +28,7 @@ function App() {
         <Route path="/create-study-session" component={StudySession}/>
         <Route path="/create-account" component={CreateAccount}/>
         <Route path="/map-markers" component={MapMarkers}/>
+        <Route path="/map-markers" component={StudySessions}/>
 
       </header>
     </div>
