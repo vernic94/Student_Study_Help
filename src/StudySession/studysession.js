@@ -1,29 +1,25 @@
 /* Create or plan study session page 
 
-OFÄRDIG
-
-ITERATION 2
-Should consist of: 
-- Plan session button ? (two seperate buttons or two seperate pages? One suggestion: choose between two and then depending on what you clicked, renders different stuff)
-- Start session button
-- header ?
-- Side/top bar (?)
-
-Must not be handled (this iteration):
-- Store user in database
+Responsible: Lou 
 
 */
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./studysession.css";
-import Topbar from "../Topbar/topbar"
+import Topbar from "../Topbar/topbar";
+import Map from "../MapComponent/map"
+import modelInstance from "../data/Model";
 
 class StudySession extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: "LOADING"
+      status: "LOADING",
+      description: null, 
+      startTime: null,
+      endTime: null,
+      location: null
     };
   }
 
@@ -55,19 +51,16 @@ class StudySession extends Component {
         break;
       case "CREATE":
         studySessionParameters = 
-        <div className="location-parameter">
+        <div className="div-parameter">
+          <div className="location-parameter">
           <label for="location">Location: </label>
-          <select className="location-list" id="studysession-location">
-            <option value="KTH-campus">KTH Valhallavägen</option>
-            <option value="KTH-kista">KTH Kista</option>
-            <option value="KTH-flemingsberg">KTH Flemingsberg</option>
-            <option value="KTH-sodertalje">KTH Södertälje</option>
-          </select>
-
+          <div className="location-map">
+            <Map/>
+          </div>
+          </div>
           <div className="studysession-description">
             <p className="Note-text">Note: </p>
-            <textarea  className="description-box" id="description" rows="5" cols="100">
-                            Description
+            <textarea  className="description-box" placeholder="Description of study session" id="description" rows="5" cols="100">
             </textarea><br/>
           </div>
 
@@ -81,17 +74,13 @@ class StudySession extends Component {
       case "PLAN":
         studySessionParameters = 
           <form action="action.php">
-            Start time : <input className="time-box" type="text" name="startTime" /><br />
-            End time : <input className="time-box" type="text" name="endTime" /><br />
-            Location :  
-              <select className="location-list" id="studysession-location">
-                <option value="KTH-campus">KTH Valhallavägen</option>
-                <option value="KTH-kista">KTH Kista</option>
-                <option value="KTH-flemingsberg">KTH Flemingsberg</option>
-                <option value="KTH-sodertalje">KTH Södertälje</option>
-              </select><br/>
-            <textarea  className="description-box" id="description" rows="5" cols="100">
-                            Description
+            Start time : <input className="time-box" type="text" name="startTime" onChange={e => this.setState({startTime: e.target.value})}/><br />
+            End time : <input className="time-box" type="text" name="endTime" onChange={e => this.setState({endTime: e.target.value})}/><br />
+            <div className="location-map">
+              <p>            Location :  </p>
+            <Map/>
+          </div>
+              <textarea  className="description-box" placeholder="Description of study session" id="description" rows="5" cols="100">
             </textarea><br/>
             <Link to="/maps">
               <input className="studysession-btn" type="submit" value="Plan study session" />
@@ -113,8 +102,8 @@ class StudySession extends Component {
           <p>Create a current study session or plan a study session for the future!</p>
           
           <div className="choice-btns">
-            <button onClick={() => this.choiceCreateStudySession()}>Create a study session</button>
-            <button onClick={() => this.choicePlanStudySession()}>Plan a study session</button>
+            <button className="choice-btn" onClick={() => this.choiceCreateStudySession()}>Create a study session</button>
+            <button className="choice-btn"  onClick={() => this.choicePlanStudySession()}>Plan a study session</button>
           </div>
 
           <div className="studySessionParameters">
