@@ -53,17 +53,13 @@ class dbHandler{
 
 	}
 	changePassword(email, newPass){
-		console.log("changePassword called");
+		console.log("db handler changePassword called");
+		console.log(email + " " + newPass);
 		let hash = bcrypt.hashSync(newPass, salt);
-		this.users.doc(email)
-			.get()
-			.then(user => {
-				if(user.exists){
-					console.log("user exist");
-					this.users.doc(email).set({	password: hash	});
 
-				}
-			});
+		this.db.collection("users").doc(email).update({
+			password: hash
+		});
 	}
 	removeUser(email){
 		console.log("removeUser called");

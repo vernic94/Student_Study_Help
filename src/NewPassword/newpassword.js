@@ -20,10 +20,15 @@ class NewPassword extends Component{
 	render(){
 		return (
 			<div className="NewPassword">
+				<h1>Forgot your password? Change it to a new one</h1>
 				<form className="NewPasswordForm">
 					<input type="email" placeholder="Email" onChange={e=> this.setState({email: e.target.value})}/>
 					<input type="password" placeholder="Password" onChange={e=> this.setState({password: e.target.value})}/>
 					<button className="logBtn" onClick={this.changePasswordHandler}>Change password</button>
+				</form>
+				<hr/>
+				<h1>Remove user, warning this action can not be undone</h1>
+				<form className="NewPasswordForm">
 					<input type="email" placeholder="Email" onChange={e=> this.setState({removeEmail: e.target.value})}/>
 					<button className="logBtn" onClick={this.removeUserHandler}>Remove user</button>
 				</form>
