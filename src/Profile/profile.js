@@ -18,10 +18,11 @@ Must not be handled (this iteration):
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./profile.css";
-import Topbar from "../Topbar/topbar"
+import Topbar from "../Topbar/topbar";
 //import firebase from 'firebase';
 import firebase from "firebase/app";
 import "firebase/firestore";
+import modelInstance from "../data/Model";
 
 class Profile extends Component {
     //constructor(props){}
@@ -38,6 +39,9 @@ class Profile extends Component {
     }
 
     componentDidMount(){
+
+        console.log("currentUser");
+        console.log(typeof modelInstance.currentUser);
 
 
         var firebaseConfig = {
@@ -57,10 +61,10 @@ class Profile extends Component {
 
         //TODO
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc("KPPhw1QDS3j7HtfQhPQP");
+        var docRef = db.collection("users").doc(modelInstance.currentUser);
         docRef.get().then(doc => {
             this.setState({
-                username: doc.data().name,
+                username: doc.data().firstname,
                 biography: doc.data().bio,
                 school: doc.data().school,
                 subject: doc.data().subjects,
@@ -78,7 +82,7 @@ class Profile extends Component {
         */
 
         let study_sessions = [];
-        db.collection("study_session").where("creator", "==", "KPPhw1QDS3j7HtfQhPQP").get().then(
+        db.collection("study_session").where("creator", "==", modelInstance.currentUser).get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     study_sessions.push(doc.data());
@@ -138,9 +142,9 @@ class Profile extends Component {
                         <div className="ProfileBiography">
                             <p className="BioParagraph"><i>{this.state.biography}</i></p>
                         </div>
-                        <p className="ProfileParagraph">{"Schools: " + this.state.school}</p>
+                        <p className="ProfileParagraph">{"School: " + this.state.school}</p>
                         <p className="ProfileParagraph">{"Subjects: " + this.state.subject}</p>
-                        <p className="ProfileParagraph">Courses:</p>
+                        <hr></hr>
                         <p className="MySessions">My Study Sessions</p>
                         <div className="SessionDiv">{mySessions}</div>
                     </div>

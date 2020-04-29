@@ -31,7 +31,7 @@ class Model extends ObservableModel {
 					password: pass
 				});
 				this.currentUser = email;
-				console.log(this.currentUser);
+				//console.log(this.currentUser);
 /*			});
 		});		*/
 	}
