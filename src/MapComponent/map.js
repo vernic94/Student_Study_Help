@@ -22,8 +22,6 @@ class MapComponent extends Component {
   }
   render() {
 
-
-
     return (
 
          <div className="map-comp" id="map-comp"></div>

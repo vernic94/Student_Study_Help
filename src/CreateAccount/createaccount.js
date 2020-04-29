@@ -1,6 +1,7 @@
 /* Create account page (accessible from Welcome page - Sign up button)
 
 Responsible: Saga
+
 */
 
 import React, { Component } from 'react';

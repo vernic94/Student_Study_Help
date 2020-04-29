@@ -14,8 +14,8 @@ class AboutUs extends Component {
 
       <div className="AboutUs">
         <Topbar/>
-          <img class="AboutUsIcon" src={require("../images/student-study-help-2.png")}
-               height="150vh">
+          <img class="AboutUsIcon" src={require("../images/student-study-help-3.png")}
+               height="120vh">
           </img>
         <h1 class="AboutUsH1">ABOUT US</h1>
           <div class="Boxed">

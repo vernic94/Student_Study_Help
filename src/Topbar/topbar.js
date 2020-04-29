@@ -25,6 +25,8 @@ export class Topbar extends React.Component{
                 <Navbar.Toggle />
                 <Navbar.Collapse>
                     <Nav class="topbar-nav">
+                        <img className="topbar-icon" src={require("../images/student-study-help-3.png")} height="35vh">
+                        </img>&nbsp;
                                 {/*
                                 Navigation links where "to" is what
                                 page the link navigates to
@@ -38,9 +40,7 @@ export class Topbar extends React.Component{
 
                     </Nav>
                 </Navbar.Collapse>
-                <img className="topbar-icon" src={require("../images/student-study-help-2.png")}
-                     height="35vh">
-                </img>
+
             </Navbar>     
             );
     }

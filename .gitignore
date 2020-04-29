@@ -33,3 +33,4 @@ src/data/firebaseConfig.js
 package.json
 package-lock.json
 *.json
+student-study-help.iml
