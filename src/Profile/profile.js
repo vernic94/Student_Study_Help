@@ -81,7 +81,11 @@ class Profile extends Component {
 
         let mysession = [];
 
+
         let date = this.state.session.startTime;
+        //date = date.seconds;
+        
+        //new Date(this.state.session.startTime.seconds * 1000).toLocaleDateString("sv-SE");
         console.log(date);
         //console.log(date.toDate());
 

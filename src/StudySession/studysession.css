@@ -38,6 +38,8 @@
     width: 200px;
 }
 
-.location-list{
-    margin-left: 5px;
+.location-map{
+    width: 20vw;
+    height: 0.5vh;
+    margin: auto;
 }

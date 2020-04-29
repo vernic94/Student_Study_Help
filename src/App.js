@@ -6,14 +6,12 @@ import Welcome from "./Welcome/welcome";
 import CreateAccount from "./CreateAccount/createaccount";
 import AboutUs from "./AboutUs/aboutus";
 import Profile from "./Profile/profile";
-import ProfileEditor from "./ProfileEditor/profileEditor";
 import Maps from "./Maps/maps";
 import StudySession from "./StudySession/studysession";
-
+import ProfileEditor from "./ProfileEditor/profileEditor"
+import StudySessions from "./studysessions/studysessions";
 import {Topbar} from './Topbar/topbar'
-
 import { Link } from "react-router-dom";
-
 
 function App() {
   return (
@@ -27,6 +25,7 @@ function App() {
         <Route path="/profileEditor" component={ProfileEditor}/>
         <Route path="/create-study-session" component={StudySession}/>
         <Route path="/create-account" component={CreateAccount}/>
+        <Route path="/study-sessions" component={StudySessions}/>
 
       </header>
     </div>
@@ -34,4 +33,3 @@ function App() {
 }
 
 export default App;
-
