@@ -33,7 +33,7 @@ class Profile extends Component {
             school: [],
             subject: [],
             pfpurl: "",
-            session: {}
+            sessions: []
         }
     }
 
@@ -77,9 +77,16 @@ class Profile extends Component {
         })
         */
 
-        db.collection("study_session").get().then(snapshot => {
-            console.log(snapshot):
-        })
+        let study_sessions = [];
+        db.collection("study_session").where("creator", "==", "KPPhw1QDS3j7HtfQhPQP").get().then(
+            (snapshot) => {
+                snapshot.forEach((doc) => {
+                    study_sessions.push(doc.data());
+                })
+            }).then(() => {
+                this.setState({sessions: study_sessions})
+            }
+        )
     }
 
     convertToTime(timestamp) {
@@ -90,25 +97,29 @@ class Profile extends Component {
     }
 	
 	render(){
-        console.log(this.state.session);
+        //console.log(this.state.sessions);
 
-        let mysession = [];
-        let start = this.convertToTime(this.state.session.startTime);
-        let end = this.convertToTime(this.state.session.endTime);
+        console.log(this.state.sessions[0]);
 
-        //new Date(this.state.session.startTime.seconds * 1000).toLocaleDateString("sv-SE");
-        console.log(start);
-        console.log(end);
+        let mySessions = [];
 
-        mysession.push(<div className="StudySession">
-                <div className="TitleBlock">
-                    <p className="SessionTitle"><b>{this.state.session.subject}</b></p>
-                </div>
-                <p className="SessionDesc">{this.state.session.description}</p>
-                <p className="Date">{"Start time: " + start}
-                <br></br>
-                {"End time: " + end}</p>
-            </div>);
+        for(let i = 0; i < this.state.sessions.length; i++){
+            let start = this.convertToTime(this.state.sessions[i].startTime);
+            let end = this.convertToTime(this.state.sessions[i].endTime);
+
+            mySessions.push(
+                <div className="StudySession">
+                    <div className="TitleBlock">
+                        <p className="SessionTitle"><b>{this.state.sessions[i].subject}</b></p>
+                    </div>
+                    <p className="SessionDesc">{this.state.sessions[i].description}</p>
+                    <p className="Date">
+                        {"Start time: " + start}
+                        <br></br>
+                        {"End time: " + end}
+                    </p>
+                </div>)
+        }
         
 		return(
             <div className="profile-page">
@@ -131,7 +142,7 @@ class Profile extends Component {
                         <p className="ProfileParagraph">{"Subjects: " + this.state.subject}</p>
                         <p className="ProfileParagraph">Courses:</p>
                         <p className="MySessions">My Study Sessions</p>
-                        <div>{mysession}</div>
+                        <div className="SessionDiv">{mySessions}</div>
                     </div>
                 </div>
             </div>
