@@ -20,7 +20,7 @@
   "scripts": {
     "start": "node node_modules/react-scripts/scripts/start.js",
     "build": "node node_modules/react-scripts/scripts/build.js",
-    "test": "node node_modules/react-scripts/scripts/test.js",
+    "test": "react-scripts test",
     "eject": "node node_modules/react-scripts/scripts/eject.js",
     "build-prd": "cross-env GENERATE_SOURCEMAP=false react-scripts build"
   },
@@ -42,6 +42,6 @@
     "cross-env": "^7.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.8.1"
   }
 }
