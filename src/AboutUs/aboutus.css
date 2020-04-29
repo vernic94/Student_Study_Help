@@ -1,9 +1,7 @@
 .AboutUs{
+    height: 100vh;
     width: 100%;
-}
-.AboutUsIcon{
-    align-items: center;
-
+    overflow-y: auto;
 }
 .Boxed {
     width: 90%;
@@ -37,8 +35,5 @@
     }
     .UnderH3{
         font-size: 12px;
-    }
-    .AboutUsIcon{
-        height: 100px;
     }
 }

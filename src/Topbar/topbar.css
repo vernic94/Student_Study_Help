@@ -1,4 +1,3 @@
-
 /*The color of the topbar buttons*/
 .topbar-button{
     color:#00f0ff;
@@ -6,19 +5,22 @@
 /*Hover overwrite over bootstraps hover*/
 /* overwrite doesnt seem to work
 .topbar-button:hover{
-   hover: red !important;
+    hover: red !important;
 }
 .topbar-nav > Link:hover {
-   color: #fff;
-   z-index: 1;
+    color: #fff;
+    z-index: 1;
 }
-*/
-
+ */
 
 /*If the screen if less than 700px width, these ccs codes will be modified*/
 @media screen and (max-width: 700px) {
     .topbar-button{
         font-size:15px;
+    }
+    .topbar{
+        min-width: 300px;
+
     }
     .topbar-icon{
         height: 25px;
