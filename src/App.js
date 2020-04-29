@@ -13,6 +13,7 @@ import FindStudySession from "./FindStudySession/findstudysession";
 import {Topbar} from './Topbar/topbar'
 import { Link } from "react-router-dom";
 import MapMarkers from './MapMarkers/mapMarkers';
+import StudySessions from "./studysessions/studysessions";
 
 function App() {
   return (
