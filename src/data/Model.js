@@ -15,57 +15,32 @@ class Model extends ObservableModel {
 	    //this.users = this.db.collection("users");
 	}
 
-	userExist(email) {
-		return dbHandlerInstance.userExist(email);
+	async userExist(email) {
+		let userExist = await dbHandlerInstance.userExist(email);
+		console.log("user exist response: " + userExist);
+		return userExist;
 	}
     createUser(email, pass, firstName, lastName){
 		dbHandlerInstance.createUser(email, pass, firstName, lastName);
 		this.currentUser = email;
 		console.log(this.currentUser);
 	}
-	login(email, pass){
-		let auth = false;
-		if (!this.userExist(email)){
-			this.notifyObservers({ type: "login", userExist: false });
-		}
-		else {
-			auth = dbHandlerInstance.authUser(email, pass);
-			this.notifyObservers({ type: "login", userExist: true, correct: auth });
-			console.log("login correct: " + auth);
+	async login(email, pass){
+		let auth = await dbHandlerInstance.login(email, pass);
+		console.log(auth);
+		this.notifyObservers(auth);
+		if (auth.correct===true){
 			this.currentUser = email;
+			console.log(this.currentUser);
 		}
 	}
-
-
-/*	authUser(email, pass){
-		console.log("authUser called");
-		let auth = false;
-		let hash = "";
-		return this.users.doc(email)
-			.get()
-			.then(user => {
-				if(user.exists){
-					console.log("user exist");
-					hash = user.data().password;
-					if (bcrypt.compareSync(pass, hash)){
-						console.log("correct pass");
-						this.currentUser = email;
-						auth = true;
-						console.log("check pass " + auth + this.currentUser);
-					}
-					this.notifyObservers({ type: "login", userExist: true, correct: auth });
-				}
-				else{
-					this.notifyObservers({ type: "login", userExist: false });
-				}
-			})
-
-	}
-*/
 	changePassword(email, newPass){
+		console.log("model.changePassword called");
+		console.log(email + " " + newPass);
 		dbHandlerInstance.changePassword(email, newPass);
 	}
 	removeUser(email){
+		dbHandlerInstance.removeUser(email);
 	}
 	logout(){
 		this.currentUser = null;

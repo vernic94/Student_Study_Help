@@ -25,24 +25,32 @@ class dbHandler{
 		this.users.doc(email).set({
 			firstname: firstName,
 			lastname: lastName,
-			password: hash
+			password: hash,
+			bio: "",
+			pfpurl: "",
+			school: [],
+			subject: []
 		});
 	}
-	authUser(email, pass){
-		console.log("authUser called");
-		let auth = false;
+	login(email, pass){
+		console.log("dbHandler login called");
+		let authUser = false;
+		let authPass = false;
 		let hash = "";
 		return this.users.doc(email)
 			.get()
 			.then(user => {
-				hash = user.data().password;
-				if (bcrypt.compareSync(pass, hash)){
-					console.log("correct pass");
-					auth = true;
-					console.log("check pass " + auth);
+				if(user.exists){
+					authUser = true;
+					hash = user.data().password;
+					if (bcrypt.compareSync(pass, hash)){
+						console.log("auth user correct pass");
+						authPass = true;
+					}
 				}
+				return ({type: "login", userExist: authUser, correct: authPass});
 			});
-		return auth;
+
 	}
 	changePassword(email, newPass){
 		console.log("changePassword called");
@@ -56,6 +64,15 @@ class dbHandler{
 
 				}
 			});
+	}
+	removeUser(email){
+		console.log("removeUser called");
+		console.log(email);
+		this.db.collection("users").doc(email).delete().then(function() {
+		    console.log("Document successfully deleted!");
+		}).catch(function(error) {
+		    console.error("Error removing document: ", error);
+		});
 	}
 
 }

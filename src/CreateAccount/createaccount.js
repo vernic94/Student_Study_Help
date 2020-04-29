@@ -18,21 +18,12 @@ class CreateAccount extends Component{
 	    password: "",
 	    check: "",
 	    status: "NULL",
-	    userExist: false,
-	    newEmail: "",
-	    newPass: "",
-	    removeUser: ""
+	    userExist: false
 	  }
     }
     addHandler=()=>{
 		modelInstance.createUser(this.state.email,this.state.password,this.state.firstName,this.state.lastName);
     }
-    changePassHandler=()=>{
-		modelInstance.changePassword(this.state.newEmail,this.state.newPass);
-	}
-	removeUserHandler=()=>{
-		modelInstance.removeUser(this.state.removeUser);
-	}
     componentDidUpdate(){
 		if (this.state.status==="EMAIL"&&this.state.email!=""){
 			modelInstance.userExist(this.state.email)
@@ -74,10 +65,6 @@ class CreateAccount extends Component{
 				<Link to={linkTo}>
 					{btn}
 				</Link>
-
-
-				<input type="email" placeholder="Email" onChange={e=> this.setState({removeEmail: e.target.value})}/>
-				<button className="logBtn" onClick={this.removeUserHandler}>Remove user</button>
 			</form>
 	  	  </div>
 		);
