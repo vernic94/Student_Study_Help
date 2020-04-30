@@ -32,6 +32,7 @@ import Topbar from "../Topbar/topbar"
 //import firebase from 'firebase';
 import firebase from "firebase/app";
 import "firebase/firestore";
+import modelInstance from "../data/Model";
 
 class ProfileEditor extends Component {
 
@@ -49,6 +50,8 @@ class ProfileEditor extends Component {
 
     componentDidMount(){
         // Your web app's Firebase configuration
+        let instanceUser = modelInstance.getCurrentUser();
+
         var firebaseConfig = {
             apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
             authDomain: "student-study-help.firebaseapp.com",
@@ -67,13 +70,13 @@ class ProfileEditor extends Component {
 
         // Set state
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc("KPPhw1QDS3j7HtfQhPQP");
+        var docRef = db.collection("users").doc("agnesal@kth.se");
         docRef.get().then(doc => {
             this.setState({
-                username: doc.data().name,
+                username: doc.data().firstname,
                 biography: doc.data().bio,
                 school: doc.data().school,
-                subject: doc.data().subjects,
+                subject: doc.data().subject,
                 pfpurl: doc.data().pfpurl,
             })
         })
@@ -82,13 +85,13 @@ class ProfileEditor extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         const db = firebase.firestore();
-        const docRef = db.collection("users").doc("KPPhw1QDS3j7HtfQhPQP");
+        const docRef = db.collection("users").doc("agnesal@kth.se");
 
         docRef.update({
-            name: this.state.username,
+            firstname: this.state.username,
             bio: this.state.biography,
             school: this.state.school,
-            subjects: this.state.subject,
+            subject: this.state.subject,
             pfpurl: this.state.pfpurl
         }).then(function() {
             console.log("Document successfully updated!");
@@ -121,7 +124,7 @@ class ProfileEditor extends Component {
             }
         }
 
-        if(exists != false && nam === "school"){
+        if(exists !== false && nam === "school"){
             console.log("Do nothing!")
         }else if(exists != false && nam === "subject"){
             console.log("Do nothing!")
@@ -176,6 +179,7 @@ class ProfileEditor extends Component {
         for(let i = 0; i < this.state.subject.length; i++){
             selectedSubjects.push(<p className="RemoveSubject">{this.state.subject[i]}<button type="button" className="ButtonRemove" value={"subjectselect" + this.state.subject[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
         }
+        
 
 		return(
             <div className="profileEditor-page">
