@@ -11,7 +11,8 @@ class dbHandler{
 
 	    global.firebase.initializeApp(firebaseConfig);
 	    this.db = global.firebase.firestore();
-	    this.users = this.db.collection("users");
+		this.users = this.db.collection("users");
+		this.studysessions = this.db.collection("study_session");
 	}
 	userExist(email) {
 		console.log(email);
@@ -71,6 +72,16 @@ class dbHandler{
 		});
 	}
 
+	createStudySession(starttime, endtime, loc, descr){
+		this.studysessions.doc().set({
+			creator: this.currentUser,
+			startTime: starttime,
+			endTime: endtime,
+			location: loc,
+			description: descr
+		});
+	}
+
 }
 const dbHandlerInstance = new dbHandler();
 export default dbHandlerInstance;
@@ -83,26 +94,19 @@ export default dbHandlerInstance;
 /**
 class dbHandler {
     function
-
     func() {
-
         firebase.initializeApp(firebaseConfig);
         var database = firebase.database();
         //eller var database = firebase.firestore();?
-
         var ref = database.ref('study_session');
         ref.on('value', gotData, errData);
     }
-
     function
-
     gotData(data) {
         console.log(data);
         alert(data);
     }
-
     function
-
     errData(err) {
         console.log('Error');
         console.log(err);
@@ -117,4 +121,3 @@ ref.on("value", function(snapshot) {
     console.log("The read failed: " + errorObject.code);
 });
 **/
-
