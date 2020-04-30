@@ -40,7 +40,6 @@ class ProfileEditor extends Component {
     constructor(props){
         super(props);
         this.state = {
-            currentUser: "",
             username: "",
             biography: "",
             school: [],
@@ -71,10 +70,9 @@ class ProfileEditor extends Component {
 
         // Set state
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc(instanceUser);
+        var docRef = db.collection("users").doc("agnesal@kth.se");
         docRef.get().then(doc => {
             this.setState({
-                currentUser: instanceUser,
                 username: doc.data().firstname,
                 biography: doc.data().bio,
                 school: doc.data().school,
@@ -87,7 +85,7 @@ class ProfileEditor extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         const db = firebase.firestore();
-        const docRef = db.collection("users").doc(this.currentUser);
+        const docRef = db.collection("users").doc("agnesal@kth.se");
 
         docRef.update({
             firstname: this.state.username,

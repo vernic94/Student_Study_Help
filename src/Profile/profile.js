@@ -29,7 +29,6 @@ class Profile extends Component {
     constructor(props){
         super(props);
         this.state = {
-            currentUser: "",
             username: "",
             biography: "",
             school: [],
@@ -44,7 +43,7 @@ class Profile extends Component {
         console.log("currentUser");
         let instanceUser = modelInstance.getCurrentUser();
 
-        console.log(instanceUser);
+        console.log(modelInstance.getCurrentUser());
 
 
 
@@ -65,10 +64,9 @@ class Profile extends Component {
 
         //TODO
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc(instanceUser);
+        var docRef = db.collection("users").doc("agnesal@kth.se");
         docRef.get().then(doc => {
             this.setState({
-                currentUser: instanceUser,
                 username: doc.data().firstname,
                 biography: doc.data().bio,
                 school: doc.data().school,
@@ -87,7 +85,7 @@ class Profile extends Component {
         */
 
         let study_sessions = [];
-        db.collection("study_session").where("creator", "==", this.currentUser).get().then(
+        db.collection("study_session").where("creator", "==", "agnesal@kth.se").get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     study_sessions.push(doc.data());
