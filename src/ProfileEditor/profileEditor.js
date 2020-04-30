@@ -10,6 +10,8 @@ import Topbar from "../Topbar/topbar"
 import firebase from "firebase/app";
 import "firebase/firestore";
 import modelInstance from "../data/Model";
+import dbHandlerInstance from "../data/dbHandler";
+import {firebaseConfig} from "../data/dbHandler";
 
 class ProfileEditor extends Component {
 
@@ -27,19 +29,6 @@ class ProfileEditor extends Component {
 
     componentDidMount(){
         
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
-            authDomain: "student-study-help.firebaseapp.com",
-            databaseURL: "https://student-study-help.firebaseio.com",
-            projectId: "student-study-help",
-            storageBucket: "student-study-help.appspot.com",
-            messagingSenderId: "284363914579",
-            appId: "1:284363914579:web:7bec55fc128b5ab3cb35a6",
-            measurementId: "G-YPH7CP209E"
-        };
-
-        // Initialize Firebase
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
@@ -47,6 +36,7 @@ class ProfileEditor extends Component {
         // Set state
         const db = firebase.firestore();
         var docRef = db.collection("users").doc(modelInstance.getCurrentUser());
+        //var docRef = db.collection("users").doc("agnesal@kth.se");
         docRef.get().then(doc => {
             this.setState({
                 username: doc.data().firstname,
@@ -64,6 +54,7 @@ class ProfileEditor extends Component {
         
         const db = firebase.firestore();
         const docRef = db.collection("users").doc(modelInstance.getCurrentUser());
+        //const docRef = db.collection("users").doc("agnesal@kth.se");
 
         docRef.update({
             firstname: this.state.username,

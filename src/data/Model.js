@@ -32,11 +32,10 @@ class Model extends ObservableModel {
 	async login(email, pass){
 		let auth = await dbHandlerInstance.login(email, pass);
 		console.log(auth);
-		this.notifyObservers(auth);
 		if (auth.correct===true){
 			this.currentUser = email;
-			console.log(this.currentUser);
 		}
+		this.notifyObservers(auth);
 	}
 	changePassword(email, newPass){
 		console.log("model.changePassword called");
@@ -51,7 +50,15 @@ class Model extends ObservableModel {
 		console.log(this.currentUser);
 	}
 
-	}
+	//converts TimeStamp to a readable date
+	convertToTime(timestamp) {
+        let t = new Date(timestamp * 1000);
+        let minutes = "0" + t.getMinutes();
+        let date = eval(t.getFullYear() - 1969) + '-' + eval(t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + minutes.substr(-2);
+        return date;
+    }
+
+}
 
 // Export an instance of model
 const modelInstance = new Model();
