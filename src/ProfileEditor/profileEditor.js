@@ -17,7 +17,6 @@ class ProfileEditor extends Component {
     constructor(props){
         super(props);
         this.state = {
-            currentUser: "",
             username: "",
             biography: "",
             school: [],

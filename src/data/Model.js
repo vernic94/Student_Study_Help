@@ -10,11 +10,10 @@ class Model extends ObservableModel {
 		super();
 
 		this.currentUser = null;
-	    //global.firebase.initializeApp(firebaseConfig);
-	    //this.db = global.firebase.firestore();
+	    // global.firebase.initializeApp(firebaseConfig);
+	    // this.db = global.firebase.firestore();
 		//this.users = this.db.collection("users");
-		
-		this.studysessions = this.db.collection("study_session");
+
 	}
 
 	getCurrentUser() {
@@ -52,18 +51,8 @@ class Model extends ObservableModel {
 		console.log(this.currentUser);
 	}
 
-	createStudySession(starttime, endtime, loc, descr){
-		this.studysessions.doc().set({
-			creator: this.currentUser,
-			startTime: starttime,
-			endTime: endtime,
-			location: loc,
-			description: descr
-		});
 	}
 
-
-}
 // Export an instance of model
 const modelInstance = new Model();
 

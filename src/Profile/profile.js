@@ -78,7 +78,7 @@ class Profile extends Component {
     }
 	
 	render(){
-        
+
         let mySessions = [];
 
         for(let i = 0; i < this.state.sessions.length; i++){

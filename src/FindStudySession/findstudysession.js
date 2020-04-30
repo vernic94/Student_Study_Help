@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 //import "./maps.css";
 import Topbar from "../Topbar/topbar"
 import Maps from "../Maps/maps"
+import MapComponent from "../MapComponent/map";
+import "./findstudysession.css";
 
 class FindStudySession extends Component {
   constructor(props) {
@@ -40,6 +42,9 @@ class FindStudySession extends Component {
     return (
       <div className="find-page">
          <Topbar/>
+         <div className="mapMarkers">
+           <MapComponent/>
+         </div>
          {currentView}
          {mapBtn}
          {listBtn}

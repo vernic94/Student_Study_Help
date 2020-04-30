@@ -15,6 +15,7 @@ import {Topbar} from './Topbar/topbar'
 import { Link } from "react-router-dom";
 import MapMarkers from './MapMarkers/mapMarkers';
 import StudySessions from "./studysessions/studysessions";
+import MapComponent from "./MapComponent/map";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
         <Route path="/change-password" component={NewPassword}/>
         <Route path="/map-markers" component={MapMarkers}/>
         <Route path="/map-markers" component={StudySessions}/>
+        <Route path="/map" component={MapComponent}/>
+
 
       </header>
     </div>
