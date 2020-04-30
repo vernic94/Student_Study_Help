@@ -77,13 +77,13 @@ class Model extends ObservableModel {
 		console.log(this.currentUser);
 	}
 
-	createStudySession(starttime, endtime, loc){
+	createStudySession(starttime, endtime, loc, descr){
 		this.studysessions.doc().set({
 			creator: this.currentUser,
 			startTime: starttime,
 			endTime: endtime,
 			location: loc,
-			description: ""
+			description: descr
 		});
 		console.log("eirskjdgksdhjr");
 	}

@@ -10,19 +10,21 @@ import "./studysession.css";
 import Topbar from "../Topbar/topbar";
 import Map from "../MapComponent/map"
 import modelInstance from "../data/Model";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Dropdown, DropdownButton} from 'react-bootstrap';
 
 class StudySession extends Component {
   constructor(props) {
     super(props);
     this.state = {
       status: "LOADING",
-     /* description: "fghjkjhgbvfvghjkhg gujgjhg", */
-      startTime: "063723837600.000000000",
-      endTime: "063723848400.000000000",
-      location: "test", 
-      longitude: 18,
-      latitude: 20,
-      subject: "IV1350"
+      description: null, 
+      startTime: null,
+      endTime: null,
+      location: "", 
+    /*  longitude: 18,
+      latitude: 20,*/
+      subject: null
     };
   }
 
@@ -43,11 +45,11 @@ class StudySession extends Component {
   */
   createStudySession(){
     console.log("STUDY SESSION SHOULD BE CREATED");
+    modelInstance.createStudySession()
   }
 
   submit(){
-    console.log("hej");
-    modelInstance.createStudySession(this.state.startTime, this.state.endTime, this.state.location);
+    modelInstance.createStudySession(this.state.startTime, this.state.endTime, this.state.location, this.state.description);
   }
 
   render() {
@@ -58,24 +60,32 @@ class StudySession extends Component {
         studySessionParameters = null;
         break;
       case "CREATE":
+        let startTime = new Date();
+
         studySessionParameters = 
         <div className="div-parameter">
-          <div className="location-parameter">
-          <label for="location">Location: </label>
-          <div className="location-map">
-          </div>
+            <form action="action.php">
+            End time : <input className="time-box" type="text" name="endTime" onChange={e => this.setState({endTime: e.target.value, startTime: startTime})}/><br />
+            <div className="location-parameter">
+            <DropdownButton id="studysession-location" title="Choose location">
+              <Dropdown.Item value="KTH-campus" onClick={e => this.setState({location: "KTH-campus"})}>KTH Valhallavägen</Dropdown.Item>
+              <Dropdown.Item value="KTH-kista" onClick={e => this.setState({location: "KTH-kista"})}>KTH Kista</Dropdown.Item>
+              <Dropdown.Item value="KTH-flemingsberg" onClick={e => this.setState({location: "KTH-flemingsberg"})}>KTH Flemingsberg</Dropdown.Item>
+              <Dropdown.Item value="KTH-sodertalje" onClick={e => this.setState({location: "KTH-sodertalje"})}>KTH Södertälje</Dropdown.Item>
+            </DropdownButton>
           </div>
           <div className="studysession-description">
             <p className="Note-text">Note: </p>
-            <textarea  className="description-box" placeholder="Description of study session" id="description" rows="5" cols="100">
+            <textarea  className="description-box" placeholder="Description of study session" onChange={e => this.setState({description: e.target.value})} id="description" rows="5" cols="100">
             </textarea><br/>
           </div>
 
           <div className="btnDiv">
-            <Link to="/find-study-session">
-              <button onClick={() => this.createStudySession()} className="studysession-btn">Create a study session</button>
+            <Link to="/">
+              <button onClick={() => this.submit()} className="studysession-btn">Create a study session</button>
             </Link>
           </div>
+          </form>;
         </div>;
         break;
       case "PLAN":
@@ -83,14 +93,17 @@ class StudySession extends Component {
           <form action="action.php">
             Start time : <input className="time-box" type="text" name="startTime" onChange={e => this.setState({startTime: e.target.value})}/><br />
             End time : <input className="time-box" type="text" name="endTime" onChange={e => this.setState({endTime: e.target.value})}/><br />
-            <div className="location-map">
-              <p>            Location :  </p>
+            <div className="location-parameter">
+            <DropdownButton id="studysession-location" title="Choose location">
+              <Dropdown.Item value="KTH-campus" onClick={e => this.setState({location: "KTH-campus"})}>KTH Valhallavägen</Dropdown.Item>
+              <Dropdown.Item value="KTH-kista" onClick={e => this.setState({location: "KTH-kista"})}>KTH Kista</Dropdown.Item>
+              <Dropdown.Item value="KTH-flemingsberg" onClick={e => this.setState({location: "KTH-flemingsberg"})}>KTH Flemingsberg</Dropdown.Item>
+              <Dropdown.Item value="KTH-sodertalje" onClick={e => this.setState({location: "KTH-sodertalje"})}>KTH Södertälje</Dropdown.Item>
+            </DropdownButton>
           </div>
-          <div>
               <textarea  className="description-box" placeholder="Description of study session" onChange={e => this.setState({description: e.target.value})} id="description" rows="5" cols="100">
             </textarea><br/>
-            </div>
-            <Link to="/find-study-session">
+            <Link to="/">
               <button className="studysession-btn" type="submit" onClick={this.submit}>Plan study session</button>
             </Link>
           </form>;
