@@ -10,6 +10,9 @@ class Model extends ObservableModel {
 		super();
 
 		this.currentUser = null;
+
+		this.studysessions = this.db.collection("study_session");
+
 	    //global.firebase.initializeApp(firebaseConfig);
 	    //this.db = global.firebase.firestore();
 	    //this.users = this.db.collection("users");
@@ -50,12 +53,19 @@ class Model extends ObservableModel {
 		console.log(this.currentUser);
 	}
 
-	createStudySession(){
+	createStudySession(starttime, endtime, loc, descr){
+		this.studysessions.doc().set({
+			creator: this.currentUser,
+			startTime: starttime,
+			endTime: endtime,
+			location: loc,
+			description: descr
+		});
+		console.log("eirskjdgksdhjr");
 	}
 
 	planStudySession(){
 	}
-
 
 }
 // Export an instance of model
