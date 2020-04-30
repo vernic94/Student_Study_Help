@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import "./studysessions.css";
-import {firebaseConfig} from "../data/firebaseConfig";
+// import {firebaseConfig} from "../data/firebaseConfig";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
