@@ -1,35 +1,12 @@
-/* Profile Editor
-
-Responsible: Agnes
-
-ITERATION 2
-Should consist of: 
-- username efitor
-- biography editor
-- school editor
-- subjects
-- courses
-- save button
-- cancel button 
-- return to profile
-- header 
-- Side/top bar 
-
-Collection - User
-Fields:
-- username
-- biogrphy
-- school(s)
-- subjects
-- courses
-
-*/
+/**************************************** 
+* Profile Editor                        *
+* Responsible: Agnes                    *
+*****************************************/
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./profileEditor.css";
 import Topbar from "../Topbar/topbar"
-//import firebase from 'firebase';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import modelInstance from "../data/Model";
@@ -50,9 +27,8 @@ class ProfileEditor extends Component {
     }
 
     componentDidMount(){
+        
         // Your web app's Firebase configuration
-        let instanceUser = modelInstance.getCurrentUser();
-
         var firebaseConfig = {
             apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
             authDomain: "student-study-help.firebaseapp.com",
@@ -71,10 +47,9 @@ class ProfileEditor extends Component {
 
         // Set state
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc(instanceUser);
+        var docRef = db.collection("users").doc(modelInstance.getCurrentUser());
         docRef.get().then(doc => {
             this.setState({
-                currentUser: instanceUser,
                 username: doc.data().firstname,
                 biography: doc.data().bio,
                 school: doc.data().school,
@@ -85,9 +60,11 @@ class ProfileEditor extends Component {
     }
 
     submitHandler = (event) => {
+        
         event.preventDefault();
+        
         const db = firebase.firestore();
-        const docRef = db.collection("users").doc(this.currentUser);
+        const docRef = db.collection("users").doc(modelInstance.getCurrentUser());
 
         docRef.update({
             firstname: this.state.username,

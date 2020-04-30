@@ -1,25 +1,12 @@
-/* Profile page shows current user's account
-
-Responsible: Agnes
-
-ITERATION 2
-Should consist of: 
-- email?, password, school (list?)
-- Edit profile button ?
-- Additional information such as deescription, editable stuff like courses
-- header 
-- Side/top bar 
-
-Must not be handled (this iteration):
-- Get user information from database 
-
-*/
+/*********************************************
+* Profile page shows current user's account  *
+* Responsible: Agnes                         *   
+**********************************************/
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./profile.css";
 import Topbar from "../Topbar/topbar";
-//import firebase from 'firebase';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import modelInstance from "../data/Model";
@@ -29,7 +16,6 @@ class Profile extends Component {
     constructor(props){
         super(props);
         this.state = {
-            currentUser: "",
             username: "",
             biography: "",
             school: [],
@@ -41,13 +27,9 @@ class Profile extends Component {
 
     componentDidMount(){
 
-        console.log("currentUser");
-        let instanceUser = modelInstance.getCurrentUser();
-
-        console.log(instanceUser);
-
-
-
+        console.log("currentUser test");
+        //modelInstance.getCurrentUser();
+        
         var firebaseConfig = {
             apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
             authDomain: "student-study-help.firebaseapp.com",
@@ -63,12 +45,11 @@ class Profile extends Component {
             firebase.initializeApp(firebaseConfig);
         }
 
-        //TODO
+
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc(instanceUser);
+        var docRef = db.collection("users").doc(modelInstance.getCurrentUser());
         docRef.get().then(doc => {
             this.setState({
-                currentUser: instanceUser,
                 username: doc.data().firstname,
                 biography: doc.data().bio,
                 school: doc.data().school,
@@ -77,17 +58,8 @@ class Profile extends Component {
             })
         })
 
-        /*
-        var sessionRef = db.collection("study_session").doc("vb07M9l74D91iTfNFDCy");
-        sessionRef.get().then(doc => {
-            this.setState({
-                session: doc.data()
-            })
-        })
-        */
-
         let study_sessions = [];
-        db.collection("study_session").where("creator", "==", this.currentUser).get().then(
+        db.collection("study_session").where("creator", "==", "agnesal@kth.se").get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     study_sessions.push(doc.data());
@@ -106,10 +78,7 @@ class Profile extends Component {
     }
 	
 	render(){
-        //console.log(this.state.sessions);
-
-        console.log(this.state.sessions[0]);
-
+        
         let mySessions = [];
 
         for(let i = 0; i < this.state.sessions.length; i++){
