@@ -11,7 +11,8 @@ class dbHandler{
 
 	    global.firebase.initializeApp(firebaseConfig);
 	    this.db = global.firebase.firestore();
-	    this.users = this.db.collection("users");
+		this.users = this.db.collection("users");
+		this.studysessions = this.db.collection("study_session");
 	}
 	userExist(email) {
 		console.log(email);
@@ -68,6 +69,16 @@ class dbHandler{
 		    console.log("Document successfully deleted!");
 		}).catch(function(error) {
 		    console.error("Error removing document: ", error);
+		});
+	}
+
+	createStudySession(starttime, endtime, loc, descr){
+		this.studysessions.doc().set({
+			creator: this.currentUser,
+			startTime: starttime,
+			endTime: endtime,
+			location: loc,
+			description: descr
 		});
 	}
 
