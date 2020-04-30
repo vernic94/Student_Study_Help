@@ -6,6 +6,17 @@ import {firebaseConfig} from "./firebaseConfig";
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 
+export const firebaseConfig = {
+    apiKey: API_KEY,
+    authDomain: "student-study-help.firebaseapp.com",
+    databaseURL: "https://student-study-help.firebaseio.com/",
+    projectId: "student-study-help",
+    storageBucket: "student-study-help.appspot.com",
+    messagingSenderId: "284363914579",
+    appId: "1:284363914579:web:7bec55fc128b5ab3cb35a6",
+    measurementId: "G-YPH7CP209E"
+};
+
 class dbHandler{
 	constructor() {
 
