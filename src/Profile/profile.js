@@ -41,7 +41,10 @@ class Profile extends Component {
     componentDidMount(){
 
         console.log("currentUser");
-        console.log(typeof modelInstance.currentUser);
+        let instanceUser = modelInstance.getCurrentUser();
+
+        console.log(modelInstance.getCurrentUser());
+
 
 
         var firebaseConfig = {
@@ -61,7 +64,7 @@ class Profile extends Component {
 
         //TODO
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc(modelInstance.currentUser);
+        var docRef = db.collection("users").doc("agnesal@kth.se");
         docRef.get().then(doc => {
             this.setState({
                 username: doc.data().firstname,
@@ -82,7 +85,7 @@ class Profile extends Component {
         */
 
         let study_sessions = [];
-        db.collection("study_session").where("creator", "==", modelInstance.currentUser).get().then(
+        db.collection("study_session").where("creator", "==", "agnesal@kth.se").get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     study_sessions.push(doc.data());

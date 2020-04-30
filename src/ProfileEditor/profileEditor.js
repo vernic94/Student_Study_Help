@@ -50,6 +50,8 @@ class ProfileEditor extends Component {
 
     componentDidMount(){
         // Your web app's Firebase configuration
+        let instanceUser = modelInstance.getCurrentUser();
+
         var firebaseConfig = {
             apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
             authDomain: "student-study-help.firebaseapp.com",
@@ -68,7 +70,7 @@ class ProfileEditor extends Component {
 
         // Set state
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc(modelInstance.currentUser);
+        var docRef = db.collection("users").doc("agnesal@kth.se");
         docRef.get().then(doc => {
             this.setState({
                 username: doc.data().firstname,
@@ -83,7 +85,7 @@ class ProfileEditor extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         const db = firebase.firestore();
-        const docRef = db.collection("users").doc(modelInstance.currentUser);
+        const docRef = db.collection("users").doc("agnesal@kth.se");
 
         docRef.update({
             firstname: this.state.username,
@@ -122,7 +124,7 @@ class ProfileEditor extends Component {
             }
         }
 
-        if(exists != false && nam === "school"){
+        if(exists !== false && nam === "school"){
             console.log("Do nothing!")
         }else if(exists != false && nam === "subject"){
             console.log("Do nothing!")
