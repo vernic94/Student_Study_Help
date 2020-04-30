@@ -85,12 +85,7 @@ class Model extends ObservableModel {
 			location: loc,
 			description: descr
 		});
-		console.log("eirskjdgksdhjr");
 	}
-
-	planStudySession(){
-	}
-
 }
 // Export an instance of model
 const modelInstance = new Model();
