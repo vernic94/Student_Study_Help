@@ -83,26 +83,19 @@ export default dbHandlerInstance;
 /**
 class dbHandler {
     function
-
     func() {
-
         firebase.initializeApp(firebaseConfig);
         var database = firebase.database();
         //eller var database = firebase.firestore();?
-
         var ref = database.ref('study_session');
         ref.on('value', gotData, errData);
     }
-
     function
-
     gotData(data) {
         console.log(data);
         alert(data);
     }
-
     function
-
     errData(err) {
         console.log('Error');
         console.log(err);
@@ -117,4 +110,3 @@ ref.on("value", function(snapshot) {
     console.log("The read failed: " + errorObject.code);
 });
 **/
-
