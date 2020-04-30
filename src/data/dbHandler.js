@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 
 export const firebaseConfig = {
-    apiKey: API_KEY,
+    apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
     authDomain: "student-study-help.firebaseapp.com",
     databaseURL: "https://student-study-help.firebaseio.com/",
     projectId: "student-study-help",
