@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import "./studysession.css";
 import Topbar from "../Topbar/topbar";
 import Map from "../MapComponent/map"
-import dbHandlerInstance from "../data/dbHandler";
+import modelInstance from "../data/Model";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownButton} from 'react-bootstrap';
 
@@ -45,11 +45,11 @@ class StudySession extends Component {
   */
   createStudySession(){
     console.log("STUDY SESSION SHOULD BE CREATED");
-    dbHandlerInstance.createStudySession()
+    modelInstance.createStudySession()
   }
 
   submit(){
-    dbHandlerInstance.createStudySession(this.state.startTime, this.state.endTime, this.state.location, this.state.description);
+    modelInstance.createStudySession(this.state.startTime, this.state.endTime, this.state.location, this.state.description);
   }
 
   render() {
