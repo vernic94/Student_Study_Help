@@ -108,6 +108,8 @@ class ProfileEditor extends Component {
         }else{
             this.setState({[nam]: val});
         }
+
+        this.forceUpdate();
     }
 
     remove = (e) =>{
@@ -179,6 +181,7 @@ class ProfileEditor extends Component {
                             Select schools:
                             <div className="Selected">{selectedSchools}</div>
                             <select name="school" className="SchoolSelect" onChange={this.inputHandler}>
+                                <option disabled selected value> -- select an option -- </option>
                                 <option value="Stockholms Universitet">Stockholms Universitet</option>
                                 <option value="Karolinska">Karonlinska</option>
                                 <option value="Kungliga Tekniska Högskolan">Kungliga Tekniska Högskolan</option>
@@ -190,6 +193,7 @@ class ProfileEditor extends Component {
                             Select subjects:
                             <div className="Selected">{selectedSubjects}</div>
                             <select name="subject" className="SubjectSelect" onChange={this.inputHandler}>
+                                <option disabled selected value> -- select an option -- </option>
                                 <option value="Maths">Maths</option>
                                 <option value="Biology">Biology</option>
                                 <option value="Economy">Economy</option>

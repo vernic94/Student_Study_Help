@@ -62,6 +62,7 @@ class Profile extends Component {
 
         let mySessions = [];
         let pfp = "";
+        let bio;
 
         //study session element
         for(let i = 0; i < this.state.sessions.length; i++){
@@ -91,6 +92,16 @@ class Profile extends Component {
                 pfp = <div></div>;
             }
 
+            //bio element 
+            if(this.state.biography !== ""){
+                bio =
+                    <div className="ProfileBiography">
+                        <p className="BioParagraph"><i>{this.state.biography}</i></p>
+                    </div>
+            }else{
+                bio = {};
+            }
+
         }
         
 		return(
@@ -105,9 +116,7 @@ class Profile extends Component {
                     {pfp}
                     <h1>{this.state.username}</h1>
                     <div className="ProfileInfo">
-                        <div className="ProfileBiography">
-                            <p className="BioParagraph"><i>{this.state.biography}</i></p>
-                        </div>
+                        {bio}
                         <p className="ProfileParagraph">{"School: " + this.state.school.join(', ')}</p>
                         <p className="ProfileParagraph">{"Subjects: " + this.state.subject.join(', ')}</p>
                         <hr></hr>
