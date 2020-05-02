@@ -99,7 +99,7 @@ class Profile extends Component {
                         <p className="BioParagraph"><i>{this.state.biography}</i></p>
                     </div>
             }else{
-                bio = {};
+                bio = "";
             }
 
         }

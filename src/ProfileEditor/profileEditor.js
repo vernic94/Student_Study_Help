@@ -70,47 +70,54 @@ class ProfileEditor extends Component {
         this.props.history.push('/profile')
     }
 
+    //handle general event
     inputHandler = (event) => {
         let nam = event.target.name;
         let val = event.target.value;
+ 
+        this.setState({[nam]: val});
+    }
+
+    //handle school input event
+    inputHandlerSchool = (event) => {
+        let val = event.target.value;
         let exists = false;
 
-        if(nam === "school"){
-            for(let i=0; i < this.state.school.length; i++){
-                if(this.state.school[i] === val){
-                    console.log("Already exists!")
-                    exists = true;
-                }
+        for(let i=0; i < this.state.school.length; i++){
+            if(this.state.school[i] === val){
+                exists = true;
             }
         }
 
-        if(nam === "subject"){
-            for(let i=0; i < this.state.subject.length; i++){
-                if(this.state.subject[i] === val){
-                    console.log("Already exists!")
-                    exists = true;
-                }
-            }
-        }
-
-        if(exists !== false && nam === "school"){
-            console.log("Do nothing!")
-        }else if(exists != false && nam === "subject"){
-            console.log("Do nothing!")
-        }else if(exists === false && nam === "school"){
+        if(exists !== true){
             let arr = this.state.school;
             arr = arr.push(val);
             console.log(this.state.school);
-        }else if(exists === false && nam === "subject"){
-            let arr = this.state.subject;
-            arr = arr.push(val);
-            console.log(this.state.subject);
-        }else{
-            this.setState({[nam]: val});
         }
 
         this.forceUpdate();
     }
+
+    //Handlet subject input event
+    inputHandlerSubject = (event) => {
+        let val = event.target.value;
+        let exists = false;
+
+        for(let i=0; i < this.state.subject.length; i++){
+            if(this.state.subject[i] === val){
+                exists = true;
+            }
+        }
+
+        if(exists !== true){
+            let arr = this.state.subject;
+            arr = arr.push(val);
+            console.log(this.state.subject);
+        }
+
+        this.forceUpdate();
+    }
+
 
     remove = (e) =>{
         console.log(e.target.value);
@@ -180,7 +187,7 @@ class ProfileEditor extends Component {
                         <label>
                             Select schools:
                             <div className="Selected">{selectedSchools}</div>
-                            <select name="school" className="SchoolSelect" onChange={this.inputHandler}>
+                            <select name="school" className="SchoolSelect" onChange={this.inputHandlerSchool}>
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="Stockholms Universitet">Stockholms Universitet</option>
                                 <option value="Karolinska">Karonlinska</option>
@@ -192,7 +199,7 @@ class ProfileEditor extends Component {
                         <label>
                             Select subjects:
                             <div className="Selected">{selectedSubjects}</div>
-                            <select name="subject" className="SubjectSelect" onChange={this.inputHandler}>
+                            <select name="subject" className="SubjectSelect" onChange={this.inputHandlerSubject}>
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="Maths">Maths</option>
                                 <option value="Biology">Biology</option>
