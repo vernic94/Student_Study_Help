@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import "./studysessions.css";
-import {firebaseConfig} from "../data/firebaseConfig";
+import API_KEY from "./firebaseConfig";
 
 
 class StudySessions extends React.Component {
