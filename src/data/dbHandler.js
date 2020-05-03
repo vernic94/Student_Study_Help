@@ -1,10 +1,8 @@
 //import firebase from "firebase/app";
 //import "firebase/firestore";
 //import ObservableModel from "./ObservableModel";
-import {firebaseConfig} from "./firebaseConfig";
 import {API_KEY} from "./firebaseConfig";
 import modelInstance from "./Model";
-import {API_KEY} from "./firebaseConfig";
 //import * as firebase from "firebase";
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
