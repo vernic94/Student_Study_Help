@@ -28,8 +28,14 @@ function App() {
         <Route path="/create-study-session" component={StudySession}/>
         <Route path="/create-account" component={CreateAccount}/>
         <Route path="/map-markers" component={MapMarkers}/>
+<<<<<<< Updated upstream
         <Route path="/study-sessions" component={StudySessions}/>
 
+=======
+        <Route path="/map-markers" component={StudySessions}/>
+        <Route path="/map" component={MapComponent}/>
+        <Route path="/study-sessions" component={StudySessions}/>
+>>>>>>> Stashed changes
       </header>
     </div>
   );

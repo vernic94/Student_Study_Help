@@ -33,9 +33,9 @@ export class Topbar extends React.Component{
                                 <Link class="topbar-button" to="profile">Profile</Link>&nbsp;
                                 <Link class="topbar-button" to="create-study-session">Create Study Session</Link>&nbsp;
                                 <Link class="topbar-button" to="find-study-session">Find Study Session</Link>&nbsp;
+                                <Link class="topbar-button" to="study-sessions">Study Sessions</Link>&nbsp;
                                 <Link class="topbar-button" to="aboutus">About Us</Link>&nbsp;
                                 <Link class="topbar-button" to="/" onClick={this.logoutHandler}>Logout</Link>
-
                     </Nav>
                 </Navbar.Collapse>
                 <img className="topbar-icon" src={require("../images/student-study-help-2.png")}
