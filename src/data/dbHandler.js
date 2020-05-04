@@ -1,7 +1,6 @@
 //import firebase from "firebase/app";
 //import "firebase/firestore";
 //import ObservableModel from "./ObservableModel";
-import {API_KEY} from "./firebaseConfig";
 import modelInstance from "./Model";
 //import * as firebase from "firebase";
 const bcrypt = require("bcryptjs");
