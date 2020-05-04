@@ -65,7 +65,7 @@ class Profile extends Component {
                 })
             }).then(() => {
                 this.setState({sessions: study_sessions})
-            })
+            });
     }
 	
 	render(){

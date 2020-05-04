@@ -23,19 +23,20 @@ class ProfileEditor extends Component {
             biography: "",
             school: [],
             subject: [],
+            all: [],
             pfpurl: ""
         }
     }
 
     componentDidMount(){
-        
+
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
 
         // Set state
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc(modelInstance.getCurrentUser());
+        var docRef = db.collection("users").doc(localStorage.getItem("currentUser"));
         //var docRef = db.collection("users").doc("agnesal@kth.se");
         docRef.get().then(doc => {
             this.setState({
@@ -46,6 +47,16 @@ class ProfileEditor extends Component {
                 pfpurl: doc.data().pfpurl,
             })
         })
+        
+        let arr =[];
+        db.collection("subjects").get().then(
+            (snapshot) => {
+                snapshot.forEach((doc) => {
+                    arr.push(doc.id);
+            })
+        }).then(() => {
+            this.setState({all: arr})
+        })
     }
 
     submitHandler = (event) => {
@@ -53,8 +64,7 @@ class ProfileEditor extends Component {
         event.preventDefault();
         
         const db = firebase.firestore();
-        const docRef = db.collection("users").doc(modelInstance.getCurrentUser());
-        //const docRef = db.collection("users").doc("agnesal@kth.se");
+        const docRef = db.collection("users").doc(localStorage.getItem("currentUser"));
 
         docRef.update({
             firstname: this.state.username,
@@ -147,8 +157,10 @@ class ProfileEditor extends Component {
     }
 	
 	render(){
+
         let selectedSchools = [];
         let selectedSubjects = [];
+        let subjectOptions = [];
 
         for(let i = 0; i < this.state.school.length; i++){
             selectedSchools.push(<p className="RemoveSchool">{this.state.school[i]}<button type="button" className="ButtonRemove" value={"schoolselect" + this.state.school[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
@@ -156,6 +168,12 @@ class ProfileEditor extends Component {
 
         for(let i = 0; i < this.state.subject.length; i++){
             selectedSubjects.push(<p className="RemoveSubject">{this.state.subject[i]}<button type="button" className="ButtonRemove" value={"subjectselect" + this.state.subject[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
+        }
+
+        for(let i = 0; i < this.state.all.length; i++){
+            subjectOptions.push(
+                <option value={this.state.all[i]}>{this.state.all[i]}</option>
+            )
         }
         
 
@@ -190,7 +208,7 @@ class ProfileEditor extends Component {
                             <select name="school" className="SchoolSelect" onChange={this.inputHandlerSchool}>
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="Stockholms Universitet">Stockholms Universitet</option>
-                                <option value="Karolinska">Karonlinska</option>
+                                <option value="Karolinska Institutet">Karonlinska Institutet</option>
                                 <option value="Kungliga Tekniska Högskolan">Kungliga Tekniska Högskolan</option>
                             </select>
                         </label>
@@ -201,10 +219,7 @@ class ProfileEditor extends Component {
                             <div className="Selected">{selectedSubjects}</div>
                             <select name="subject" className="SubjectSelect" onChange={this.inputHandlerSubject}>
                                 <option disabled selected value> -- select an option -- </option>
-                                <option value="Maths">Maths</option>
-                                <option value="Biology">Biology</option>
-                                <option value="Economy">Economy</option>
-                                <option value="History">History</option>
+                                {subjectOptions}
                             </select>
                         </label>
                     </div>
