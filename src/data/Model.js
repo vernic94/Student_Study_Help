@@ -47,7 +47,9 @@ class Model extends ObservableModel {
 	}
 	logout(){
 		this.currentUser = null;
+		localStorage.setItem("currentUser", "null");
 		console.log(this.currentUser);
+		console.log(localStorage.getItem("currentUser"));
 	}
 
 	//converts TimeStamp to a readable date
