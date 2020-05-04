@@ -1,6 +1,5 @@
 
 import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom'
 import {Navbar, Nav} from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import "./topbar.css";
@@ -17,7 +16,7 @@ import modelInstance from "../data/Model";
 
 export class Topbar extends React.Component{
     logoutHandler=()=>{
-        modelInstance.logout();
+		modelInstance.logout();
     }
 
     render() {
@@ -38,8 +37,9 @@ export class Topbar extends React.Component{
                         <Nav.Link href="/" onClick={this.logoutHandler}>Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
-            </Navbar>
-        );
+
+            </Navbar>     
+            );
     }
 }
 export default Topbar;
