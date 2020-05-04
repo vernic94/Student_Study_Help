@@ -33,8 +33,7 @@ function App() {
         <Route path="/map-markers" component={MapMarkers}/>
         <Route path="/map-markers" component={StudySessions}/>
         <Route path="/map" component={MapComponent}/>
-
-
+        <Route path="/study-sessions" component={StudySessions}/>
       </header>
     </div>
   );
