@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 //import "./maps.css";
 import Topbar from "../Topbar/topbar"
 import Maps from "../Maps/maps"
+import MapComponent from "../MapComponent/map";
+import "./findstudysession.css";
 
 class FindStudySession extends Component {
   constructor(props) {
@@ -24,8 +26,8 @@ class FindStudySession extends Component {
   }
   render() {
 	let currentView = null;
-	let mapBtn = <button onClick={this.mapsHandler}>Map</button>
-	let listBtn = <button onClick={this.listHandler}>List</button>
+	let mapBtn = <button className="button" onClick={this.mapsHandler}>Map</button>
+	let listBtn = <button className="button" onClick={this.listHandler}>List</button>
 
 	if (this.state.status==="MAPS"){
 		currentView = <Maps/>
@@ -40,6 +42,9 @@ class FindStudySession extends Component {
     return (
       <div className="find-page">
          <Topbar/>
+         <div className="mapMarkers">
+           <MapComponent/>
+         </div>
          {currentView}
          {mapBtn}
          {listBtn}

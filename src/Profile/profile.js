@@ -1,27 +1,17 @@
-/* Profile page shows current user's account
-
-Responsible: Agnes
-
-ITERATION 2
-Should consist of: 
-- email?, password, school (list?)
-- Edit profile button ?
-- Additional information such as deescription, editable stuff like courses
-- header 
-- Side/top bar 
-
-Must not be handled (this iteration):
-- Get user information from database 
-
-*/
+/*********************************************
+* Profile page shows current user's account  *
+* Responsible: Agnes                         *   
+**********************************************/
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./profile.css";
-import Topbar from "../Topbar/topbar"
-//import firebase from 'firebase';
+import Topbar from "../Topbar/topbar";
 import firebase from "firebase/app";
 import "firebase/firestore";
+import modelInstance from "../data/Model";
+import dbHandlerInstance from "../data/dbHandler";
+import {firebaseConfig} from "../data/dbHandler";
 
 class Profile extends Component {
     //constructor(props){}
@@ -33,68 +23,86 @@ class Profile extends Component {
             school: [],
             subject: [],
             pfpurl: "",
-            session: {}
+            sessions: []
         }
     }
 
     componentDidMount(){
-        
-        var firebaseConfig = {
-            apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
-            authDomain: "student-study-help.firebaseapp.com",
-            databaseURL: "https://student-study-help.firebaseio.com",
-            projectId: "student-study-help",
-            storageBucket: "student-study-help.appspot.com",
-            messagingSenderId: "284363914579",
-            appId: "1:284363914579:web:7bec55fc128b5ab3cb35a6",
-            measurementId: "G-YPH7CP209E"
-        };
 
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
 
-        //TODO
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc("KPPhw1QDS3j7HtfQhPQP");
+        var docRef = db.collection("users").doc(modelInstance.getCurrentUser());
+        //var docRef = db.collection("users").doc("agnesal@kth.se");
         docRef.get().then(doc => {
             this.setState({
-                username: doc.data().name,
+                username: doc.data().firstname,
                 biography: doc.data().bio,
                 school: doc.data().school,
-                subject: doc.data().subjects,
+                subject: doc.data().subject,
                 pfpurl: doc.data().pfpurl
             })
         })
 
-        var sessionRef = db.collection("study_session").doc("MNp5SAPffkhquzCiX4Qy");
-        sessionRef.get().then(doc => {
-            this.setState({
-                session: doc.data()
+        let study_sessions = [];
+        //db.collection("study_session").where("creator", "==", "agnesal@kth.se").get().then(
+        db.collection("study_session").where("creator", "==", modelInstance.getCurrentUser()).get().then(
+            (snapshot) => {
+                snapshot.forEach((doc) => {
+                    study_sessions.push(doc.data());
+                })
+            }).then(() => {
+                this.setState({sessions: study_sessions})
             })
-        })
-
     }
 	
 	render(){
-        console.log(this.state.session);
 
-        let mysession = [];
+        let mySessions = [];
+        let pfp = "";
+        let bio;
 
+        //study session element
+        for(let i = 0; i < this.state.sessions.length; i++){
+            let start = modelInstance.convertToTime(this.state.sessions[i].startTime);
+            let end = modelInstance.convertToTime(this.state.sessions[i].endTime);
 
-        let date = this.state.session.startTime;
-        //date = date.seconds;
-        
-        //new Date(this.state.session.startTime.seconds * 1000).toLocaleDateString("sv-SE");
-        console.log(date);
-        //console.log(date.toDate());
+            mySessions.push(
+                <div className="StudySession">
+                    <div className="TitleBlock">
+                        <p className="SessionTitle"><b>{this.state.sessions[i].subject}</b></p>
+                    </div>
+                    <p className="SessionDesc">{this.state.sessions[i].description}</p>
+                    <p className="Date">
+                        {"Start time: " + start}
+                        <br></br>
+                        {"End time: " + end}
+                    </p>
+                </div>)
+            
+            //pfp element
+            if(this.state.pfpurl !== ""){
+                pfp =
+                    <div>
+                        <img className="ProfilePicture" src={this.state.pfpurl} alt="profile-picture"></img>
+                    </div>;
+            }else{
+                pfp = <div></div>;
+            }
 
-        mysession.push(<div className="StudySession">
-                <p>{this.state.session.subject}</p>
-                <p>{this.state.session.description}</p>
-                <p>{"Start time: " + this.state.session.startTime}</p>
-                <p>{"End time: " + this.state.session.endTime}</p>
-            </div>);
+            //bio element 
+            if(this.state.biography !== ""){
+                bio =
+                    <div className="ProfileBiography">
+                        <p className="BioParagraph"><i>{this.state.biography}</i></p>
+                    </div>
+            }else{
+                bio = "";
+            }
+
+        }
         
 		return(
             <div className="profile-page">
@@ -105,19 +113,15 @@ class Profile extends Component {
                             <button type="button" className="EditButton">Edit Profile</button>
                         </Link>
                     </div>
-                    <div>
-                        <img className="ProfilePicture" src={this.state.pfpurl} alt="profile-picture"></img>
-                    </div>
+                    {pfp}
                     <h1>{this.state.username}</h1>
                     <div className="ProfileInfo">
-                        <div className="ProfileBiography">
-                            <p className="BioParagraph"><i>{this.state.biography}</i></p>
-                        </div>
-                        <p className="ProfileParagraph">{"Schools: " + this.state.school}</p>
-                        <p className="ProfileParagraph">{"Subjects: " + this.state.subject}</p>
-                        <p className="ProfileParagraph">Courses:</p>
+                        {bio}
+                        <p className="ProfileParagraph">{"School: " + this.state.school.join(', ')}</p>
+                        <p className="ProfileParagraph">{"Subjects: " + this.state.subject.join(', ')}</p>
+                        <hr></hr>
                         <p className="MySessions">My Study Sessions</p>
-                        <div>{mysession}</div>
+                        <div className="SessionDiv">{mySessions}</div>
                     </div>
                 </div>
             </div>

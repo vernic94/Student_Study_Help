@@ -7,13 +7,13 @@
   pointer-events: none;
 }
 /*Button style*/
-.EditButton, .logBtn, .choice-btn{
+.EditButton, .logBtn, .choice-btn, .button{
   background-color: #56CCF2;
   color: black;
   border: 1px solid steelblue;
  }
 /*Button hover style*/
-.EditButton:hover, .logBtn:hover, .choice-btn:hover{
+.EditButton:hover, .logBtn:hover, .choice-btn:hover, .button:hover{
   background-color: steelblue;
   color: black;
   border: 1px solid steelblue;
@@ -26,7 +26,7 @@
 }
 
 .App-header {
-  background-color: #939393;
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
