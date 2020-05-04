@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import "./studysessions.css";
 import {firebaseConfig} from "../data/firebaseConfig";
+import Topbar from "../Topbar/topbar";
 
 
 class StudySessions extends React.Component {
@@ -15,18 +16,24 @@ class StudySessions extends React.Component {
 
 
     convertToTime(firebaseTimeStamp) {
-        if (firebaseTimeStamp != undefined) {
-            return firebaseTimeStamp.toDate();
-
+        try {
+            if (firebaseTimeStamp != undefined) {
+                return firebaseTimeStamp.toDate();
+            }
+        } catch (error) {
+            return "";
         }
-        return "";
     }
 
     formatDate(date) {
-        if (date != "") {
-            return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
+        try {
+            if (date != "") {
+                return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
+            }
+        } catch (error) {
+            return "";
         }
-        return "";
+
     }
 
     componentDidMount() {
@@ -46,6 +53,7 @@ class StudySessions extends React.Component {
     render() {
         return (
             <div className="studySessionsPage">
+                <Topbar/>
                 <div className="studySessionsContainer">
                     <div>
                         <table className="table table-dark">
