@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom'
 import {Navbar, Nav} from 'react-bootstrap'
@@ -6,13 +7,12 @@ import "./topbar.css";
 import modelInstance from "../data/Model";
 
 /*
-   Code to handle the topbar logic, which is a
-   navigation/menu sticked on top where the
-   user can navigate between the pages: "Home",
-   "Profile", "Create Study session", "Map" and "About".
+    Code to handle the topbar logic, which is a
+    navigation/menu sticked on top where the
+    user can navigate between the pages: "Home",
+    "Profile", "Create Study session", "Map" and "About".
 
-   2020-04-06
-   @Aurthor Amanda Baza
+    @Aurthor Amanda Baza
 */
 
 export class Topbar extends React.Component{
@@ -20,29 +20,27 @@ export class Topbar extends React.Component{
         modelInstance.logout();
     }
 
-    render(){
-        return(
-            <Navbar bg="dark" className="topbar">
-                <Navbar.Collapse>
-                    <Nav className="topbar-nav">
-                        <img className="topbar-icon" src={require("../images/student-study-help-3.png")}
-                             height="35vh">
-                        </img>&nbsp;
-                        {/*
-                               Navigation links where "to" is what
-                               page the link navigates to
-                               and "&nbsp;" adds a space after the Link.
-                               */}
-                        <Link className="topbar-button" to="profile">Profile</Link>&nbsp;
-                        <Link className="topbar-button" to="create-study-session">Create Study Session</Link>&nbsp;
-                        <Link className="topbar-button" to="find-study-session">Find Study Session</Link>&nbsp;
-                        <Link className="topbar-button" to="aboutus">About Us</Link>&nbsp;
-                        <Link className="topbar-button" to="/" onClick={this.logoutHandler}>Logout</Link>&nbsp;
+    render() {
+        return (
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <img className="topbar-icon" src={require("../images/student-study-help-3.png")}>
+                </img>&nbsp;
+                <Navbar.Brand href="#home" >Student Study Help</Navbar.Brand>
 
+                <Navbar.Toggle/>
+
+                <Navbar.Collapse className="responsive-navbar-nav">
+                    <Nav>
+                        <Nav.Link href="profile">Profile</Nav.Link>
+                        <Nav.Link href="create-study-session">Create Study Session</Nav.Link>
+                        <Nav.Link href="find-study-session">Find Study Session</Nav.Link>
+                        <Nav.Link href="aboutus">About Us</Nav.Link>
+                        <Nav.Link href="/" onClick={this.logoutHandler}>Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
         );
     }
 }
-export default Topbar
+export default Topbar;
+
