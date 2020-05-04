@@ -1,7 +1,6 @@
 
 import React, {Component} from 'react';
 import {Navbar, Nav} from 'react-bootstrap'
-import { Link } from "react-router-dom";
 import "./topbar.css";
 import modelInstance from "../data/Model";
 
