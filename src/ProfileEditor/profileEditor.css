@@ -44,13 +44,14 @@
     border-radius: 5px;
     padding: 8px;
     margin-top: 5px;
+    width: 430px;
 }
 
 .SchoolSelect{
     background-color: #3a3f4b;
     border-color: #4f5461;
     color: whitesmoke;
-    width: 350px;
+    width: 430px;
 }
 
 .SubjectSelect{
@@ -58,7 +59,7 @@
     border-color: #4f5461;
     color: whitesmoke;
     margin-bottom: 15px;
-    width: 350px;
+    width: 430px;
 }
 
 .Selected{

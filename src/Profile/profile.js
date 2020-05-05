@@ -120,7 +120,7 @@ class Profile extends Component {
                 <div className="ProfileContainer">
                     <div className="Edit">
                         <Link to="/profileEditor">
-                            <button type="button" className="EditButton">Edit Profile</button>
+                            <button type="button" className="EditButton">🖊️</button>
                         </Link>
                     </div>
                     {pfp}

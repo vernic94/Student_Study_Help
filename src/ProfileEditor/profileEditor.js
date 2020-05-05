@@ -23,7 +23,8 @@ class ProfileEditor extends Component {
             biography: "",
             school: [],
             subject: [],
-            all: [],
+            allSubjects: [],
+            allSchools: [],
             pfpurl: ""
         }
     }
@@ -48,14 +49,24 @@ class ProfileEditor extends Component {
             })
         })
         
-        let arr =[];
+        let arrSub =[];
         db.collection("subjects").get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
-                    arr.push(doc.id);
+                    arrSub.push(doc.id);
             })
         }).then(() => {
-            this.setState({all: arr})
+            this.setState({allSubjects: arrSub})
+        })
+
+        let arrSch =[];
+        db.collection("universities").get().then(
+            (snapshot) => {
+                snapshot.forEach((doc) => {
+                    arrSch.push(doc.id);
+            })
+        }).then(() => {
+            this.setState({allSchools: arrSch})
         })
     }
 
@@ -161,6 +172,7 @@ class ProfileEditor extends Component {
         let selectedSchools = [];
         let selectedSubjects = [];
         let subjectOptions = [];
+        let schoolOptions = [];
 
         for(let i = 0; i < this.state.school.length; i++){
             selectedSchools.push(<p className="RemoveSchool">{this.state.school[i]}<button type="button" className="ButtonRemove" value={"schoolselect" + this.state.school[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
@@ -170,12 +182,17 @@ class ProfileEditor extends Component {
             selectedSubjects.push(<p className="RemoveSubject">{this.state.subject[i]}<button type="button" className="ButtonRemove" value={"subjectselect" + this.state.subject[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
         }
 
-        for(let i = 0; i < this.state.all.length; i++){
+        for(let i = 0; i < this.state.allSubjects.length; i++){
             subjectOptions.push(
-                <option value={this.state.all[i]}>{this.state.all[i]}</option>
+                <option value={this.state.allSubjects[i]}>{this.state.allSubjects[i]}</option>
             )
         }
-        
+
+        for(let i = 0; i < this.state.allSchools.length; i++){
+            schoolOptions.push(
+                <option value={this.state.allSchools[i]}>{this.state.allSchools[i]}</option>
+            )
+        }
 
 		return(
             <div className="profileEditor-page">
@@ -207,9 +224,7 @@ class ProfileEditor extends Component {
                             <div className="Selected">{selectedSchools}</div>
                             <select name="school" className="SchoolSelect" onChange={this.inputHandlerSchool}>
                                 <option disabled selected value> -- select an option -- </option>
-                                <option value="Stockholms Universitet">Stockholms Universitet</option>
-                                <option value="Karolinska Institutet">Karonlinska Institutet</option>
-                                <option value="Kungliga Tekniska Högskolan">Kungliga Tekniska Högskolan</option>
+                                {schoolOptions}
                             </select>
                         </label>
                     </div>
