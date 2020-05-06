@@ -2,6 +2,7 @@
 //import "firebase/firestore";
 //import ObservableModel from "./ObservableModel";
 import API_KEY from "./firebaseConfig";
+import modelInstance from "./Model";
 //import * as firebase from "firebase";
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
@@ -85,7 +86,7 @@ class dbHandler{
 
 	createStudySession(starttime, endtime, loc, descr){
 		this.studysessions.doc().set({
-			creator: this.currentUser,
+			creator: modelInstance.getCurrentUser(),
 			startTime: starttime,
 			endTime: endtime,
 			location: loc,
