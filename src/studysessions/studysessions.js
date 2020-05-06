@@ -59,16 +59,20 @@ class StudySessions extends React.Component {
 
         //If search bar isn't empty
         if(event.target.value !== "") {
-            currentSessions = this.state.list;
-            newSessions = currentSessions.filter(item => {
-                // change current item to lowercase
-                const lowerCase = item.toLowerCase();
-                // change search term to lowercase
+            currentSessions = this.state.sessions;
+            newSessions = currentSessions.filter(session => {
+                alert(session.description);
+                // change current session's description to lowercase
+                const sessionDescription = session.description.toLowerCase();
+                const sessionSubject = session.subject.toLowerCase();
+                // change search value to lowercase
                 const filter = event.target.value.toLowerCase();
+                //Check what sessions includes the search value
                 // check to see if the current list item includes the search term
                 // If it does, it will be added to newList. Using lowercase eliminates
                 // issues with capitalization in search terms and search content
-                return lowerCase.includes(filter);
+                const test = sessionDescription.includes(filter);
+                return test;
             });
         }
         else {
@@ -85,7 +89,7 @@ class StudySessions extends React.Component {
             <div className="studySessionsPage">
                 <Topbar/>
                 <div className="studySessionsContainer">
-                    <input type="text" className="input" onChange={this.search} placeholder="Search..." />
+                    <input type="text" className="input" onChange={this.search} placeholder="Search for sessions" />
                     <div>
                         <table className="table table-dark">
                             <thead>
