@@ -24,4 +24,23 @@
   color: black;
 }
 
-#map { top:10%; bottom:0; left: 0; right:0; width:100%; }
+.geocoder {
+    position: absolute;
+    z-index: 1;
+    width: 50%;
+    left: 43%;
+    top: 10%;
+}
+
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+}
+   
+#map { 
+    margin-top: 75px;
+    top:5%; 
+    bottom:0; 
+    left: 0; 
+    right:0;  
+    width:100%; 
+}
