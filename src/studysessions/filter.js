@@ -1,65 +1,22 @@
-import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import "./studysessions.css";
-import {firebaseConfig} from "../data/firebaseConfig";
 import Topbar from "../Topbar/topbar";
+import React from "react";
 
-
-class StudySessions extends React.Component {
-
+class SearchedSessions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sessions: [],
             filtered: []
         }
         this.search = this.search.bind(this);
-
     }
 
-
-    convertToTime(firebaseTimeStamp) {
-        try {
-            if (firebaseTimeStamp != undefined) {
-                return firebaseTimeStamp.toDate();
-            }
-        } catch (error) {
-            return "";
-        }
-    }
-
-    formatDate(date) {
-        try {
-            if (date != "") {
-                return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
-            }
-        } catch (error) {
-            return "";
-        }
-
-    }
-
-    componentDidMount() {
-        let db = global.firebase.firestore();
-        var study_sessions = [];
-        db.collection('study_session').get().then(
-            (snapshot) => {
-                snapshot.forEach((doc) => {
-                    study_sessions.push(doc.data());
-                })
-            }).then(() => {
-                this.setState({sessions: study_sessions})
-            }
-        );
-    }
-
-    search(event){
+    search(event) {
         let currentSessions = [];
         let newSessions = [];
 
         //If search bar isn't empty
-        if(event.target.value !== "") {
-            currentSessions = this.state.list;
+        if (event.target.value !== "") {
+            currentSessions = this.props.items;
             newSessions = currentSessions.filter(item => {
                 // change current item to lowercase
                 const lowerCase = item.toLowerCase();
@@ -70,18 +27,17 @@ class StudySessions extends React.Component {
                 // issues with capitalization in search terms and search content
                 return lowerCase.includes(filter);
             });
-        }
-        else {
-            newSessions = this.props.sessions;
+        } else {
+            newSessions = this.props.items;
         }
         // Set the filtered state based on what our rules added to newList
         this.setState({
             sessions: newSessions
         });
-    }
 
+    }
     render() {
-        return (
+        return(
             <div className="studySessionsPage">
                 <Topbar/>
                 <div className="studySessionsContainer">
@@ -112,8 +68,7 @@ class StudySessions extends React.Component {
                         </table>
                     </div>
                 </div>
-            </div>);
+            </div>
+        );
     }
 }
-
-export default StudySessions;

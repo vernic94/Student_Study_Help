@@ -10,7 +10,7 @@ import modelInstance from "../data/Model";
     user can navigate between the pages: "Home",
     "Profile", "Create Study session", "Map" and "About".
 
-    @Aurthor Amanda Baza
+    @Aurthor Amanda Baza, Fariba
 */
 
 export class Topbar extends React.Component{
