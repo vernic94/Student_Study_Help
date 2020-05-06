@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import "./studysessions.css";
 import {firebaseConfig} from "../data/firebaseConfig";
 import Topbar from "../Topbar/topbar";
+import SearchedSessions from "./searchedSessions";
 
 
 class StudySessions extends React.Component {
@@ -10,13 +11,9 @@ class StudySessions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sessions: [],
-            filtered: []
+            sessions: []
         }
-        this.search = this.search.bind(this);
-
     }
-
 
     convertToTime(firebaseTimeStamp) {
         try {
@@ -53,43 +50,12 @@ class StudySessions extends React.Component {
         );
     }
 
-    search(event){
-        let currentSessions = [];
-        let newSessions = [];
-
-        //If search bar isn't empty
-        if(event.target.value !== "") {
-            currentSessions = this.state.sessions;
-            newSessions = currentSessions.filter(session => {
-                alert(session.description);
-                // change current session's description to lowercase
-                const sessionDescription = session.description.toLowerCase();
-                const sessionSubject = session.subject.toLowerCase();
-                // change search value to lowercase
-                const filter = event.target.value.toLowerCase();
-                //Check what sessions includes the search value
-                // check to see if the current list item includes the search term
-                // If it does, it will be added to newList. Using lowercase eliminates
-                // issues with capitalization in search terms and search content
-                const test = sessionDescription.includes(filter);
-                return test;
-            });
-        }
-        else {
-            newSessions = this.props.sessions;
-        }
-        // Set the filtered state based on what our rules added to newList
-        this.setState({
-            sessions: newSessions
-        });
-    }
-
     render() {
         return (
             <div className="studySessionsPage">
                 <Topbar/>
                 <div className="studySessionsContainer">
-                    <input type="text" className="input" onChange={this.search} placeholder="Search for sessions" />
+                    <SearchedSessions search={this.search}/>
                     <div>
                         <table className="table table-dark">
                             <thead>
