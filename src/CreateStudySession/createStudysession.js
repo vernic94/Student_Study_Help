@@ -11,7 +11,7 @@ import Topbar from "../Topbar/topbar";
 import dbHandlerInstance from "../data/dbHandler";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownButton} from 'react-bootstrap';
-import * as mapboxConfig from '../data/mapboxConfig';
+//import * as mapboxConfig from '../data/mapboxConfig';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 const token = mapboxConfig.REACT_APP_TOKEN;
