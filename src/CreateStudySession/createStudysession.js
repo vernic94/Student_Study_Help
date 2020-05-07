@@ -11,6 +11,11 @@ import Topbar from "../Topbar/topbar";
 import dbHandlerInstance from "../data/dbHandler";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownButton} from 'react-bootstrap';
+import * as mapboxConfig from '../data/mapboxConfig';
+
+const token = mapboxConfig.REACT_APP_TOKEN;
+const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+mapboxgl.accessToken = token;
 
 class CreateStudySession extends Component {
   constructor(props) {
@@ -86,7 +91,7 @@ class CreateStudySession extends Component {
             </div>
             <div className="location-parameter">
             <label for="location">Location : </label>
-
+              <div id="sessionLocation"></div>
           </div>
           <div className="studysession-description">
             <p className="Note-text">Note: </p>
