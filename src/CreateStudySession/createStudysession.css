@@ -32,18 +32,26 @@
     width: 100px;
 }
 
-.location-box{
-    margin-bottom: 10px;
-    width: 200px;
-}
-
-.location-map{
-    width: 20vw;
-    height: 0.5vh;
-    margin: auto;
-}
-
 .timeBoxes{
     margin-top: 5vh;
     margin-bottom: 5vh;
 }
+
+#mapSession{
+    position: relative;
+    height: 200px;
+}
+
+#info {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #222;
+    background: #fff;
+    }

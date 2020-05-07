@@ -12,6 +12,7 @@ import dbHandlerInstance from "../data/dbHandler";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownButton} from 'react-bootstrap';
 import * as mapboxConfig from '../data/mapboxConfig';
+import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 const token = mapboxConfig.REACT_APP_TOKEN;
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
@@ -32,6 +33,27 @@ class CreateStudySession extends Component {
       sessionDate: null,
     };
   }
+  componentDidMount(){
+    var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+    mapboxgl.accessToken = 'pk.eyJ1IjoidmVybmljIiwiYSI6ImNrOWltOXJ0YjAwNjQzbnA4eXlmY293eWkifQ.dA5_3vrOMVMmIEThwLQlUg';    
+    
+    var map = new mapboxgl.Map({
+    container: 'mapSession',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [18.063240, 59.334591],
+    zoom: 12
+    });
+
+    map.on('mousemove', function(e) {
+      document.getElementById('info').innerHTML =
+      // e.point is the x, y coordinates of the mousemove event relative
+      // to the top-left corner of the map
+      JSON.stringify(e.point) +
+      '<br />' +
+      // e.lngLat is the longitude, latitude geographical position of the event
+      JSON.stringify(e.lngLat.wrap());
+      });
+}
 
   choiceCreateStudySession(){
     this.setState({
@@ -91,7 +113,10 @@ class CreateStudySession extends Component {
             </div>
             <div className="location-parameter">
             <label for="location">Location : </label>
-              <div id="sessionLocation"></div>
+              <div id="map-container">
+                <div id="mapSession" className="mapSession"></div>
+                <pre id="info"></pre>
+              </div>
           </div>
           <div className="studysession-description">
             <p className="Note-text">Note: </p>
@@ -116,6 +141,7 @@ class CreateStudySession extends Component {
           <div className="studySessionParameters">
             {studySessionParameters}
           </div>
+          
         </div>
       </div>
     );
