@@ -14,7 +14,7 @@ import { Dropdown, DropdownButton} from 'react-bootstrap';
 //import * as mapboxConfig from '../data/mapboxConfig';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
-const token = mapboxConfig.REACT_APP_TOKEN;
+const token = process.env.mapboxAPIKey.REACT_APP_TOKEN;
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = token;
 
