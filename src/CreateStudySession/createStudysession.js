@@ -31,6 +31,8 @@ class CreateStudySession extends Component {
       latitude: 20,*/
       subject: "",
       sessionDate: null,
+      longitude: null,
+      latitude: null
     };
   }
   componentDidMount(){
@@ -52,22 +54,9 @@ class CreateStudySession extends Component {
       '<br />' +
       // e.lngLat is the longitude, latitude geographical position of the event
       JSON.stringify(e.lngLat.wrap());
+      console.log(e.lngLat.lat);
       });
 }
-
-  choiceCreateStudySession(){
-    this.setState({
-      status: "CREATE"
-    }); 
-  }
-
-  /*
-  * Function shall create study session based on input parameters from user
-  */
-  createStudySession(){
-    console.log("STUDY SESSION SHOULD BE CREATED");
-    dbHandlerInstance.createStudySession()
-  }
 
   submit(){
     dbHandlerInstance.createStudySession(this.state.subject, this.state.startTime, this.state.endTime, this.state.location, this.state.description);
