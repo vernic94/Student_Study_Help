@@ -85,8 +85,8 @@ class Profile extends Component {
                     <div className="TitleBlock">
                         <p className="SessionTitle">
                             <b>{title}</b>
-                            <button className="Info">🛈</button
-                        ></p>
+                            <button className="Info">🛈</button>
+                        </p>
                     </div>
                     <p className="SessionDesc">{this.state.sessions[i].description}</p>
                     <p className="Date">
