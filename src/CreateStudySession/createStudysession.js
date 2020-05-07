@@ -6,13 +6,12 @@ Responsible: Lou
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./studysession.css";
 import Topbar from "../Topbar/topbar";
 import dbHandlerInstance from "../data/dbHandler";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownButton} from 'react-bootstrap';
 
-class StudySession extends Component {
+class CreateStudySession extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,4 +94,4 @@ class StudySession extends Component {
   }
 }
 
-export default StudySession;
+export default CreateStudySession;

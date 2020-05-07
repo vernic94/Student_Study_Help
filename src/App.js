@@ -8,7 +8,7 @@ import AboutUs from "./AboutUs/aboutus";
 import Profile from "./Profile/profile";
 import ProfileEditor from "./ProfileEditor/profileEditor";
 import Maps from "./Maps/maps";
-import StudySession from "./StudySession/studysession";
+import CreateStudySession from "./CreateStudySession/createStudysession";
 import FindStudySession from "./FindStudySession/findstudysession";
 import NewPassword from "./NewPassword/newpassword";
 import {Topbar} from './Topbar/topbar'
@@ -27,7 +27,7 @@ function App() {
         <Route path="/find-study-session" component={FindStudySession}/>
         <Route path="/profile" component={Profile}/>
         <Route path="/profileEditor" component={ProfileEditor}/>
-        <Route path="/create-study-session" component={StudySession}/>
+        <Route path="/create-study-session" component={CreateStudySession}/>
         <Route path="/create-account" component={CreateAccount}/>
         <Route path="/change-password" component={NewPassword}/>
         <Route path="/map-markers" component={MapMarkers}/>
