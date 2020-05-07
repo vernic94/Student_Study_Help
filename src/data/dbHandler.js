@@ -84,13 +84,15 @@ class dbHandler{
 		});
 	}
 
-	createStudySession(starttime, endtime, loc, descr){
+	createStudySession(subj, starttime, endtime, loc, descr){
+		console.log(starttime, endtime);
 		this.studysessions.doc().set({
 			creator: modelInstance.getCurrentUser(),
 			startTime: starttime,
 			endTime: endtime,
 			location: loc,
-			description: descr
+			description: descr,
+			subject: subj
 		});
 	}
 
