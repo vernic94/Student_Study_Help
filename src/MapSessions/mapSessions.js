@@ -16,6 +16,7 @@ class MapSessions extends Component {
         this.state = {
             sessions: [],
             location: [],
+            sessionInfo:{},
             geojson: {
                 type: 'FeatureCollection',
                 features: [{
@@ -50,34 +51,56 @@ class MapSessions extends Component {
         db.collection('study_session').get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
-                    study_sessions.push(doc.data());
+                       study_sessions.push(doc.data());
                 })
             }).then(() => {
+                //if(!study_sessions.location instanceof String)
                 this.setState({sessions: study_sessions})
                 console.log("sessions state: ", this.state.sessions)
-                this.displaySessionLocation();
+               
+                    console.log(this.state.sessions.location)
+                    this.displaySessionLocation();
 
-                 // add markers to map
-                this.state.geojson.features.forEach(function(marker) {
-                    console.log("marker in addMarkers:",marker)
-                    // create a HTML element for each feature
-                    var el = document.createElement('div');
-                    el.className = 'marker';
-                    console.log("marker.geometry.coordinates",marker.geometry.coordinates)
-                    // make a marker for each feature and add to the map
-                    new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates)
-                    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                    .setHTML("<h1>Hello World!</h1>"))
-                    .addTo(map);
-                });
+                    // add markers to map
+                    this.state.geojson.features.forEach(function(marker) {
+                        console.log("marker in addMarkers:",marker)
+                        // create a HTML element for each feature
+                        var el = document.createElement('div');
+                        el.className = 'marker';
+                        console.log("marker.geometry.coordinates",marker.geometry.coordinates)
+                        // make a marker for each feature and add to the map
+                        new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates)
+                        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                        .setHTML(`<div>Hello world</div>`))
+                        .addTo(map);
+                    });
+            });    
+    }
+
+    filterSessions(){
+        const filteredSessions = this.state.sessions.filter(value => value.location && !(typeof value.location === 'string' || value.location instanceof String))
+        console.log("filtered sessions: ",filteredSessions)
+        return filteredSessions;
+    }
+    displaySessionInfo(){
+        const info = this.filterSessions().map(session => {
+            return {
+                user: session.creator,
+                subject: session.subject,
+                // start: this.props.studysessions.formatDate(this.convertToTime(session.startTime)),
+                // end: this.props.studysessions.formatDate(this.convertToTime(session.endTime)),
+                description: session.description
             }
-        );      
-      
+        });
+        this.setState({
+            sessionInfo: info,
+        });
+        console.log(this.sessionInfo);
     }
 
     displaySessionLocation(){
-        const features = this.state.sessions.map(session => {
-            console.log(session)
+        const features = this.filterSessions().map(session => {
+            console.log("session: ",session)
             return {
                 type: 'Feature',
                 geometry: {

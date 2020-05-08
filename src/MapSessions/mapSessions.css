@@ -30,6 +30,7 @@
     width: 50%;
     left: 43%;
     top: 10%;
+    min-width: 50%;
 }
 
 .mapboxgl-ctrl-geocoder {
