@@ -22,7 +22,7 @@
     z-index: 1;
     width: 50%;
     left: 43%;
-    top: 10%;
+    top: 27%;
     min-width: 50%;
 }
 
@@ -32,7 +32,7 @@
    
 #map { 
     margin-top: 75px;
-    top:10%; 
+    top:25%; 
     bottom:0; 
     left: 0; 
     right:0;  

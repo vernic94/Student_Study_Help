@@ -2,7 +2,9 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import "./mapSessions.css";
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import studySessionsInstance from "../studysessions/studysessions";
+import StudySessions from "../studysessions/studysessions";
+import modelInstance from "../data/Model";
+import Topbar from "../Topbar/topbar";
 
 const token = process.env.mapboxAPIKey;
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
@@ -99,8 +101,8 @@ class MapSessions extends Component {
                 properties: {
                     user: session.creator,
                     subject: session.subject,
-                    start: studySessionsInstance.formatDate(studySessionsInstance.convertToTime(session.startTime)),
-                    end: studySessionsInstance.formatDate(studySessionsInstance.convertToTime(session.endTime)),
+                    start: modelInstance.formatDate(modelInstance.convertToTime(session.startTime)),
+                    end: modelInstance.formatDate(modelInstance.convertToTime(session.endTime)),
                     description: session.description
                 }
             }
@@ -115,8 +117,8 @@ class MapSessions extends Component {
     render() {
         return (
             <div style={{ height: '100vh'}}>
-            <h1 style={{textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}>All study sessions, click on the markers to see more details</h1>
-            {/* <div className="marker"> </div>   */}
+                {/* <Topbar /> */}
+            <h1 style={{textAlign: 'center', fontSize: '20px', fontWeight: 'bolder'}}>Click on the markers to see more details</h1>
            <div id="geocoder" className="geocoder"></div>
             <div id ="map"> </div>
             </div>
