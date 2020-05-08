@@ -13,7 +13,6 @@ class MapSessions extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             sessions: [],
             geojson: {
@@ -118,7 +117,8 @@ class MapSessions extends Component {
         return (
             <div style={{ height: '100vh'}}>
             <h1 style={{textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}>All study sessions, click on the markers to see more details</h1>
-            <div id="geocoder" className="geocoder"></div>
+            {/* <div className="marker"> </div>   */}
+           <div id="geocoder" className="geocoder"></div>
             <div id ="map"> </div>
             </div>
       )
