@@ -33,11 +33,9 @@ class Profile extends Component {
             firebase.initializeApp(firebaseConfig);
         }
 
-        console.log(modelInstance.getCurrentUser())
-
         //set local storage
         let user;
-        if(localStorage.getItem("currentUser") === "null"){
+        if(localStorage.getItem("currentUser") === "null" || localStorage.getItem("currentUser") === null){
             console.log("In if!");
             localStorage.setItem("currentUser", modelInstance.getCurrentUser());
         }
