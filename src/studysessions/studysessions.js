@@ -34,7 +34,7 @@ class StudySessions extends React.Component {
             <div className="studySessionsPage">
                 <Topbar/>
                 <div className="studySessionsContainer">
-                    <SearchedSessions sessions={this.state.sessions}/>
+                    <SearchedSessions className="input-search" sessions={this.state.sessions}/>
 
                 </div>
             </div>);

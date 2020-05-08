@@ -89,7 +89,7 @@ class SearchedSessions extends React.Component {
     render() {
         return(
             <div>
-            <input type="text" className="input" onChange={this.search} placeholder="Search..." />
+            <input type="text" className="input-search" onChange={this.search} placeholder="Search for a session" />
             <div>
                 <table className="table table-dark">
                     <thead>
