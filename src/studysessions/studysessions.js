@@ -85,4 +85,5 @@ class StudySessions extends React.Component {
     }
 }
 
-export default StudySessions;
+const studySessionsInstance = new StudySessions();
+export default studySessionsInstance;
