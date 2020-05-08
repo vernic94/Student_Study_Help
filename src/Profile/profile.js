@@ -33,9 +33,19 @@ class Profile extends Component {
             firebase.initializeApp(firebaseConfig);
         }
 
+        console.log(modelInstance.getCurrentUser())
+
+        //set local storage
+        let user;
+        if(localStorage.getItem("currentUser") === "null"){
+            console.log("In if!");
+            localStorage.setItem("currentUser", modelInstance.getCurrentUser());
+        }
+        user = localStorage.getItem("currentUser");
+
+        //set state
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc(modelInstance.getCurrentUser());
-        //var docRef = db.collection("users").doc("agnesal@kth.se");
+        var docRef = db.collection("users").doc(user);
         docRef.get().then(doc => {
             this.setState({
                 username: doc.data().firstname,
@@ -46,16 +56,16 @@ class Profile extends Component {
             })
         })
 
+        //get the current user's study sessions
         let study_sessions = [];
-        //db.collection("study_session").where("creator", "==", "agnesal@kth.se").get().then(
-        db.collection("study_session").where("creator", "==", modelInstance.getCurrentUser()).get().then(
+        db.collection("study_session").where("creator", "==", user).get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     study_sessions.push(doc.data());
                 })
             }).then(() => {
                 this.setState({sessions: study_sessions})
-            })
+            });
     }
 	
 	render(){
@@ -110,7 +120,7 @@ class Profile extends Component {
                 <div className="ProfileContainer">
                     <div className="Edit">
                         <Link to="/profileEditor">
-                            <button type="button" className="EditButton">Edit Profile</button>
+                            <button type="button" className="EditButton">🖊️</button>
                         </Link>
                     </div>
                     {pfp}

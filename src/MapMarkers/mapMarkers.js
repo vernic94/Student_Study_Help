@@ -4,20 +4,19 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./mapMarkers.css";
 import Topbar from "../Topbar/topbar"
+import * as mapboxConfig from '../data/mapboxConfig'
 
+const TOKEN = mapboxConfig.REACT_APP_TOKEN;
 
 class MapMarkers extends Component {
     constructor(props){
         super(props);
-        this.state={
-            //geojson: {},
-        }
       }
    
     componentDidMount(){
         var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
-        mapboxgl.accessToken = 'pk.eyJ1IjoidmVybmljIiwiYSI6ImNrOWltOXJ0YjAwNjQzbnA4eXlmY293eWkifQ.dA5_3vrOMVMmIEThwLQlUg';    
-        
+        mapboxgl.accessToken = TOKEN;
+
         var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
@@ -83,6 +82,7 @@ class MapMarkers extends Component {
                 }
         ]
         };
+        console.log(geojson)
         // add markers to map
         geojson.features.forEach(function(marker) {
 
@@ -93,19 +93,20 @@ class MapMarkers extends Component {
             // make a marker for each feature and add to the map
             new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates)
             .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-            .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+            .setHTML("<h1>Hello World!</h1>"))
             .addTo(map);
         });
     }
 
   render() {
     return (
-      <div className="marker">
-          <Topbar/>
-         <h1>map with coordinates</h1>
+        <div>
+            <Topbar/>
+        <div>
+         <div className="marker"> </div>  
          <div id="map"></div>
-      </div>
-
+         </div>
+         </div>
     );
   }
 }

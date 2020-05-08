@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import MapMarkers from './MapMarkers/mapMarkers';
 import StudySessions from "./studysessions/studysessions";
 import MapComponent from "./MapComponent/map";
+import MapSessions from './MapSessions/mapSessions';
 
 function App() {
   return (
@@ -31,9 +32,9 @@ function App() {
         <Route path="/create-account" component={CreateAccount}/>
         <Route path="/change-password" component={NewPassword}/>
         <Route path="/map-markers" component={MapMarkers}/>
-        <Route path="/map-markers" component={StudySessions}/>
         <Route path="/map" component={MapComponent}/>
         <Route path="/study-sessions" component={StudySessions}/>
+        <Route path="/map-sessions" component={MapSessions}/>
       </header>
     </div>
   );
