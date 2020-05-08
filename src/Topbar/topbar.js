@@ -1,6 +1,6 @@
+
 import React, {Component} from 'react';
 import {Navbar, Nav} from 'react-bootstrap'
-import { Link } from "react-router-dom";
 import "./topbar.css";
 import modelInstance from "../data/Model";
 
@@ -10,8 +10,7 @@ import modelInstance from "../data/Model";
     user can navigate between the pages: "Home",
     "Profile", "Create Study session", "Map" and "About".
 
-    2020-04-06
-    @Aurthor Amanda Baza
+    @Aurthor Amanda Baza, Fariba
 */
 
 export class Topbar extends React.Component{
@@ -19,25 +18,22 @@ export class Topbar extends React.Component{
 		modelInstance.logout();
     }
 
-    render(){
-        return(
-            <Navbar bg="dark" className="topbar">
-                <Navbar.Toggle />
-                <Navbar.Collapse>
-                    <Nav class="topbar-nav">
-                        <img className="topbar-icon" src={require("../images/student-study-help-3.png")} height="35vh">
-                        </img>&nbsp;
-                                {/*
-                                Navigation links where "to" is what
-                                page the link navigates to
-                                and "&nbsp;" adds a space after the Link.
-                                */}
-                                <Link class="topbar-button" to="profile">Profile</Link>&nbsp;
-                                <Link class="topbar-button" to="create-study-session">Create Study Session</Link>&nbsp;
-                                <Link class="topbar-button" to="find-study-session">Find Study Session</Link>&nbsp;
-                                <Link class="topbar-button" to="study-sessions">Study Sessions</Link>&nbsp;
-                                <Link class="topbar-button" to="aboutus">About Us</Link>&nbsp;
-                                <Link class="topbar-button" to="/" onClick={this.logoutHandler}>Logout</Link>
+    render() {
+        return (
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <img className="topbar-icon" src={require("../images/student-study-help-3.png")}>
+                </img>&nbsp;
+                <Navbar.Brand href="#home" >Student Study Help</Navbar.Brand>
+
+                <Navbar.Toggle/>
+
+                <Navbar.Collapse className="responsive-navbar-nav">
+                    <Nav>
+                        <Nav.Link href="profile">Profile</Nav.Link>
+                        <Nav.Link href="create-study-session">Create Study Session</Nav.Link>
+                        <Nav.Link href="find-study-session">Find Study Session</Nav.Link>
+                        <Nav.Link href="aboutus">About Us</Nav.Link>
+                        <Nav.Link href="/" onClick={this.logoutHandler}>Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
 
