@@ -11,9 +11,6 @@ const TOKEN = mapboxConfig.REACT_APP_TOKEN;
 class MapMarkers extends Component {
     constructor(props){
         super(props);
-        this.state={
-            //geojson: {},
-        }
       }
    
     componentDidMount(){
@@ -103,11 +100,13 @@ class MapMarkers extends Component {
 
   render() {
     return (
-      <div className="marker">
-          <Topbar/>
+        <div>
+            <Topbar/>
+        <div>
+         <div className="marker"> </div>  
          <div id="map"></div>
-      </div>
-
+         </div>
+         </div>
     );
   }
 }
