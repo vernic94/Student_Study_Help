@@ -1,14 +1,14 @@
 //import firebase from "firebase/app";
 //import "firebase/firestore";
 //import ObservableModel from "./ObservableModel";
-import API_KEY from "./firebaseConfig";
+//import API_KEY from "./firebaseConfig";
 import modelInstance from "./Model";
 //import * as firebase from "firebase";
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 
 export const firebaseConfig = {
-    apiKey: API_KEY,
+    apiKey: process.env.firebaseAPIKey,
     authDomain: "student-study-help.firebaseapp.com",
     databaseURL: "https://student-study-help.firebaseio.com/",
     projectId: "student-study-help",
@@ -84,13 +84,15 @@ class dbHandler{
 		});
 	}
 
-	createStudySession(starttime, endtime, loc, descr){
+	createStudySession(subj, starttime, endtime, loc, descr){
+		console.log(starttime, endtime);
 		this.studysessions.doc().set({
 			creator: modelInstance.getCurrentUser(),
 			startTime: starttime,
 			endTime: endtime,
 			location: loc,
-			description: descr
+			description: descr,
+			subject: subj
 		});
 	}
 
