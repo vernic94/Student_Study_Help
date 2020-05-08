@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import "./studysessions.css";
 import {firebaseConfig} from "../data/dbHandler";
 import Topbar from "../Topbar/topbar";
+import SearchedSessions from "./searchedSessions";
 
 
 class StudySessions extends React.Component {
@@ -13,7 +14,6 @@ class StudySessions extends React.Component {
             sessions: []
         }
     }
-
 
     convertToTime(firebaseTimeStamp) {
         try {
@@ -55,6 +55,7 @@ class StudySessions extends React.Component {
             <div className="studySessionsPage">
                 <Topbar/>
                 <div className="studySessionsContainer">
+                    <SearchedSessions search={this.search}/>
                     <div>
                         <table className="table table-dark">
                             <thead>
