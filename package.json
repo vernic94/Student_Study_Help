@@ -4,16 +4,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^4.5.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.4.1",
+    "deck.gl": "^8.1.4",
     "firebase": "^7.14.2",
     "mapbox-gl": "^1.10.0",
     "react": "^16.8.1",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.8.1",
+    "react-map-gl": "^5.2.5",
+    "react-map-gl-geocoder": "^2.0.11",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1"
   },
@@ -30,7 +34,6 @@
   "browserslist": {
     "production": [
       ">0.2%",
-      "not dead",
       "not op_mini all"
     ],
     "development": [
@@ -43,6 +46,7 @@
     "cross-env": "^7.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
     "react-test-renderer": "^16.8.1"
   }
 }

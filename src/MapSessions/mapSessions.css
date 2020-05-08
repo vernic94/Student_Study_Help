@@ -1,0 +1,46 @@
+.marker {
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+/* .mapboxgl-marker {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border:1px solid gray;
+    background-color:lightblue;
+} */
+
+.mapboxgl-popup {
+    max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+}
+
+.geocoder {
+    position: absolute;
+    z-index: 1;
+    width: 50%;
+    left: 43%;
+    top: 10%;
+}
+
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+}
+   
+#map { 
+    margin-top: 75px;
+    top:5%; 
+    bottom:0; 
+    left: 0; 
+    right:0;  
+    width:100%; 
+}
