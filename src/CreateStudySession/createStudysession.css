@@ -1,0 +1,57 @@
+.studysession-page{
+    width: 100%;
+}
+
+.choice-btns{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.studysession-description{
+    margin-bottom: 30px;
+}
+
+.description-box{
+    margin-top: 10px;
+    width: 400px;
+    height: 100px;
+}
+
+.studysession-btn{
+    margin-top: 30px;
+}
+
+.Notetext{
+    margin-bottom:0;
+}
+
+/* plan study session paramters */
+
+.time-box{
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+.timeBoxes{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+#mapSession{
+    position: relative;
+    height: 200px;
+}
+
+#info {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #222;
+    background: #fff;
+    }
