@@ -1,10 +1,9 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import "./mapSessions.css";
-import * as mapboxConfig from '../data/mapboxConfig';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
-const token = mapboxConfig.REACT_APP_TOKEN;
+const token = process.env.mapboxAPIKey;
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = token;
 
