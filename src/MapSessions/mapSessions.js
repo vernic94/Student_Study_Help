@@ -90,28 +90,6 @@ class MapSessions extends Component {
         return filteredSessions;
     }
 
-    // displaySessionInfo(){
-    //     const properties = this.filterSessions().map(session => {
-    //         console.log("session: ",session)
-    //         console.log("user:", session.creator)
-    //         console.log("subject:", session.subject)
-    //         console.log("description:", session.description)
-    //        return{ 
-    //            properties: {
-    //                 user: session.creator,
-    //                 subject: session.subject,
-    //                 start: modelInstance.convertToTime(session.startTime),
-    //                 end: studysessions.formatDate(this.props.studysessions.convertToTime(session.endTime)),
-    //                 description: session.description
-    //             }
-    //         }
-    //     });
-        
-    //     this.setState({
-    //             properties: properties
-    //     });
-    // }
-
     displaySessionLocation(){
         const features = this.filterSessions().map(session => {
             return {

@@ -6,14 +6,6 @@
     cursor: pointer;
   }
 
-/* .mapboxgl-marker {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border:1px solid gray;
-    background-color:lightblue;
-} */
-
 .mapboxgl-popup {
     max-width: 200px;
 }
