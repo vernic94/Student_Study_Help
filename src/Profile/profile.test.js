@@ -1,9 +1,30 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Profile from './profile';
+import { shallowToJson } from 'enzyme-to-json';
+import toJson from 'enzyme-to-json';
+import { cleanup } from '@testing-library/react';
 
-describe('React component test with Enzyme', () => {
+import Profile, {constructor, componentDidMount, render} from './profile';
+
+/*describe('React component test with Enzyme', () => {
    it('renders without crashing', () => {
       shallow(<Profile />);
     });
-});
+});*/
+
+//test the components properties with snapshot
+describe("Profile", () => {
+   it("Should render correctly", ()=> {
+      const output = shallow(
+         <Profile
+            username="mockUsername"
+            biogrphy="mockBiography"
+            school="mockSchool"
+            subject="mockSubject"
+            pfpurl="mockPfpurl"
+            sessions="mockSessions"
+         />
+      );
+      expect(shallowToJson(output)).toMatchSnapshot();
+   })
+})
