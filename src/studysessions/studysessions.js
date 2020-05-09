@@ -4,6 +4,7 @@ import "./studysessions.css";
 import {firebaseConfig} from "../data/dbHandler";
 import Topbar from "../Topbar/topbar";
 import SearchedSessions from "./searchedSessions";
+import modelInstance from "../data/Model";
 
 
 class StudySessions extends React.Component {
@@ -15,26 +16,26 @@ class StudySessions extends React.Component {
         }
     }
 
-    convertToTime(firebaseTimeStamp) {
-        try {
-            if (firebaseTimeStamp != undefined) {
-                return firebaseTimeStamp.toDate();
-            }
-        } catch (error) {
-            return "";
-        }
-    }
+    // convertToTime(firebaseTimeStamp) {
+    //     try {
+    //         if (firebaseTimeStamp != undefined) {
+    //             return firebaseTimeStamp.toDate();
+    //         }
+    //     } catch (error) {
+    //         return "";
+    //     }
+    // }
 
-    formatDate(date) {
-        try {
-            if (date != "") {
-                return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
-            }
-        } catch (error) {
-            return "";
-        }
+    // formatDate(date) {
+    //     try {
+    //         if (date != "") {
+    //             return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
+    //         }
+    //     } catch (error) {
+    //         return "";
+    //     }
 
-    }
+    // }
 
     componentDidMount() {
         let db = global.firebase.firestore();
@@ -73,8 +74,8 @@ class StudySessions extends React.Component {
                                 return <tr key={index}>
                                     <td>{value.creator}</td>
                                     <td>{value.subject}</td>
-                                    <td>{this.formatDate(this.convertToTime(value.startTime))}</td>
-                                    <td>{this.formatDate(this.convertToTime(value.endTime))}</td>
+                                    <td>{modelInstance.formatDate(modelInstance.convertToTime(value.startTime))}</td>
+                                    <td>{modelInstance.formatDate(modelInstance.convertToTime(value.endTime))}</td>
                                     <td>{value.description}</td>
                                 </tr>
                             })}
