@@ -95,6 +95,23 @@ class dbHandler{
 		});
 	}
 
+	
+	getUser(user){
+		return this.db.collection("users").doc(user);
+	}
+
+	getUserStudySessions(user){
+		return this.db.collection("study_session").where("creator", "==", user);
+	}
+
+	getSubjects(){
+		return this.db.collection("subjects");
+	}
+
+	getSchools(){
+		return this.db.collection("universities");
+	}
+
 }
 const dbHandlerInstance = new dbHandler();
 export default dbHandlerInstance;

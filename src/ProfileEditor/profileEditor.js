@@ -7,11 +7,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./profileEditor.css";
 import Topbar from "../Topbar/topbar"
-import firebase from "firebase/app";
 import "firebase/firestore";
 import modelInstance from "../data/Model";
-import dbHandlerInstance from "../data/dbHandler";
-import {firebaseConfig} from "../data/dbHandler";
 
 class ProfileEditor extends Component {
 
@@ -31,14 +28,8 @@ class ProfileEditor extends Component {
 
     componentDidMount(){
 
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-
         // Set state
-        const db = firebase.firestore();
-        var docRef = db.collection("users").doc(localStorage.getItem("currentUser"));
-        //var docRef = db.collection("users").doc("agnesal@kth.se");
+        var docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
         docRef.get().then(doc => {
             this.setState({
                 username: doc.data().firstname,
@@ -50,7 +41,7 @@ class ProfileEditor extends Component {
         })
         
         let arrSub =[];
-        db.collection("subjects").get().then(
+        modelInstance.getSubjects().get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     arrSub.push(doc.id);
@@ -60,7 +51,7 @@ class ProfileEditor extends Component {
         })
 
         let arrSch =[];
-        db.collection("universities").get().then(
+        modelInstance.getSchools().get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     arrSch.push(doc.id);
@@ -70,12 +61,12 @@ class ProfileEditor extends Component {
         })
     }
 
+    //handles form submission
     submitHandler = (event) => {
         
         event.preventDefault();
-        
-        const db = firebase.firestore();
-        const docRef = db.collection("users").doc(localStorage.getItem("currentUser"));
+    
+        const docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
 
         docRef.update({
             firstname: this.state.username,
@@ -139,8 +130,8 @@ class ProfileEditor extends Component {
         this.forceUpdate();
     }
 
-
-    remove = (e) =>{
+    //removes school or subject from user
+    remove = (e) => {
         console.log(e.target.value);
         let index;
         let stateCopy = [];
@@ -166,33 +157,60 @@ class ProfileEditor extends Component {
         
         this.props.history.push('/profileEditor');
     }
-	
-	render(){
 
-        let selectedSchools = [];
-        let selectedSubjects = [];
-        let subjectOptions = [];
-        let schoolOptions = [];
+    //deletes user from firebase firestore
+    removeUser = () => {
+        console.log("here");
+        modelInstance.removeUser(localStorage.getItem("currentUser"));
+        this.props.history.push('/');
+    }
 
+    //create element with all selected schools buttons
+    createSelectedSchools(){
+        let selectedSchools = []
         for(let i = 0; i < this.state.school.length; i++){
             selectedSchools.push(<p className="RemoveSchool">{this.state.school[i]}<button type="button" className="ButtonRemove" value={"schoolselect" + this.state.school[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
         }
+        return selectedSchools;
+    }
 
+    //create element with all selected subjects buttons
+    createSelectedSubjects(){
+        let selectedSubjects = [];
         for(let i = 0; i < this.state.subject.length; i++){
             selectedSubjects.push(<p className="RemoveSubject">{this.state.subject[i]}<button type="button" className="ButtonRemove" value={"subjectselect" + this.state.subject[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
         }
+        return selectedSubjects;
+    }
 
-        for(let i = 0; i < this.state.allSubjects.length; i++){
-            subjectOptions.push(
-                <option value={this.state.allSubjects[i]}>{this.state.allSubjects[i]}</option>
-            )
-        }
-
+    //create element with all school options
+    allSchools(){
+        let schoolOptions = [];
         for(let i = 0; i < this.state.allSchools.length; i++){
             schoolOptions.push(
                 <option value={this.state.allSchools[i]}>{this.state.allSchools[i]}</option>
             )
         }
+        return schoolOptions;
+    }
+
+    //create element with all subject options
+    allSubjects(){
+        let subjectOptions = []
+        for(let i = 0; i < this.state.allSubjects.length; i++){
+            subjectOptions.push(
+                <option value={this.state.allSubjects[i]}>{this.state.allSubjects[i]}</option>
+            )
+        }
+        return subjectOptions;
+    }
+	
+	render(){
+
+        let selectedSchools = this.createSelectedSchools();
+        let selectedSubjects = this.createSelectedSubjects();
+        let schoolOptions = this.allSchools();
+        let subjectOptions = this.allSubjects();
 
 		return(
             <div className="profileEditor-page">
@@ -247,6 +265,9 @@ class ProfileEditor extends Component {
                         </Link>
                     </div>
                 </form>
+                <div className="RemoveUser">
+                    <button className="BtnRemoveUser" onClick={this.removeUser}>Delete Account</button>
+                </div>
             </div>
         );
     }
