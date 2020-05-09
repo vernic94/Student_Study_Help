@@ -95,6 +95,14 @@ class dbHandler{
 		});
 	}
 
+    getStudySessions() {
+        return this.studysessions.get();
+    }
+
+    getUser(username){
+        return this.users.doc(username).get();
+    }
+
 }
 const dbHandlerInstance = new dbHandler();
 export default dbHandlerInstance;
