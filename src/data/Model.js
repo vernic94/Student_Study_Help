@@ -47,7 +47,9 @@ class Model extends ObservableModel {
 	}
 	logout(){
 		this.currentUser = null;
+		localStorage.setItem("currentUser", "null");
 		console.log(this.currentUser);
+		console.log(localStorage.getItem("currentUser"));
 	}
 
 	//converts TimeStamp to a readable date
@@ -56,6 +58,35 @@ class Model extends ObservableModel {
         let minutes = "0" + t.getMinutes();
         let date = eval(t.getFullYear() - 1969) + '-' + eval(t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + minutes.substr(-2);
         return date;
+	}
+	
+	convertToTime(firebaseTimeStamp) {
+        try {
+            if (firebaseTimeStamp != undefined) {
+                return firebaseTimeStamp.toDate();
+            }
+        } catch (error) {
+            return "";
+        }
+    }
+
+    formatDate(date) {
+        try {
+            if (date != "") {
+                return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
+            }
+        } catch (error) {
+            return "";
+        }
+
+    }
+
+    getStudySessions() {
+        return dbHandlerInstance.getStudySessions();
+    }
+
+    getUser(username) {
+        return dbHandlerInstance.getUser(username);
     }
 
 }

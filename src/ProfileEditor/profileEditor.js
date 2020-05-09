@@ -23,19 +23,21 @@ class ProfileEditor extends Component {
             biography: "",
             school: [],
             subject: [],
+            allSubjects: [],
+            allSchools: [],
             pfpurl: ""
         }
     }
 
     componentDidMount(){
-        
+
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
 
         // Set state
         const db = firebase.firestore();
-        var docRef = db.collection("users").doc(modelInstance.getCurrentUser());
+        var docRef = db.collection("users").doc(localStorage.getItem("currentUser"));
         //var docRef = db.collection("users").doc("agnesal@kth.se");
         docRef.get().then(doc => {
             this.setState({
@@ -46,6 +48,26 @@ class ProfileEditor extends Component {
                 pfpurl: doc.data().pfpurl,
             })
         })
+        
+        let arrSub =[];
+        db.collection("subjects").get().then(
+            (snapshot) => {
+                snapshot.forEach((doc) => {
+                    arrSub.push(doc.id);
+            })
+        }).then(() => {
+            this.setState({allSubjects: arrSub})
+        })
+
+        let arrSch =[];
+        db.collection("universities").get().then(
+            (snapshot) => {
+                snapshot.forEach((doc) => {
+                    arrSch.push(doc.id);
+            })
+        }).then(() => {
+            this.setState({allSchools: arrSch})
+        })
     }
 
     submitHandler = (event) => {
@@ -53,8 +75,7 @@ class ProfileEditor extends Component {
         event.preventDefault();
         
         const db = firebase.firestore();
-        const docRef = db.collection("users").doc(modelInstance.getCurrentUser());
-        //const docRef = db.collection("users").doc("agnesal@kth.se");
+        const docRef = db.collection("users").doc(localStorage.getItem("currentUser"));
 
         docRef.update({
             firstname: this.state.username,
@@ -147,8 +168,11 @@ class ProfileEditor extends Component {
     }
 	
 	render(){
+
         let selectedSchools = [];
         let selectedSubjects = [];
+        let subjectOptions = [];
+        let schoolOptions = [];
 
         for(let i = 0; i < this.state.school.length; i++){
             selectedSchools.push(<p className="RemoveSchool">{this.state.school[i]}<button type="button" className="ButtonRemove" value={"schoolselect" + this.state.school[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
@@ -157,7 +181,18 @@ class ProfileEditor extends Component {
         for(let i = 0; i < this.state.subject.length; i++){
             selectedSubjects.push(<p className="RemoveSubject">{this.state.subject[i]}<button type="button" className="ButtonRemove" value={"subjectselect" + this.state.subject[i]} onClick={(e) => this.remove(e)}>{"x"}</button></p>);
         }
-        
+
+        for(let i = 0; i < this.state.allSubjects.length; i++){
+            subjectOptions.push(
+                <option value={this.state.allSubjects[i]}>{this.state.allSubjects[i]}</option>
+            )
+        }
+
+        for(let i = 0; i < this.state.allSchools.length; i++){
+            schoolOptions.push(
+                <option value={this.state.allSchools[i]}>{this.state.allSchools[i]}</option>
+            )
+        }
 
 		return(
             <div className="profileEditor-page">
@@ -189,9 +224,7 @@ class ProfileEditor extends Component {
                             <div className="Selected">{selectedSchools}</div>
                             <select name="school" className="SchoolSelect" onChange={this.inputHandlerSchool}>
                                 <option disabled selected value> -- select an option -- </option>
-                                <option value="Stockholms Universitet">Stockholms Universitet</option>
-                                <option value="Karolinska">Karonlinska</option>
-                                <option value="Kungliga Tekniska Högskolan">Kungliga Tekniska Högskolan</option>
+                                {schoolOptions}
                             </select>
                         </label>
                     </div>
@@ -201,10 +234,7 @@ class ProfileEditor extends Component {
                             <div className="Selected">{selectedSubjects}</div>
                             <select name="subject" className="SubjectSelect" onChange={this.inputHandlerSubject}>
                                 <option disabled selected value> -- select an option -- </option>
-                                <option value="Maths">Maths</option>
-                                <option value="Biology">Biology</option>
-                                <option value="Economy">Economy</option>
-                                <option value="History">History</option>
+                                {subjectOptions}
                             </select>
                         </label>
                     </div>
