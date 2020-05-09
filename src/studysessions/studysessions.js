@@ -4,6 +4,7 @@ import "./studysessions.css";
 import {firebaseConfig} from "../data/dbHandler";
 import Topbar from "../Topbar/topbar";
 import SearchedSessions from "./searchedSessions";
+import modelInstance from "../data/Model";
 
 
 class StudySessions extends React.Component {
@@ -14,6 +15,7 @@ class StudySessions extends React.Component {
             sessions: []
         };
     }
+
 
     componentWillMount() {
         let db = global.firebase.firestore();
@@ -35,7 +37,6 @@ class StudySessions extends React.Component {
                 <Topbar/>
                 <div className="studySessionsContainer">
                     <SearchedSessions className="input-search" sessions={this.state.sessions}/>
-
                 </div>
             </div>);
     }
