@@ -4,9 +4,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./mapMarkers.css";
 import Topbar from "../Topbar/topbar"
-import * as mapboxConfig from '../data/mapboxConfig'
 
-const TOKEN = mapboxConfig.REACT_APP_TOKEN;
+const TOKEN = process.env.mapboxAPIKey;
 
 class MapMarkers extends Component {
     constructor(props){

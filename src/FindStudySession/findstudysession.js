@@ -10,12 +10,14 @@ import Topbar from "../Topbar/topbar"
 import Maps from "../Maps/maps"
 import MapComponent from "../MapComponent/map";
 import "./findstudysession.css";
+import MapSessions from "../MapSessions/mapSessions";
+import StudySessions from "../studysessions/studysessions";
 
 class FindStudySession extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: "MAPS"
+      status: ""
     };
   }
   mapsHandler=()=>{
@@ -30,24 +32,25 @@ class FindStudySession extends Component {
 	let listBtn = <button className="button" onClick={this.listHandler}>List</button>
 
 	if (this.state.status==="MAPS"){
-		currentView = <Maps/>
-		//mapBtn = <button disabled>Map</button>
-		//listBtn = <button >List</button>
+		currentView = <MapSessions/>
+		// mapBtn = <button disabled>Map</button>
+		// listBtn = <button >List</button>
 	}
 	if (this.state.status==="LIST"){
-		currentView = <h1>List</h1>
+		currentView = <StudySessions />//<h1>List</h1>
 		//mapBtn = <button >Map</button>
 		//listBtn = <button disabled>List</button>
 	}
     return (
       <div className="find-page">
          <Topbar/>
-         <div className="mapMarkers">
+         <div className="mapSessions">
            <MapComponent/>
          </div>
-         {currentView}
          {mapBtn}
          {listBtn}
+         
+         {currentView}
 
       </div>
 

@@ -34,7 +34,7 @@ function App() {
         <Route path="/map-markers" component={MapMarkers}/>
         <Route path="/map" component={MapComponent}/>
         <Route path="/study-sessions" component={StudySessions}/>
-        <Route path="/map-sessions" component={MapSessions}/>
+        <Route path="/map-sessions" component={Topbar, MapSessions}/>
       </header>
     </div>
   );

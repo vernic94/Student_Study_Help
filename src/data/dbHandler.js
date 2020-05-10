@@ -1,7 +1,6 @@
 //import firebase from "firebase/app";
 //import "firebase/firestore";
 //import ObservableModel from "./ObservableModel";
-//import API_KEY from "./firebaseConfig";
 import modelInstance from "./Model";
 //import * as firebase from "firebase";
 const bcrypt = require("bcryptjs");
@@ -94,6 +93,23 @@ class dbHandler{
 			description: descr,
 			subject: subj
 		});
+	}
+
+	
+	getUser(user){
+		return this.db.collection("users").doc(user);
+	}
+
+	getUserStudySessions(user){
+		return this.db.collection("study_session").where("creator", "==", user);
+	}
+
+	getSubjects(){
+		return this.db.collection("subjects");
+	}
+
+	getSchools(){
+		return this.db.collection("universities");
 	}
 
 }
