@@ -78,6 +78,27 @@ class Model extends ObservableModel {
 		console.log("minutes: " + minutes);
 		console.log("date: " + date);
 		return date;
+	}
+	
+	convertToTime(firebaseTimeStamp) {
+        try {
+            if (firebaseTimeStamp != undefined) {
+                return firebaseTimeStamp.toDate();
+            }
+        } catch (error) {
+            return "";
+        }
+    }
+
+    formatDate(date) {
+        try {
+            if (date != "") {
+                return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
+            }
+        } catch (error) {
+            return "";
+        }
+
     }
 
 }
