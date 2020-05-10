@@ -43,6 +43,7 @@ class Model extends ObservableModel {
 		dbHandlerInstance.changePassword(email, newPass);
 	}
 	removeUser(email){
+		localStorage.removeItem("currentUser");
 		dbHandlerInstance.removeUser(email);
 	}
 
@@ -69,14 +70,11 @@ class Model extends ObservableModel {
 	}
 
 	//converts TimeStamp to a readable date
-	convertToTime(timestamp) {
-        let t = new Date(timestamp * 1000);
+	convertToTimeProfile(timestamp) {
+		//let t = new Date(timestamp * 1000);
+		let t = timestamp.toDate();
         let minutes = "0" + t.getMinutes();
-        let date = eval(t.getFullYear() - 1969) + '-' + eval(t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + minutes.substr(-2);
-		console.log("timestamp:" + timestamp);
-		console.log("t: " + t);
-		console.log("minutes: " + minutes);
-		console.log("date: " + date);
+        let date = eval(t.getFullYear()) + '-' + eval(t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + minutes.substr(-2);
 		return date;
 	}
 	
