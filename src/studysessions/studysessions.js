@@ -13,31 +13,11 @@ class StudySessions extends React.Component {
         super(props);
         this.state = {
             sessions: []
-        }
+        };
     }
 
-    // convertToTime(firebaseTimeStamp) {
-    //     try {
-    //         if (firebaseTimeStamp != undefined) {
-    //             return firebaseTimeStamp.toDate();
-    //         }
-    //     } catch (error) {
-    //         return "";
-    //     }
-    // }
 
-    // formatDate(date) {
-    //     try {
-    //         if (date != "") {
-    //             return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
-    //         }
-    //     } catch (error) {
-    //         return "";
-    //     }
-
-    // }
-
-    componentDidMount() {
+    componentWillMount() {
         let db = global.firebase.firestore();
         var study_sessions = [];
         db.collection('study_session').get().then(
@@ -56,32 +36,7 @@ class StudySessions extends React.Component {
             <div className="studySessionsPage">
                 <Topbar/>
                 <div className="studySessionsContainer">
-                    <SearchedSessions search={this.search}/>
-                    <div>
-                        <table className="table table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">Creator</th>
-                                <th scope="col">Subject</th>
-                                <th scope="col">Start Time</th>
-                                <th scope="col">End Time</th>
-                                <th scope="col">Description</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {this.state.sessions.map((value, index) => {
-                                return <tr key={index}>
-                                    <td>{value.creator}</td>
-                                    <td>{value.subject}</td>
-                                    <td>{modelInstance.formatDate(modelInstance.convertToTime(value.startTime))}</td>
-                                    <td>{modelInstance.formatDate(modelInstance.convertToTime(value.endTime))}</td>
-                                    <td>{value.description}</td>
-                                </tr>
-                            })}
-                            </tbody>
-                        </table>
-                    </div>
+                    <SearchedSessions className="input-search" sessions={this.state.sessions}/>
                 </div>
             </div>);
     }
