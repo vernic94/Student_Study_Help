@@ -11,7 +11,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.4.1",
     "deck.gl": "^8.1.4",
-    "firebase": "^7.14.2",
+    "firebase": "^7.14.3",
     "mapbox-gl": "^1.10.0",
     "react": "^16.8.1",
     "react-bootstrap": "^1.0.0",
