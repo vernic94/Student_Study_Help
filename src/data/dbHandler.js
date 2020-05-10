@@ -83,6 +83,15 @@ class dbHandler{
 		});
 	}
 
+	removeUserStudySession(user){
+		var userSessions = this.db.collection("study_session").where("creator", "==", user);
+		userSessions.get().then(function(querySnapshot) {
+			querySnapshot.forEach(function(doc) {
+			  doc.ref.delete();
+			});
+		  });
+	}
+
 	createStudySession(subj, starttime, endtime, loc, descr){
 		console.log(starttime, endtime);
 		this.studysessions.doc().set({
