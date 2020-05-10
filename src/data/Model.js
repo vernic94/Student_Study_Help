@@ -73,7 +73,11 @@ class Model extends ObservableModel {
         let t = new Date(timestamp * 1000);
         let minutes = "0" + t.getMinutes();
         let date = eval(t.getFullYear() - 1969) + '-' + eval(t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + minutes.substr(-2);
-        return date;
+		console.log("timestamp:" + timestamp);
+		console.log("t: " + t);
+		console.log("minutes: " + minutes);
+		console.log("date: " + date);
+		return date;
     }
 
 }
