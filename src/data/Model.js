@@ -45,11 +45,27 @@ class Model extends ObservableModel {
 	removeUser(email){
 		dbHandlerInstance.removeUser(email);
 	}
+
+	getUser(user){
+		return dbHandlerInstance.getUser(user);
+	}
+
+	getUserStudySessions(user){
+		return dbHandlerInstance.getUserStudySessions(user);
+	}
+
+	getSubjects(){
+		return dbHandlerInstance.getSubjects();
+	}
+
+	getSchools(){
+		return dbHandlerInstance.getSchools();
+	}
+
 	logout(){
 		this.currentUser = null;
-		localStorage.setItem("currentUser", "null");
+		localStorage.removeItem("currentUser");
 		console.log(this.currentUser);
-		console.log(localStorage.getItem("currentUser"));
 	}
 
 	//converts TimeStamp to a readable date

@@ -7,11 +7,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./profile.css";
 import Topbar from "../Topbar/topbar";
-import firebase from "firebase/app";
 import "firebase/firestore";
 import modelInstance from "../data/Model";
-import dbHandlerInstance from "../data/dbHandler";
-import {firebaseConfig} from "../data/dbHandler";
 
 class Profile extends Component {
     //constructor(props){}
@@ -29,10 +26,6 @@ class Profile extends Component {
 
     componentDidMount(){
 
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-
         //set local storage
         let user;
         if(localStorage.getItem("currentUser") === "null" || localStorage.getItem("currentUser") === null){
@@ -42,21 +35,20 @@ class Profile extends Component {
         user = localStorage.getItem("currentUser");
 
         //set state
-        const db = firebase.firestore();
-        var docRef = db.collection("users").doc(user);
+        var docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
         docRef.get().then(doc => {
             this.setState({
                 username: doc.data().firstname,
                 biography: doc.data().bio,
                 school: doc.data().school,
                 subject: doc.data().subject,
-                pfpurl: doc.data().pfpurl
+                pfpurl: doc.data().pfpurl,
             })
         })
 
         //get the current user's study sessions
         let study_sessions = [];
-        db.collection("study_session").where("creator", "==", user).get().then(
+        modelInstance.getUserStudySessions(user).get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     study_sessions.push(doc.data());
@@ -128,7 +120,6 @@ class Profile extends Component {
         }
 
         return bio;
-
     }
 	
 	render(){
