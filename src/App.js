@@ -19,11 +19,17 @@ import MapComponent from "./MapComponent/map";
 import MapSessions from './MapSessions/mapSessions';
 
 function App() {
+  let exactPath;
+  if(localStorage.getItem("currentUser") === "null" || localStorage.getItem("currentUser") === null) {
+    exactPath = <Route exact path="/" component={Welcome} />
+  }else{
+    exactPath = <Route exact path="/" component={Profile} />
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-
-        <Route exact path="/" component={Welcome} />
+        {exactPath}
         <Route path="/aboutus" component={AboutUs}/>
         <Route path="/find-study-session" component={FindStudySession}/>
         <Route path="/profile" component={Profile}/>

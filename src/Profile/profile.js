@@ -62,8 +62,9 @@ class Profile extends Component {
     createSessionElement(){
         let mySessions = [];
         for(let i = 0; i < this.state.sessions.length; i++){
-            let start = modelInstance.convertToTime(this.state.sessions[i].startTime);
-            let end = modelInstance.convertToTime(this.state.sessions[i].endTime);
+            console.log(this.state.sessions[i].startTime);
+            let start = modelInstance.convertToTimeProfile(this.state.sessions[i].startTime);
+            let end = modelInstance.convertToTimeProfile(this.state.sessions[i].endTime);
 
             let title = "Untitled";
             if(this.state.sessions[i].subject !== ""){
@@ -120,6 +121,7 @@ class Profile extends Component {
         }
 
         return bio;
+
     }
 	
 	render(){
