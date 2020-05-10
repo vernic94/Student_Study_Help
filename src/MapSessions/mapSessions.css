@@ -1,11 +1,18 @@
 .marker {
-    background-image: url('mapbox-icon.png');
     background-size: cover;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     cursor: pointer;
   }
+
+/* .mapboxgl-marker {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border:1px solid gray;
+    background-color:lightblue;
+} */
 
 .mapboxgl-popup {
     max-width: 200px;
@@ -22,8 +29,7 @@
     z-index: 1;
     width: 50%;
     left: 43%;
-    top: 27%;
-    min-width: 50%;
+    top: 10%;
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -32,7 +38,7 @@
    
 #map { 
     margin-top: 75px;
-    top:25%; 
+    top:5%; 
     bottom:0; 
     left: 0; 
     right:0;  

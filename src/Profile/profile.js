@@ -7,8 +7,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./profile.css";
 import Topbar from "../Topbar/topbar";
+import firebase from "firebase/app";
 import "firebase/firestore";
 import modelInstance from "../data/Model";
+import dbHandlerInstance from "../data/dbHandler";
+import {firebaseConfig} from "../data/dbHandler";
 
 class Profile extends Component {
     //constructor(props){}
@@ -26,29 +29,36 @@ class Profile extends Component {
 
     componentDidMount(){
 
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        console.log(modelInstance.getCurrentUser())
+
         //set local storage
         let user;
-        if(localStorage.getItem("currentUser") === "null" || localStorage.getItem("currentUser") === null){
+        if(localStorage.getItem("currentUser") === "null"){
             console.log("In if!");
             localStorage.setItem("currentUser", modelInstance.getCurrentUser());
         }
         user = localStorage.getItem("currentUser");
 
         //set state
-        var docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
+        const db = firebase.firestore();
+        var docRef = db.collection("users").doc(user);
         docRef.get().then(doc => {
             this.setState({
                 username: doc.data().firstname,
                 biography: doc.data().bio,
                 school: doc.data().school,
                 subject: doc.data().subject,
-                pfpurl: doc.data().pfpurl,
+                pfpurl: doc.data().pfpurl
             })
         })
 
         //get the current user's study sessions
         let study_sessions = [];
-        modelInstance.getUserStudySessions(user).get().then(
+        db.collection("study_session").where("creator", "==", user).get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     study_sessions.push(doc.data());
@@ -57,26 +67,22 @@ class Profile extends Component {
                 this.setState({sessions: study_sessions})
             });
     }
+	
+	render(){
 
-    //create study session element
-    createSessionElement(){
         let mySessions = [];
+        let pfp = "";
+        let bio;
+
+        //study session element
         for(let i = 0; i < this.state.sessions.length; i++){
             let start = modelInstance.convertToTime(this.state.sessions[i].startTime);
             let end = modelInstance.convertToTime(this.state.sessions[i].endTime);
 
-            let title = "Untitled";
-            if(this.state.sessions[i].subject !== ""){
-                title = this.state.sessions[i].subject;
-            }
-
             mySessions.push(
                 <div className="StudySession">
                     <div className="TitleBlock">
-                        <p className="SessionTitle">
-                            <b>{title}</b>
-                            <button className="Info">🛈</button>
-                        </p>
+                        <p className="SessionTitle"><b>{this.state.sessions[i].subject}</b></p>
                     </div>
                     <p className="SessionDesc">{this.state.sessions[i].description}</p>
                     <p className="Date">
@@ -84,49 +90,29 @@ class Profile extends Component {
                         <br></br>
                         {"End time: " + end}
                     </p>
-                </div>)}
+                </div>)
+            
+            //pfp element
+            if(this.state.pfpurl !== ""){
+                pfp =
+                    <div>
+                        <img className="ProfilePicture" src={this.state.pfpurl} alt="profile-picture"></img>
+                    </div>;
+            }else{
+                pfp = <div></div>;
+            }
 
-        return mySessions;
-    }
+            //bio element 
+            if(this.state.biography !== ""){
+                bio =
+                    <div className="ProfileBiography">
+                        <p className="BioParagraph"><i>{this.state.biography}</i></p>
+                    </div>
+            }else{
+                bio = "";
+            }
 
-    //create pfp element
-    createPfpElement(){
-        let pfp = "";
-        //pfp element
-        if(this.state.pfpurl !== ""){
-            pfp =
-                <div>
-                    <img className="ProfilePicture" src={this.state.pfpurl} alt="profile-picture"></img>
-                </div>;
-        }else{
-            pfp = <div></div>;
         }
-
-        return pfp;
-    }
-
-    //create bio element
-    createBioElement(){
-        let bio;
-
-        //bio element 
-        if(this.state.biography !== ""){
-            bio =
-                <div className="ProfileBiography">
-                    <p className="BioParagraph"><i>{this.state.biography}</i></p>
-                </div>
-        }else{
-            bio = "";
-        }
-
-        return bio;
-    }
-	
-	render(){
-
-        let pfp = this.createPfpElement();
-        let bio = this.createBioElement();
-        let mySessions = this.createSessionElement();
         
 		return(
             <div className="profile-page">
