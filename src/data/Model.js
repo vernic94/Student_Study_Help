@@ -52,6 +52,10 @@ class Model extends ObservableModel {
 		return dbHandlerInstance.getUser(user);
 	}
 
+	getUserProfile(user){
+		return dbHandlerInstance.getUserProfile(user);
+	}
+
 	getUserStudySessions(user){
 		return dbHandlerInstance.getUserStudySessions(user);
 	}

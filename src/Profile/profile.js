@@ -35,7 +35,7 @@ class Profile extends Component {
         user = localStorage.getItem("currentUser");
 
         //set state
-        var docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
+        var docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
         docRef.get().then(doc => {
             this.setState({
                 username: doc.data().firstname,

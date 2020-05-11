@@ -117,7 +117,6 @@ class dbHandler{
         return this.users.doc(username).get();
     }
 
-	
 	getUserProfile(user){
 		return this.db.collection("users").doc(user);
 	}

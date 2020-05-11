@@ -29,7 +29,7 @@ class ProfileEditor extends Component {
     componentDidMount(){
 
         // Set state
-        var docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
+        var docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
         docRef.get().then(doc => {
             this.setState({
                 username: doc.data().firstname,
@@ -66,7 +66,7 @@ class ProfileEditor extends Component {
         
         event.preventDefault();
     
-        const docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
+        const docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
 
         docRef.update({
             firstname: this.state.username,
