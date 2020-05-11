@@ -15,21 +15,6 @@ class StudySessions extends Component {
         }
 
         this.populateTable();
-
-    }
-  
-    componentWillMount() {
-        let db = global.firebase.firestore();
-        var study_sessions = [];
-        db.collection('study_session').get().then(
-            (snapshot) => {
-                snapshot.forEach((doc) => {
-                    study_sessions.push(doc.data());
-                })
-            }).then(() => {
-                this.setState({sessions: study_sessions})
-            }
-        );
     }
 
     async populateTable() {
@@ -41,7 +26,7 @@ class StudySessions extends Component {
 
         await studySessions
             .forEach(session => this.fetchUserData(session.creator)
-                .then(user => userData.push(user)).catch(() => console.log("no user.")));
+                .then(user => userData.push(user)).catch((err) => console.log("no user."+ err)));
         this.setState({sessions: studySessions, userData: userData});
     }
 
@@ -61,9 +46,9 @@ class StudySessions extends Component {
     getUserInfoRow(session) {
         let find = this.state.userData.find((user) => user.id === session.creator);
         if (find != null) {
-            return <Fragment>
+            return <Fragment key={uuid()}>
                 <tr key={uuid()} className="table-secondary table-borderless">
-                    <td className="tableCell" colSpan={1} key={uuid()}>Description of study session</td>
+                    <td key={uuid()} className="tableCell" colSpan={1} key={uuid()}>Description of study session</td>
                     <td colSpan={2} key={uuid()}>{session.description}</td>
                 </tr>
 
@@ -72,6 +57,7 @@ class StudySessions extends Component {
                     <td className="tableCell" colSpan={2} key={uuid()}>
                         <div key={uuid()} className="table-responsive table-borderless ">
                             <table className="tableCellBig ">
+                                <tbody key={uuid()}>
                                 <tr key={uuid()} className="table-secondary">
                                     <td className="tableCell" key={uuid()}>
                                         {find.data().firstname} {find.data().lastname}
@@ -82,6 +68,7 @@ class StudySessions extends Component {
                                         {find.data().school.toString()}
                                     </td>
                                 </tr>
+                                </tbody>
                             </table>
                         </div>
                     </td>
