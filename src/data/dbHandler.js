@@ -2,7 +2,7 @@
 //import "firebase/firestore";
 //import ObservableModel from "./ObservableModel";
 import modelInstance from "./Model";
-//import * as firebase from "firebase";
+import * as firebase from "firebase";
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 
@@ -83,6 +83,7 @@ class dbHandler{
 		});
 	}
 
+
 	removeUserStudySession(user){
 		var userSessions = this.db.collection("study_session").where("creator", "==", user);
 		userSessions.get().then(function(querySnapshot) {
@@ -92,13 +93,17 @@ class dbHandler{
 		  });
 	}
 
-	createStudySession(subj, starttime, endtime, loc, descr){
-		console.log(starttime, endtime);
+	createStudySession(subj, starttime, endtime, lat, lng, descr){
+		const geopoint: Project = {
+			latitude: lat,
+			longitude: lng
+		  }
+    
 		this.studysessions.doc().set({
-			creator: modelInstance.getCurrentUser(),
+			creator: localStorage.getItem("currentUser"),
 			startTime: starttime,
 			endTime: endtime,
-			location: loc,
+			location: geopoint,
 			description: descr,
 			subject: subj
 		});

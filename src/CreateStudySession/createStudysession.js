@@ -1,4 +1,6 @@
-/* Create or plan study session page 
+/* 
+
+Page component for creating a study session. 
 
 Responsible: Lou 
 
@@ -10,9 +12,8 @@ import "./createStudysession.css";
 import Topbar from "../Topbar/topbar";
 import dbHandlerInstance from "../data/dbHandler";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Dropdown, DropdownButton} from 'react-bootstrap';
-//import * as mapboxConfig from '../data/mapboxConfig';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import modelInstance from "../data/Model";
 
 const token = process.env.mapboxAPIKey;
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
@@ -23,17 +24,17 @@ class CreateStudySession extends Component {
     super(props);
     this.state = {
       status: "LOADING",
-      description: null, 
-      startTime: null,
-      endTime: null,
+      description: "", 
+      startTime: new Date("2020-05-01" + 'T' + "09:00" + ':00'),
+      endTime: new Date("2020-05-01" + 'T' + "11:00" + ':00'),
       location: "", 
-    /*  longitude: 18,
-      latitude: 20,*/
       subject: "",
-      sessionDate: null,
-      longitude: null,
-      latitude: null
+      sessionDate: "2020-05-01",
+      longitude: "",
+      latitude: "",
+      allSubjects: []
     };
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
   componentDidMount(){
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
@@ -46,20 +47,58 @@ class CreateStudySession extends Component {
     zoom: 12
     });
 
-    map.on('mousemove', function(e) {
-      document.getElementById('info').innerHTML =
-      // e.point is the x, y coordinates of the mousemove event relative
-      // to the top-left corner of the map
-      JSON.stringify(e.point) +
-      '<br />' +
-      // e.lngLat is the longitude, latitude geographical position of the event
-      JSON.stringify(e.lngLat.wrap());
-      console.log(e.lngLat.lat);
+      
+    var geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+  });
+     
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+    // Add geolocate control to the map.
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+        },
+        trackUserLocation: true
+        })
+      );
+      var markSessionPosition = new mapboxgl.Marker();
+      map.on('click', e=> {
+          this.setState({
+            longitude: e.lngLat.lng,
+            latitude: e.lngLat.lat
+          });
+
+          markSessionPosition.setLngLat([e.lngLat.lng, e.lngLat.lat])
+          .addTo(map);
       });
+
+      //set state
+      var docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
+      docRef.get().then(doc => {
+          this.setState({
+              userSubjects: doc.data().subject,
+          })
+      })
+
+
+      // agnes metod, hämtar alla subjects
+      let arrSub =[];
+      modelInstance.getSubjects().get().then(
+          (snapshot) => {
+              snapshot.forEach((doc) => {
+                  arrSub.push(doc.id);
+          })
+      }).then(() => {
+          this.setState({allSubjects: arrSub})
+      })
+
 }
 
   submit(){
-    dbHandlerInstance.createStudySession(this.state.subject, this.state.startTime, this.state.endTime, this.state.location, this.state.description);
+    dbHandlerInstance.createStudySession(this.state.subject, this.state.startTime, this.state.endTime, this.state.latitude, this.state.longitude, this.state.description);
   }
 
   setStartTime(startTime){
@@ -75,51 +114,20 @@ class CreateStudySession extends Component {
       endTime: endTimeTemp
     });
   }
-/*
-  <DropdownButton id="studysession-location" title="Choose location">
-  <Dropdown.Item value="KTH-campus" onClick={e => this.setState({location: "KTH-campus"})}>KTH Valhallavägen</Dropdown.Item>
-  <Dropdown.Item value="KTH-kista" onClick={e => this.setState({location: "KTH-kista"})}>KTH Kista</Dropdown.Item>
-  <Dropdown.Item value="KTH-flemingsberg" onClick={e => this.setState({location: "KTH-flemingsberg"})}>KTH Flemingsberg</Dropdown.Item>
-  <Dropdown.Item value="KTH-sodertalje" onClick={e => this.setState({location: "KTH-sodertalje"})}>KTH Södertälje</Dropdown.Item>
-</DropdownButton>*/
+
+  //create element with all subject options, agnes metod
+  allSubjects(){
+    let subjectOptions = []
+    for(let i = 0; i < this.state.allSubjects.length; i++){
+        subjectOptions.push(
+            <option value={this.state.allSubjects[i]}>{this.state.allSubjects[i]}</option>
+        )
+    }
+    return subjectOptions;
+}
+
   render() {
-    let studySessionParameters = null;
-
-    studySessionParameters = 
-        <div className="div-parameter">
-          <form action="action.php">
-            <label for="subject">Enter subject : </label>
-            <input type="text" id="sessionSubject" name="sessionSubject" onChange={e => this.setState({subject: e.target.value})}/> <br/>
-            <div className="timeBoxes">
-              <label for="sessionDate">Date : </label>
-              <input type="date" id="sessionDate" name="sessionDate" onChange={e => this.setState({sessionDate: e.target.value})}/> <br/>
-              <label for="startTime">Start time : </label>
-              <input type="time" id="appt" name="appt"
-                min="06:00" max="23:00" required onChange={e => this.setStartTime(e.target.value)}></input> <br/>
-              <label for="endTime">End time : </label>
-              <input type="time" id="appt" name="appt"
-                min="06:00" max="23:00" required onChange={e => this.setEndTime(e.target.value)}></input> <br/>
-            </div>
-            <div className="location-parameter">
-            <label for="location">Location : </label>
-              <div id="map-container">
-                <div id="mapSession" className="mapSession"></div>
-                <pre id="info"></pre>
-              </div>
-          </div>
-          <div className="studysession-description">
-            <p className="Note-text">Note: </p>
-            <textarea  className="description-box" placeholder="Description of study session" onChange={e => this.setState({description: e.target.value})} id="description" rows="5" cols="100">
-            </textarea><br/>
-          </div>
-
-          <div className="btnDiv">
-            <Link to="/">
-              <button onClick={() => this.submit()} className="studysession-btn">Create a study session</button>
-            </Link>
-          </div>
-          </form>
-        </div>;
+    let allSubjects = this.allSubjects();
 
     return (
         <div className="studysession-page">
@@ -128,7 +136,46 @@ class CreateStudySession extends Component {
           <h1>CREATE STUDY SESSION PAGE</h1>
 
           <div className="studySessionParameters">
-            {studySessionParameters}
+          <div className="div-parameter">
+          <form action="action.php">
+            <div className="subjectDiv">
+              <label for="subject">Select subject : </label><br/>
+              <select name="subject" className="studySessionSubject" onChange={e => this.setState({subject: e.target.value})}>
+                  <option disabled selected value></option>
+                  {allSubjects}
+              </select>
+            </div>
+            <div className="timeBoxes">
+              <label for="sessionDate">Date : </label>
+              <input type="date" id="sessionDate" name="sessionDate" className="sessionDate" defaultValue="2020-05-01" onChange={e => this.setState({sessionDate: e.target.value})}/> <br/>
+              <label for="startTime">Start time : </label>
+              <input type="time" id="appt" name="appt" className="startTimeBox"
+                min="06:00" max="23:00" defaultValue="09:00" required onChange={e => this.setStartTime(e.target.value)}></input> <br/>
+              <label for="endTime">End time : </label>
+              <input type="time" id="appt" name="appt" className="endTimeBox"
+                min="06:00" max="23:00" defaultValue="11:00" required onChange={e => this.setEndTime(e.target.value)}></input> <br/>
+            </div>
+            <div className="location-parameter">
+            <label for="location">Location : </label>
+              <div id="map-container">
+              <div id="geocoder" className="geocoder"></div>
+                <div id="mapSession" className="mapSession"></div>
+                <pre id="info"></pre>
+              </div>
+          </div>
+          <div className="studysession-description">
+            <label for="description">Note : </label><br/>
+            <textarea  className="description-box" placeholder="Decription of the study session, for example course code, group room, conference room etc." onChange={e => this.setState({description: e.target.value})} id="description" rows="5" cols="100">
+            </textarea><br/>
+          </div>
+
+          <div className="btnDiv">
+            <Link to="/find-study-session">
+              <button onClick={() => this.submit()} className="button">Create a study session</button>
+            </Link>
+          </div>
+          </form>
+        </div>
           </div>
           
         </div>
