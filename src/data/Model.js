@@ -45,6 +45,7 @@ class Model extends ObservableModel {
 	removeUser(email){
 		localStorage.removeItem("currentUser");
 		dbHandlerInstance.removeUser(email);
+		dbHandlerInstance.removeUserStudySession(email);
 	}
 
 	getUser(user){
