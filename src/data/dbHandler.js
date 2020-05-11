@@ -83,12 +83,22 @@ class dbHandler{
 		});
 	}
 
+
+	removeUserStudySession(user){
+		var userSessions = this.db.collection("study_session").where("creator", "==", user);
+		userSessions.get().then(function(querySnapshot) {
+			querySnapshot.forEach(function(doc) {
+			  doc.ref.delete();
+			});
+		  });
+	}
+
 	createStudySession(subj, starttime, endtime, lat, lng, descr){
 		const geopoint: Project = {
 			latitude: lat,
 			longitude: lng
 		  }
-
+    
 		this.studysessions.doc().set({
 			creator: localStorage.getItem("currentUser"),
 			startTime: starttime,
