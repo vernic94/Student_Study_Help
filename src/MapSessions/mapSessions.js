@@ -96,7 +96,7 @@ class MapSessions extends Component {
                 type: 'Feature',
                 geometry: {
                     type: 'Point',
-                    coordinates: [session.location._long, session.location._lat]
+                    coordinates: [session.location.longitude, session.location.latitude]
                 },
                 properties: {
                     user: session.creator,
