@@ -171,7 +171,7 @@ class CreateStudySession extends Component {
 
           <div className="btnDiv">
             <Link to="/find-study-session">
-              <button onClick={() => this.submit()} className="studysession-btn">Create a study session</button>
+              <button onClick={() => this.submit()} className="button">Create a study session</button>
             </Link>
           </div>
           </form>
