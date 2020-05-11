@@ -17,6 +17,20 @@ class StudySessions extends Component {
         this.populateTable();
 
     }
+  
+    componentWillMount() {
+        let db = global.firebase.firestore();
+        var study_sessions = [];
+        db.collection('study_session').get().then(
+            (snapshot) => {
+                snapshot.forEach((doc) => {
+                    study_sessions.push(doc.data());
+                })
+            }).then(() => {
+                this.setState({sessions: study_sessions})
+            }
+        );
+    }
 
     async populateTable() {
         let studySessions = [];
@@ -105,8 +119,8 @@ class StudySessions extends Component {
         });
 
         return <div className="studySessionsContainer">
-            <SearchedSessions search={this.search}/>
-            <div key={uuid()} className="table-responsive ">
+        <SearchedSessions className="input-search" sessions={this.state.sessions}/>
+        <div key={uuid()} className="table-responsive ">
                 <table className="table table-dark" key={uuid()}>
                     <thead>
                     <tr key={uuid()} className="table-active">
@@ -121,6 +135,7 @@ class StudySessions extends Component {
                 </table>
             </div>
         </div>;
+
     }
 }
 

@@ -83,6 +83,15 @@ class dbHandler{
 		});
 	}
 
+	removeUserStudySession(user){
+		var userSessions = this.db.collection("study_session").where("creator", "==", user);
+		userSessions.get().then(function(querySnapshot) {
+			querySnapshot.forEach(function(doc) {
+			  doc.ref.delete();
+			});
+		  });
+	}
+
 	createStudySession(subj, starttime, endtime, loc, descr){
 		console.log(starttime, endtime);
 		this.studysessions.doc().set({
@@ -102,6 +111,23 @@ class dbHandler{
     getUser(username){
         return this.users.doc(username).get();
     }
+
+	
+	getUserProfile(user){
+		return this.db.collection("users").doc(user);
+	}
+
+	getUserStudySessions(user){
+		return this.db.collection("study_session").where("creator", "==", user);
+	}
+
+	getSubjects(){
+		return this.db.collection("subjects");
+	}
+
+	getSchools(){
+		return this.db.collection("universities");
+	}
 
 }
 const dbHandlerInstance = new dbHandler();
