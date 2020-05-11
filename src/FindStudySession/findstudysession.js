@@ -28,8 +28,8 @@ class FindStudySession extends Component {
   }
   render() {
 	let currentView = null;
-	let mapBtn = <button className="button" onClick={this.mapsHandler}>Map</button>
-	let listBtn = <button className="button" onClick={this.listHandler}>List</button>
+	let mapBtn = <button className="button btn btn-lg btn-primary" onClick={this.mapsHandler}>Map</button>
+	let listBtn = <button className="button btn btn-lg  btn-primary" onClick={this.listHandler}>List</button>
 
 	if (this.state.status==="MAPS"){
 		currentView = <MapSessions/>
@@ -47,11 +47,11 @@ class FindStudySession extends Component {
          <div className="mapSessions">
            <MapComponent/>
          </div>
+          <div className="btn-group" data-toggle="buttons">
          {mapBtn}
          {listBtn}
-         
-         {currentView}
-
+          </div>
+          {currentView}
       </div>
 
     );

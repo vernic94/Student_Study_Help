@@ -109,8 +109,16 @@ class dbHandler{
 		});
 	}
 
+    getStudySessions() {
+        return this.studysessions.get();
+    }
+
+    getUser(username){
+        return this.users.doc(username).get();
+    }
+
 	
-	getUser(user){
+	getUserProfile(user){
 		return this.db.collection("users").doc(user);
 	}
 

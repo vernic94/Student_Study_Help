@@ -100,6 +100,14 @@ class Model extends ObservableModel {
 
     }
 
+    getStudySessions() {
+        return dbHandlerInstance.getStudySessions();
+    }
+
+    getUser(username) {
+        return dbHandlerInstance.getUser(username);
+    }
+
 }
 
 // Export an instance of model
