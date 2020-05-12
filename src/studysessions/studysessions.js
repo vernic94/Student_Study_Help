@@ -15,21 +15,6 @@ class StudySessions extends Component {
         }
 
         this.populateTable();
-
-    }
-  
-    componentWillMount() {
-        let db = global.firebase.firestore();
-        var study_sessions = [];
-        db.collection('study_session').get().then(
-            (snapshot) => {
-                snapshot.forEach((doc) => {
-                    study_sessions.push(doc.data());
-                })
-            }).then(() => {
-                this.setState({sessions: study_sessions})
-            }
-        );
     }
 
     async populateTable() {
@@ -41,7 +26,7 @@ class StudySessions extends Component {
 
         await studySessions
             .forEach(session => this.fetchUserData(session.creator)
-                .then(user => userData.push(user)).catch(() => console.log("no user.")));
+                .then(user => userData.push(user)).catch((err) => console.log("no user." + err)));
         this.setState({sessions: studySessions, userData: userData});
     }
 
@@ -61,17 +46,13 @@ class StudySessions extends Component {
     getUserInfoRow(session) {
         let find = this.state.userData.find((user) => user.id === session.creator);
         if (find != null) {
-            return <Fragment>
-                <tr key={uuid()} className="table-secondary table-borderless">
-                    <td className="tableCell" colSpan={1} key={uuid()}>Description of study session</td>
-                    <td colSpan={2} key={uuid()}>{session.description}</td>
-                </tr>
-
+            return <Fragment key={uuid()}>
                 <tr key={uuid()} className="table-secondary">
                     <td className="tableCell" colSpan={1} key={uuid()}>Creators information:</td>
-                    <td className="tableCell" colSpan={2} key={uuid()}>
+                    <td className="tableCell" colSpan={3} key={uuid()}>
                         <div key={uuid()} className="table-responsive table-borderless ">
                             <table className="tableCellBig ">
+                                <tbody key={uuid()}>
                                 <tr key={uuid()} className="table-secondary">
                                     <td className="tableCell" key={uuid()}>
                                         {find.data().firstname} {find.data().lastname}
@@ -82,6 +63,7 @@ class StudySessions extends Component {
                                         {find.data().school.toString()}
                                     </td>
                                 </tr>
+                                </tbody>
                             </table>
                         </div>
                     </td>
@@ -98,9 +80,12 @@ class StudySessions extends Component {
             <tr onClick={clickCallback} className="clickable justify-content-center" key={"row-data-" + index}>
                 <td className="tableCell" key={uuid()}>{value.subject}</td>
                 <td className="tableCell"
-                    key={uuid()}>{modelInstance.formatDate(modelInstance.convertToTime(value.startTime))}</td>
+                    key={uuid()}>{modelInstance.formatDate(modelInstance.convertToTime(value.startTime))}
+                </td>
                 <td className="tableCell"
-                    key={uuid()}>{modelInstance.formatDate(modelInstance.convertToTime(value.endTime))}</td>
+                    key={uuid()}>{modelInstance.formatDate(modelInstance.convertToTime(value.endTime))}
+                </td>
+                    <td key={uuid()}>{value.description}</td>
             </tr>
         ];
 
@@ -127,6 +112,7 @@ class StudySessions extends Component {
                         <th key={uuid()} className="tableCell" scope="col">Subject</th>
                         <th key={uuid()} className="tableCell" scope="col">Start Time</th>
                         <th key={uuid()} className="tableCell" scope="col">End Time</th>
+                        <th key={uuid()} className="tableCell" scope="col">Description</th>
                     </tr>
                     </thead>
                     <tbody>
