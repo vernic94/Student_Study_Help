@@ -116,7 +116,7 @@ class MapSessions extends Component {
     
     render() {
         return (
-            <div style={{ height: '100vh'}}>
+            <div>
                 {/* <Topbar /> */}
             <h1 style={{textAlign: 'center', fontSize: '20px', fontWeight: 'bolder'}}>Click on the markers to see more details</h1>
            <div id="geocoderMap" className="geocoderMap"></div>
