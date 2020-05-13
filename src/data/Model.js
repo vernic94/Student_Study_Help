@@ -2,18 +2,11 @@ import ObservableModel from "./ObservableModel";
 //import { firebaseConfig } from "./firebaseConfig";
 import dbHandlerInstance from "./dbHandler";
 
-//const bcrypt = require("bcryptjs");
-//const salt = bcrypt.genSaltSync(10);
 
 class Model extends ObservableModel {
 	constructor() {
 		super();
-
 		this.currentUser = null;
-	    // global.firebase.initializeApp(firebaseConfig);
-	    // this.db = global.firebase.firestore();
-		//this.users = this.db.collection("users");
-
 	}
 
 	getCurrentUser() {
@@ -93,8 +86,6 @@ class Model extends ObservableModel {
         }
     }
 
-
-
     getStudySessions() {
         return dbHandlerInstance.getStudySessions();
     }
@@ -121,7 +112,7 @@ class Model extends ObservableModel {
 		try {
 			if (date !== "") {
 				return date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2)
-					+ " kl " + date.getHours() + ":" + date.getMinutes();
+					+ " kl " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
 			}
 		} catch (error) {
 			return "";

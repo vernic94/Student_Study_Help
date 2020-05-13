@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * @author Amanda
+ * Responsible: Amanda
  */
 
 class SearchedSessions extends React.Component {
@@ -11,7 +11,6 @@ class SearchedSessions extends React.Component {
         };
         this.search = this.search.bind(this);
     }
-
 
     search(event){
         //saving a copy of original sessions

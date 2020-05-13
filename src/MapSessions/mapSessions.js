@@ -1,10 +1,7 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
 import "./mapSessions.css";
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import StudySessions from "../studysessions/studysessions";
 import modelInstance from "../data/Model";
-import Topbar from "../Topbar/topbar";
 import * as mapboxConfig from '../data/mapboxConfig';
 
 const token = mapboxConfig.REACT_APP_TOKEN;

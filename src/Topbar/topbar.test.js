@@ -1,8 +1,5 @@
 import React from 'react'
 import {shallow} from 'enzyme';
-import { Link } from "react-router-dom";
-import renderer from './topbar'
-import {Nav} from "react-bootstrap";
 describe('testing navigation', () => {
 
 it('testing whether the component will render correctly', () => {

@@ -4,18 +4,10 @@ Responsible:	Saga
 */
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-//import "./maps.css";
 import Topbar from "../Topbar/topbar"
-import Maps from "../Maps/maps"
-import MapComponent from "../MapComponent/map";
 import "./findstudysession.css";
 import MapSessions from "../MapSessions/mapSessions";
 import StudySessions from "../studysessions/studysessions";
-
-// const token = process.env.mapboxAPIKey;
-// const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
-// mapboxgl.accessToken = token;
 
 class FindStudySession extends Component {
   constructor(props) {
@@ -37,20 +29,13 @@ class FindStudySession extends Component {
 
 	if (this.state.status==="MAPS"){
 		currentView = <MapSessions/>
-		// mapBtn = <button disabled>Map</button>
-		// listBtn = <button >List</button>
 	}
 	if (this.state.status==="LIST"){
-		currentView = <StudySessions />//<h1>List</h1>
-		//mapBtn = <button >Map</button>
-		//listBtn = <button disabled>List</button>
+		currentView = <StudySessions />
 	}
     return (
       <div className="find-page">
          <Topbar/>
-         {/* <div className="mapSessions">
-           
-         </div> */}
           <div className="btn-group" data-toggle="buttons">
          {mapBtn}
          {listBtn}

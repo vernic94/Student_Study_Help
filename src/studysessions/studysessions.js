@@ -5,7 +5,7 @@ import modelInstance from "../data/Model";
 import uuid from 'react-uuid'
 
 /**
- * @author Fariba
+ * Responsible: Fariba
  */
 
 class StudySessions extends Component {

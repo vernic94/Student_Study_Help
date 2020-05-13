@@ -1,9 +1,8 @@
-/* About us page
-
-*/
+/** About us page
+ * Responsible: Amanda
+**/
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./aboutus.css";
 import Topbar from "../Topbar/topbar"
 
