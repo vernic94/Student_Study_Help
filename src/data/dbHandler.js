@@ -98,7 +98,9 @@ class dbHandler{
 			latitude: lat,
 			longitude: lng
 		  }
-    
+		  
+		  console.log(starttime);
+		  console.log(endtime);
 		this.studysessions.doc().set({
 			creator: localStorage.getItem("currentUser"),
 			startTime: starttime,
