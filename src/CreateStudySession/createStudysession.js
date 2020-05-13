@@ -15,9 +15,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import modelInstance from "../data/Model";
 
-const token = process.env.mapboxAPIKey;
-const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
-mapboxgl.accessToken = token;
+export const mapboxConfig = {
+  apiKey: process.env.mapboxAPIKey
+};
+
+
 
 class CreateStudySession extends Component {
   constructor(props) {
@@ -38,11 +40,15 @@ class CreateStudySession extends Component {
 
   }
   componentDidMount(){
-    console.log(process.env.mapboxAPIKey);
+    console.log(token + "hej");
 
+    const token = mapboxConfig.apiKey;
+    var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+    mapboxgl.accessToken = token;
+/*
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoidmVybmljIiwiYSI6ImNrOWltOXJ0YjAwNjQzbnA4eXlmY293eWkifQ.dA5_3vrOMVMmIEThwLQlUg';    
-    
+    */
     var map = new mapboxgl.Map({
     container: 'mapSession',
     style: 'mapbox://styles/mapbox/streets-v11',
