@@ -5,10 +5,11 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import StudySessions from "../studysessions/studysessions";
 import modelInstance from "../data/Model";
 import Topbar from "../Topbar/topbar";
+import * as mapboxConfig from '../data/mapboxConfig';
 
-const token = process.env.mapboxAPIKey;
+const token = mapboxConfig.REACT_APP_TOKEN;
+//process.env.mapboxAPIKey;
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
-mapboxgl.accessToken = token;
 
 class MapSessions extends Component {
 
@@ -24,7 +25,7 @@ class MapSessions extends Component {
                         type: 'Point',
                         coordinates: [],
                         properties: {
-                            user: "",
+                            username: "",
                             subject:"",
                             description: "",
                             start:"",
@@ -38,6 +39,7 @@ class MapSessions extends Component {
     
 
     componentDidMount() {
+        mapboxgl.accessToken = token;
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
@@ -99,7 +101,7 @@ class MapSessions extends Component {
                     coordinates: [session.location.longitude, session.location.latitude]
                 },
                 properties: {
-                    user: session.creator,
+                    username: modelInstance.getUser(session.creator),
                     subject: session.subject,
                     start: modelInstance.formatDate(modelInstance.convertToTime(session.startTime)),
                     end: modelInstance.formatDate(modelInstance.convertToTime(session.endTime)),
@@ -116,9 +118,9 @@ class MapSessions extends Component {
     
     render() {
         return (
-            <div style={{ height: '100vh'}}>
+            <div >
                 {/* <Topbar /> */}
-            <h1 style={{textAlign: 'center', fontSize: '20px', fontWeight: 'bolder'}}>Click on the markers to see more details</h1>
+            <h1 style={{textAlign: 'center', fontSize: '20px', fontWeight: 'bolder', marginTop: "100px"}}>Click on the markers to see more details</h1>
            <div id="geocoderMap" className="geocoderMap"></div>
             <div id ="map"> </div>
             </div>
