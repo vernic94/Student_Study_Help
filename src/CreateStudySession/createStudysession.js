@@ -32,7 +32,8 @@ class CreateStudySession extends Component {
       sessionDate: "2020-05-01",
       longitude: "",
       latitude: "",
-      allSubjects: []
+      allSubjects: [],
+      startTimeClock: "09:00"
     };
     this.componentDidMount = this.componentDidMount.bind(this);
   }
@@ -47,13 +48,14 @@ class CreateStudySession extends Component {
     zoom: 12
     });
 
-      
-    var geocoder = new MapboxGeocoder({
+    map.addControl(
+      new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl
-  });
+      })
+      );
+
      
-    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
     // Add geolocate control to the map.
     map.addControl(
@@ -96,7 +98,7 @@ class CreateStudySession extends Component {
       })
 
 }
-
+  
   submit(){
     dbHandlerInstance.createStudySession(this.state.subject, this.state.startTime, this.state.endTime, this.state.latitude, this.state.longitude, this.state.description);
   }
@@ -104,7 +106,8 @@ class CreateStudySession extends Component {
   setStartTime(startTime){
     let startTimeTemp = new Date(this.state.sessionDate + 'T' + startTime + ':00');
     this.setState({
-      startTime: startTimeTemp
+      startTime: startTimeTemp,
+      startTimeClock: startTime
     });
   }
 
@@ -126,8 +129,28 @@ class CreateStudySession extends Component {
     return subjectOptions;
 }
 
+getDateOfToday(){
+  let today = new Date();
+  let date;
+  console.log(today);
+  if((today.getMonth()+1) > 9 && today.getDate() > 9){
+  date = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
+  }
+  else if((today.getMonth()+1) < 10){
+    date = today.getFullYear() + "-0" + (today.getMonth()+1) + "-" + today.getDate();
+  }
+  else if(today.getDate() < 10){
+    date = today.getFullYear() + "-0" + (today.getMonth()+1) + "-0" + today.getDate();
+  }
+  console.log(date);
+
+  return date;
+}
+
   render() {
     let allSubjects = this.allSubjects();
+
+    let today = this.getDateOfToday();
 
     return (
         <div className="studysession-page">
@@ -147,17 +170,17 @@ class CreateStudySession extends Component {
             </div>
             <div className="timeBoxes">
               <label for="sessionDate">Date : </label>
-              <input type="date" id="sessionDate" name="sessionDate" className="sessionDate" defaultValue="2020-05-01" onChange={e => this.setState({sessionDate: e.target.value})}/> <br/>
+              <input type="date" id="sessionDate" name="sessionDate" className="sessionDate" defaultValue={today} min={today} max="2020-12-31" onChange={e => this.setState({sessionDate: e.target.value})}/> <br/>
               <label for="startTime">Start time : </label>
               <input type="time" id="appt" name="appt" className="startTimeBox"
                 min="06:00" max="23:00" defaultValue="09:00" required onChange={e => this.setStartTime(e.target.value)}></input> <br/>
               <label for="endTime">End time : </label>
               <input type="time" id="appt" name="appt" className="endTimeBox"
-                min="06:00" max="23:00" defaultValue="11:00" required onChange={e => this.setEndTime(e.target.value)}></input> <br/>
+                min={this.state.startTimeClock} max="23:00" required onChange={e => this.setEndTime(e.target.value)}></input> <br/>
             </div>
             <div className="location-parameter">
             <label for="location">Location : </label>
-              <div id="map-container">
+              <div id="map-container" className="map-container">
               <div id="geocoder" className="geocoder"></div>
                 <div id="mapSession" className="mapSession"></div>
                 <pre id="info"></pre>
@@ -165,7 +188,7 @@ class CreateStudySession extends Component {
           </div>
           <div className="studysession-description">
             <label for="description">Note : </label><br/>
-            <textarea  className="description-box" placeholder="Decription of the study session, for example course code, group room, conference room etc." onChange={e => this.setState({description: e.target.value})} id="description" rows="5" cols="100">
+            <textarea  className="description-box" placeholder="Description of study session, for example course code, group room" onChange={e => this.setState({description: e.target.value})} id="description" rows="5" cols="100">
             </textarea><br/>
           </div>
 

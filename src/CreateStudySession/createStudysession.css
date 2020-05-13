@@ -37,6 +37,12 @@
     margin-bottom: 10px;
 }
 
+.location-parameter{
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
 #mapSession, #geocoder{
     position: relative;
 }
@@ -47,6 +53,16 @@
     margin: auto;
 }
 
+.geocoder {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    margin-left: 50%;
+    margin-right: 50%;
+    }
+    .mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+    }
 .subjectDiv{
     margin-top: 20px;
 }
