@@ -15,7 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import modelInstance from "../data/Model";
 
-const token = process.env.mapboxAPIKey;
+const token = process.env.REACT_APP_MAPTOKEN;
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = token;
 
@@ -37,6 +37,8 @@ class CreateStudySession extends Component {
     this.componentDidMount = this.componentDidMount.bind(this);
   }
   componentDidMount(){
+    const token = process.env.REACT_APP_MAPTOKEN;
+    console.log(token);
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoidmVybmljIiwiYSI6ImNrOWltOXJ0YjAwNjQzbnA4eXlmY293eWkifQ.dA5_3vrOMVMmIEThwLQlUg';    
     
