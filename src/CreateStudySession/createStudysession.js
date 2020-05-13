@@ -25,19 +25,21 @@ class CreateStudySession extends Component {
     this.state = {
       status: "LOADING",
       description: "", 
-      startTime: new Date("2020-05-01" + 'T' + "09:00" + ':00'),
-      endTime: new Date("2020-05-01" + 'T' + "11:00" + ':00'),
+      startTime: "",
+      endTime: "",
       location: "", 
       subject: "",
-      sessionDate: "2020-05-01",
+      sessionDate: "",
       longitude: "",
       latitude: "",
       allSubjects: [],
-      startTimeClock: "09:00"
+      startTimeClock: ""
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
+
   }
   componentDidMount(){
+    console.log(process.env.mapboxAPIKey);
+
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoidmVybmljIiwiYSI6ImNrOWltOXJ0YjAwNjQzbnA4eXlmY293eWkifQ.dA5_3vrOMVMmIEThwLQlUg';    
     
@@ -96,6 +98,16 @@ class CreateStudySession extends Component {
       }).then(() => {
           this.setState({allSubjects: arrSub})
       })
+
+      let today = this.getDateOfToday();
+      this.setState({
+        startTime: new Date(today + 'T' + "09:00" + ':00'),
+        endTime: new Date(today + 'T' + "09:00" + ':00'),
+        sessionDate: today,
+        startTimeClock: "09:00"
+
+      });
+      console.log(this.state.startTime);
 
 }
   
