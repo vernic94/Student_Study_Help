@@ -107,7 +107,6 @@ class CreateStudySession extends Component {
         startTimeClock: "09:00"
 
       });
-      console.log(this.state.startTime);
 
 }
   
