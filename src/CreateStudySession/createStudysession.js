@@ -95,7 +95,6 @@ class CreateStudySession extends Component {
           this.setState({allSubjects: arrSub})
       })
 
-<<<<<<< HEAD
       let today = this.getDateOfToday();
       this.setState({
         startTime: new Date(today + 'T' + "09:00" + ':00'),
@@ -105,8 +104,6 @@ class CreateStudySession extends Component {
 
       });
 
-=======
->>>>>>> parent of 06317cdb... Merge branch 'lou' into development
 }
 
   submit(){
