@@ -50,7 +50,7 @@ class MapSessions extends Component {
                 mapboxgl: mapboxgl
             });
                
-        document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+        document.getElementById('geocoderMap').appendChild(geocoder.onAdd(map));
 
         let db = global.firebase.firestore();
         var study_sessions = [];
@@ -96,7 +96,7 @@ class MapSessions extends Component {
                 type: 'Feature',
                 geometry: {
                     type: 'Point',
-                    coordinates: [session.location._long, session.location._lat]
+                    coordinates: [session.location.longitude, session.location.latitude]
                 },
                 properties: {
                     user: session.creator,
@@ -119,7 +119,7 @@ class MapSessions extends Component {
             <div style={{ height: '100vh'}}>
                 {/* <Topbar /> */}
             <h1 style={{textAlign: 'center', fontSize: '20px', fontWeight: 'bolder'}}>Click on the markers to see more details</h1>
-           <div id="geocoder" className="geocoder"></div>
+           <div id="geocoderMap" className="geocoderMap"></div>
             <div id ="map"> </div>
             </div>
       )

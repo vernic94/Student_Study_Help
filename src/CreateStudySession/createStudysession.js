@@ -76,7 +76,7 @@ class CreateStudySession extends Component {
       });
 
       //set state
-      var docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
+      var docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
       docRef.get().then(doc => {
           this.setState({
               userSubjects: doc.data().subject,

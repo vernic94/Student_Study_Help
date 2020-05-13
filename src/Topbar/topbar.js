@@ -22,8 +22,8 @@ export class Topbar extends React.Component{
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <img className="topbar-icon" src={require("../images/student-study-help-3.png")}>
-                </img>&nbsp;
-                <Navbar.Brand href="#home" >Student Study Help</Navbar.Brand>
+                </img>
+                <Navbar.Brand>Study Group</Navbar.Brand>
 
                 <Navbar.Toggle/>
 

@@ -52,6 +52,10 @@ class Model extends ObservableModel {
 		return dbHandlerInstance.getUser(user);
 	}
 
+	getUserProfile(user){
+		return dbHandlerInstance.getUserProfile(user);
+	}
+
 	getUserStudySessions(user){
 		return dbHandlerInstance.getUserStudySessions(user);
 	}
@@ -89,24 +93,40 @@ class Model extends ObservableModel {
         }
     }
 
-    formatDate(date) {
-        try {
-            if (date != "") {
-                return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
-            }
-        } catch (error) {
-            return "";
-        }
 
-    }
 
     getStudySessions() {
         return dbHandlerInstance.getStudySessions();
     }
-
-    getUser(username) {
-        return dbHandlerInstance.getUserProfile(username);
-    }
+	formatDay(date) {
+		try {
+			if (date !== "") {
+				return date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+			}
+		} catch (error) {
+			return "";
+		}
+	}
+	formatTime(startTime, endTime){
+		try {
+			if (startTime !== "" && endTime !== "") {
+				return " kl " + ("0" + startTime.getHours()).slice(-2) + ":" + ("0" + startTime.getMinutes()).slice(-2)
+					+" - " + ("0" + endTime.getHours()).slice(-2) + ":" +  ("0" + endTime.getMinutes()).slice(-2) ;
+			}
+		} catch (error) {
+			return "";
+		}
+	}
+	formatDate(date) {
+		try {
+			if (date !== "") {
+				return date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2)
+					+ " kl " + date.getHours() + ":" + date.getMinutes();
+			}
+		} catch (error) {
+			return "";
+		}
+	}
 
 }
 

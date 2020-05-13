@@ -74,7 +74,7 @@ class ProfileEditor extends Component {
         
         event.preventDefault();
     
-        const docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
+        const docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
 
         docRef.update({
             firstname: this.state.firstname,
