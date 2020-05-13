@@ -13,6 +13,10 @@ import "./findstudysession.css";
 import MapSessions from "../MapSessions/mapSessions";
 import StudySessions from "../studysessions/studysessions";
 
+// const token = process.env.mapboxAPIKey;
+// const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+// mapboxgl.accessToken = token;
+
 class FindStudySession extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +31,7 @@ class FindStudySession extends Component {
 	  this.setState({status: "LIST"});
   }
   render() {
-	let currentView = null;
+	let currentView = <MapSessions />;
 	let mapBtn = <button className="button btn btn-lg btn-primary" onClick={this.mapsHandler}>Map</button>
 	let listBtn = <button className="button btn btn-lg  btn-primary" onClick={this.listHandler}>List</button>
 
@@ -44,9 +48,9 @@ class FindStudySession extends Component {
     return (
       <div className="find-page">
          <Topbar/>
-         <div className="mapSessions">
-           <MapComponent/>
-         </div>
+         {/* <div className="mapSessions">
+           
+         </div> */}
           <div className="btn-group" data-toggle="buttons">
          {mapBtn}
          {listBtn}
