@@ -17,6 +17,7 @@ import MapMarkers from './MapMarkers/mapMarkers';
 import StudySessions from "./studysessions/studysessions";
 import MapComponent from "./MapComponent/map";
 import MapSessions from './MapSessions/mapSessions';
+import SessionEditor from './SessionEditor/sessionEditor';
 
 function App() {
   let exactPath;
@@ -41,6 +42,7 @@ function App() {
         <Route path="/map" component={MapComponent}/>
         <Route path="/study-sessions" component={StudySessions}/>
         <Route path="/map-sessions" component={Topbar, MapSessions}/>
+        <Route path="/edit-session" component={SessionEditor}/>
       </header>
     </div>
   );

@@ -128,6 +128,11 @@ class Model extends ObservableModel {
 		}
 	}
 
+	setCurrentStudySession(id){
+		console.log(id);
+		dbHandlerInstance.setStudySession(id);
+	}
+
 }
 
 // Export an instance of model

@@ -20,7 +20,8 @@ class Profile extends Component {
             school: [],
             subject: [],
             pfpurl: "",
-            sessions: []
+            sessions: [],
+            studySessionID: []
         }
     }
 
@@ -48,13 +49,15 @@ class Profile extends Component {
 
         //get the current user's study sessions
         let study_sessions = [];
+        let id = [];
         modelInstance.getUserStudySessions(user).get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
                     study_sessions.push(doc.data());
+                    id.push(doc.id);
                 })
             }).then(() => {
-                this.setState({sessions: study_sessions})
+                this.setState({sessions: study_sessions, studySessionID: id})
             });
     }
 
@@ -70,13 +73,18 @@ class Profile extends Component {
             if(this.state.sessions[i].subject !== ""){
                 title = this.state.sessions[i].subject;
             }
-
+            
+            let currentSessionID = this.state.studySessionID[i];
+            console.log(currentSessionID);
+            
             mySessions.push(
                 <div className="StudySession">
                     <div className="TitleBlock">
                         <p className="SessionTitle">
                             <b>{title}</b>
-                            <button className="Info">🛈</button>
+                            <Link to="/edit-session">
+                                <button className="Info" onClick={modelInstance.setCurrentStudySession(currentSessionID)}>🛈</button>
+                            </Link>
                         </p>
                     </div>
                     <p className="SessionDesc">{this.state.sessions[i].description}</p>

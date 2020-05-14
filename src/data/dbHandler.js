@@ -111,6 +111,15 @@ class dbHandler{
 		});
 	}
 
+	setStudySession(id){
+		let session = this.db.collection("study_session").doc(id);
+		localStorage.setItem("currentSession", session);
+	}
+
+	getCurrentStudySession(){
+		return localStorage.getItem("currentSession");
+	}
+
     getStudySessions() {
         return this.studysessions.get();
     }

@@ -15,12 +15,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import modelInstance from "../data/Model";
 
-export const mapboxConfig = {
-  apiKey: process.env.mapboxAPIKey
+export const token = process.env.REACT_APP_MAPKEY;
+
+export const mapbokConfig = {
+  apiKey: process.env.REACT_APP_MAPKEY
 };
-
-
-
 class CreateStudySession extends Component {
   constructor(props) {
     super(props);
@@ -39,16 +38,16 @@ class CreateStudySession extends Component {
     };
 
   }
-  componentDidMount(){
-    console.log(token + "hej");
 
-    const token = mapboxConfig.apiKey;
-    var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
-    mapboxgl.accessToken = token;
+  
+  componentDidMount(){
 /*
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+    mapboxgl.accessToken = mapbokConfig.apiKey;*/
+
+    var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoidmVybmljIiwiYSI6ImNrOWltOXJ0YjAwNjQzbnA4eXlmY293eWkifQ.dA5_3vrOMVMmIEThwLQlUg';    
-    */
+    
     var map = new mapboxgl.Map({
     container: 'mapSession',
     style: 'mapbox://styles/mapbox/streets-v11',
@@ -113,7 +112,6 @@ class CreateStudySession extends Component {
         startTimeClock: "09:00"
 
       });
-      console.log(this.state.startTime);
 
 }
   
