@@ -1,4 +1,4 @@
-.profileEditor-page{
+.sessionEditor-page{
     width: 100%;
     margin-bottom: 50px;
 }
@@ -71,29 +71,6 @@
     width: 430px;
 }
 
-.RemoveSchool{
-    display: flex;
-    font-size: smaller;
-    background-color: #4f5461;
-    border-radius: 5px;
-    padding-left: 5px;
-    margin-top: 1px;
-    margin-right: 5px;
-    margin-bottom: 2px;
-    color: whitesmoke;
-}
-
-.RemoveSubject{
-    display: flex;
-    font-size: smaller;
-    background-color: #4f5461;
-    border-radius: 5px;
-    padding-left: 5px;
-    margin-top: 1px;
-    margin-right: 5px;
-    margin-bottom: 2px;
-    color: whitesmoke;
-}
 
 /**************************************************/
 /*                    Buttons                     */
@@ -129,13 +106,13 @@
     margin-left: 2px;
 }
 
-.RemoveUser{
+.RemoveSession{
     text-align: left;   
     margin-left: 400px;
     margin-top: 10px;
 }
 
-.BtnRemoveUser{
+.BtnRemoveSession{
     color: whitesmoke;
     align-self: center;
     text-align: center;

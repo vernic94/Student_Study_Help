@@ -75,7 +75,6 @@ class Profile extends Component {
             }
             
             let currentSessionID = this.state.studySessionID[i];
-            console.log(currentSessionID);
             
             mySessions.push(
                 <div className="StudySession">
@@ -83,7 +82,7 @@ class Profile extends Component {
                         <p className="SessionTitle">
                             <b>{title}</b>
                             <Link to="/edit-session">
-                                <button className="Info" onClick={modelInstance.setCurrentStudySession(currentSessionID)}>🛈</button>
+                                <button className="Info" onClick={modelInstance.setCurrentSession(currentSessionID)}>🛈</button>
                             </Link>
                         </p>
                     </div>

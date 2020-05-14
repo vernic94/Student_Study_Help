@@ -13,7 +13,7 @@ class Model extends ObservableModel {
 	    // global.firebase.initializeApp(firebaseConfig);
 	    // this.db = global.firebase.firestore();
 		//this.users = this.db.collection("users");
-
+		this.currentSession = null;
 	}
 
 	getCurrentUser() {
@@ -128,12 +128,15 @@ class Model extends ObservableModel {
 		}
 	}
 
-	setCurrentStudySession(id){
+	setCurrentSession(id){
 		console.log(id);
-		dbHandlerInstance.setStudySession(id);
+		this.currentSession = dbHandlerInstance.setCurrentSession(id);
 	}
 
-}
+	getCurrentSession(){
+		return this.currentSession;
+	}
+}	
 
 // Export an instance of model
 const modelInstance = new Model();
