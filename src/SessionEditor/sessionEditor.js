@@ -169,7 +169,7 @@ class SessionEditor extends Component {
 	render(){
         let allSubjects = this.allSubjects();
         let today = this.getDateOfToday();
-        console.log(this.state.subject);
+        console.log(this.state.startTime);
 
 
 		return(
@@ -190,7 +190,7 @@ class SessionEditor extends Component {
                             <input type="date" id="sessionDate" name="sessionDate" className="sessionDate" defaultValue={this.state.sessionDate} min={today} max="2020-12-31" onChange={e => this.setState({sessionDate: e.target.value})}/> <br/>
                             <label for="startTime">Start time : </label>
                             <input type="time" id="appt" name="appt" className="startTimeBox"
-                                min="06:00" max="23:00" defaultValue={"09:00"} onChange={e => this.setStartTime(e.target.value)}></input> <br/>
+                                min="06:00" max="23:00" defaultValue={this.state.startTime} onChange={e => this.setStartTime(e.target.value)}></input> <br/>
                             <label for="endTime">End time : </label>
                             <input type="time" id="appt" name="appt" className="endTimeBox"
                                 min={this.state.startTimeClock} max="23:00" onChange={e => this.setEndTime(e.target.value)}></input> <br/>
@@ -211,7 +211,7 @@ class SessionEditor extends Component {
                         </label>
                     </div>
 
-                    <br/><br/>
+                    <br/>
                     <div className="SaveCancel">
                         <button className="ButtonSave" type="submit" onClick={this.submitHandler}>Save</button>
                         <Link to="/profile">
