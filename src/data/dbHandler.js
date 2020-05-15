@@ -98,7 +98,7 @@ class dbHandler{
 			latitude: lat,
 			longitude: lng
 		  }
-    
+		  
 		this.studysessions.doc().set({
 			creator: localStorage.getItem("currentUser"),
 			startTime: starttime,
@@ -108,6 +108,20 @@ class dbHandler{
 			subject: subj
 		});
 	}
+
+	setCurrentSession(id){
+		let session = this.db.collection("study_session").doc(id);
+		return session;
+	}
+
+	removeSession(session){
+		this.db.collection("study_session").doc(session.id).delete().then(function() {
+		    console.log("Document successfully deleted!");
+		}).catch(function(error) {
+		    console.error("Error removing document: ", error);
+		});
+	}
+
 
     getStudySessions() {
         return this.studysessions.get();

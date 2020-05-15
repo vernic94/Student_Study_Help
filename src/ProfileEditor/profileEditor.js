@@ -88,7 +88,7 @@ class ProfileEditor extends Component {
         });
 
         //navigates back to the profile page
-        this.props.history.push('/profile')
+        this.props.history.push('/profile');
     }
 
     //handle general event

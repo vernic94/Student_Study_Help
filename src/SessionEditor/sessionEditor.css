@@ -1,0 +1,149 @@
+.sessionEditor-page{
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.ProfileEditorContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: medium;
+    margin-left: 400px; /*change later*/
+    margin-top: 40px; /*change later*/
+}
+
+.UsernameInput{
+    background-color: #3a3f4b; 
+    border-color: #4f5461;  
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+.PfpUrlInput{
+    background-color: #3a3f4b; 
+    border-color: #4f5461;  
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 5px; 
+    margin-top: 5px;
+    width: 430px;   
+}
+
+.descriptionTextArea{
+    background-color: #3a3f4b;
+    border-color: #4f5461;
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: small;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 5px;
+    width: 430px;
+}
+
+.SchoolSelect{
+    background-color: #3a3f4b;
+    border-color: #4f5461;
+    color: whitesmoke;
+    width: 430px;
+    margin-top: 2px;
+}
+
+.editSubject{
+    background-color: #3a3f4b;
+    border-color: #4f5461;
+    color: whitesmoke;
+    margin-bottom: 15px;
+    width: 430px;
+    margin-top: 2px;
+}
+
+.Selected{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 430px;
+}
+
+
+/**************************************************/
+/*                    Buttons                     */
+/**************************************************/
+
+.ButtonRemove{
+    background: none;
+    border: none;
+    color: whitesmoke;
+}
+
+.ButtonRemove:hover{
+    color: #6586da;
+}
+
+.ButtonSave{
+    align-self: center;
+    text-align: center;
+    width: 60px;
+    background-color: whitesmoke;
+    border-radius: 2px;
+    border-style: solid;
+    margin-right: 2px;
+}
+
+.ButtonCancel{
+    align-self: center;
+    text-align: center;
+    width: 60px;
+    background-color: whitesmoke;
+    border-radius: 2px;
+    border-style: solid;
+    margin-left: 2px;
+}
+
+.RemoveSession{
+    text-align: left;   
+    margin-left: 400px;
+    margin-top: 10px;
+}
+
+.BtnRemoveSession{
+    color: whitesmoke;
+    align-self: center;
+    text-align: center;
+    width: 160px;
+    font-size: 16px;
+    background-color: rgb(194, 78, 78);
+    border-radius: 2px;
+    border-style: solid;
+    margin-right: 2px;
+    border-color: rgb(194, 78, 78);
+}
+
+/**************************************************/
+
+
+.mapSessionEditor{
+    min-height: 60vh;
+    width: 40vw;
+}
+
+.location-parameterEditor{
+    margin-right:500px;
+}
+
+
+.geocoderEditor {
+    z-index: 1;
+    top: 10px;
+    margin-left: 50%;
+    margin-right: 50%;
+    }
+    .mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+    }

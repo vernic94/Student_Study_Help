@@ -11,6 +11,7 @@ import FindStudySession from "./FindStudySession/findstudysession";
 import NewPassword from "./NewPassword/newpassword";
 import StudySessions from "./studysessions/studysessions";
 import MapSessions from './MapSessions/mapSessions';
+import SessionEditor from './SessionEditor/sessionEditor';
 
 function App() {
   let exactPath;
@@ -33,6 +34,7 @@ function App() {
         <Route path="/change-password" component={NewPassword}/>
         <Route path="/study-sessions" component={StudySessions}/>
         <Route path="/map-sessions" component={MapSessions}/>
+        <Route path="/edit-session" component={SessionEditor}/>
       </header>
     </div>
   );

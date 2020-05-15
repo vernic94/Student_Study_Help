@@ -15,9 +15,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import modelInstance from "../data/Model";
 
-const token = process.env.mapboxAPIKey;
-const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
-mapboxgl.accessToken = token;
+  const token = process.env.mapboxAPIKey;
+
+    var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+    mapboxgl.accessToken = token;
 
 class CreateStudySession extends Component {
   constructor(props) {
@@ -37,8 +38,10 @@ class CreateStudySession extends Component {
     };
 
   }
+
+  
   componentDidMount(){
-    console.log(process.env.mapboxAPIKey);
+
 
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoidmVybmljIiwiYSI6ImNrOWltOXJ0YjAwNjQzbnA4eXlmY293eWkifQ.dA5_3vrOMVMmIEThwLQlUg';    
@@ -107,7 +110,6 @@ class CreateStudySession extends Component {
         startTimeClock: "09:00"
 
       });
-      console.log(this.state.startTime);
 
 }
   
@@ -171,15 +173,15 @@ getDateOfToday(){
           <h1>CREATE STUDY SESSION</h1>
 
           <div className="studySessionParameters">
-          <div className="div-parameter">
-          <form action="action.php">
-            <div className="subjectDiv">
-              <label for="subject">Select subject : </label><br/>
-              <select name="subject" className="studySessionSubject" onChange={e => this.setState({subject: e.target.value})}>
-                  <option disabled selected value></option>
-                  {allSubjects}
-              </select>
-            </div>
+            <div className="div-parameter">
+            <form action="action.php">
+              <div className="subjectDiv">
+                <label for="subject">Select subject : </label><br/>
+                <select name="subject" className="studySessionSubject" onChange={e => this.setState({subject: e.target.value})}>
+                    <option disabled selected value></option>
+                    {allSubjects}
+                </select>
+              </div>
             <div className="timeBoxes">
               <label for="sessionDate">Date : </label>
               <input type="date" id="sessionDate" name="sessionDate" className="sessionDate" defaultValue={today} min={today} max="2020-12-31" onChange={e => this.setState({sessionDate: e.target.value})}/> <br/>
