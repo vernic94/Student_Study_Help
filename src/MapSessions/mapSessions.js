@@ -22,7 +22,8 @@ class MapSessions extends Component {
                         type: 'Point',
                         coordinates: [],
                         properties: {
-                            username: "",
+                            firstName: "",
+                            lastName:"",
                             subject:"",
                             description: "",
                             start:"",
@@ -38,21 +39,24 @@ class MapSessions extends Component {
     componentDidMount() {
         mapboxgl.accessToken = token;
         var map = new mapboxgl.Map({
-            container: 'map',
+            container: 'mapSession',
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [18.063240, 59.334591],
             zoom: 12,
             })
             
-            var geocoder = new MapboxGeocoder({
+            map.addControl(
+                new MapboxGeocoder({
                 accessToken: mapboxgl.accessToken,
                 mapboxgl: mapboxgl
-            });
+                })
+                );
                
-        document.getElementById('geocoderMap').appendChild(geocoder.onAdd(map));
+        //document.getElementById('geocoderMap').appendChild(geocoder.onAdd(map));
 
         let db = global.firebase.firestore();
         var study_sessions = [];
+
         db.collection('study_session').get().then(
             (snapshot) => {
                 snapshot.forEach((doc) => {
@@ -60,11 +64,22 @@ class MapSessions extends Component {
                 })
             }).then(() => {
                 this.setState({sessions: study_sessions})
-                console.log("sessions state: ", this.state.sessions)
-               
-                    this.displaySessionLocation();
+                const getFeatures = async () => {
+                    return Promise.all(this.filterSessions().map(session => this.createFeatureFromSession(session)))
+                }
+                
+                getFeatures().then(features => {
+                    this.setState({
+                        geojson: {
+                        type: 'FeatureCollection',
+                        features: features
+                        },                        
+        
+                    });
+                
                     // add markers to map
                     this.state.geojson.features.forEach(function(marker) {
+                        
                         // create a HTML element for each feature
                         var el = document.createElement('div');
                         el.className = 'marker';
@@ -72,54 +87,60 @@ class MapSessions extends Component {
                         // make a marker for each feature and add to the map
                         new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates)
                         .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                        .setHTML(`<div> <Strong> User: </Strong>${marker.properties.user}<br>
+                        .setHTML(`<div> <Strong> User: </Strong>${marker.properties.firstName} ${marker.properties.lastName}<br>
                             <Strong> Subject: </Strong>${marker.properties.subject}<br>
                             <Strong> Description: </Strong>${marker.properties.description}<br>
                             <Strong> Start Time: </Strong>${marker.properties.start}<br>
                             <Strong> End Time: </Strong>${marker.properties.end}<br>
                             </div>`))
                         .addTo(map);
+                    })
                     });
-            });    
+                });
+
+                }
+
+    fetchUserData(username) {
+        return modelInstance.getUser(username).then(doc => doc.data())
+        
     }
 
     filterSessions(){
-        const filteredSessions = this.state.sessions.filter(value => value.location && !(typeof value.location === 'string' || value.location instanceof String))
-        console.log("filtered sessions: ",filteredSessions)
+        let filteredSessions = this.state.sessions.filter(value => value.location && !(typeof value.location === 'string' || value.location instanceof String))
+        filteredSessions = filteredSessions.filter(value => value.location && !(value.location.longitude == "" || value.location.latitude == ""))
         return filteredSessions;
     }
 
-    displaySessionLocation(){
-        const features = this.filterSessions().map(session => {
-            return {
-                type: 'Feature',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [session.location.longitude, session.location.latitude]
-                },
-                properties: {
-                    username: modelInstance.getUser(session.creator),
-                    subject: session.subject,
-                    start: modelInstance.formatDate(modelInstance.convertToTime(session.startTime)),
-                    end: modelInstance.formatDate(modelInstance.convertToTime(session.endTime)),
-                    description: session.description
+    createFeatureFromSession = async session => {
+        let temp = null;
+        await this.fetchUserData(session.creator).then(result => { 
+            temp = {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',  
+                        coordinates: [session.location.longitude, session.location.latitude]
+                    },
+                    properties: {
+                        firstName: result.firstname,
+                        lastName: result.lastname,
+                        subject: session.subject,
+                        start: modelInstance.formatDate(modelInstance.convertToTime(session.startTime)),
+                        end: modelInstance.formatDate(modelInstance.convertToTime(session.endTime)),
+                        description: session.description
+                    }
                 }
-            }
-        });
-        this.setState({
-            geojson: {
-            type: 'FeatureCollection',
-            features:  features
-            }});
+            });
+        return temp    
     }
+
+
     
     render() {
         return (
             <div >
-                {/* <Topbar /> */}
-            <h1 style={{textAlign: 'center', fontSize: '20px', fontWeight: 'bolder', marginTop: "100px"}}>Click on the markers to see more details</h1>
+            <h1 className="infoText">Click on the markers to see more details</h1>
            <div id="geocoderMap" className="geocoderMap"></div>
-            <div id ="map"> </div>
+            <div id ="mapSession"> </div>
             </div>
       )
     }
