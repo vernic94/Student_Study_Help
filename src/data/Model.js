@@ -65,6 +65,7 @@ class Model extends ObservableModel {
 		this.currentUser = null;
 		localStorage.removeItem("currentUser");
 		console.log(this.currentUser);
+		console.log(localStorage.getItem("currentUser"));
 	}
 
 	//converts TimeStamp to a readable date

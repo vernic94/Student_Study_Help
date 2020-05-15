@@ -35,7 +35,7 @@ class ProfileEditor extends Component {
         }
         else {
             // Set state
-            var docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
+            var docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
             docRef.get().then(doc => {
                 this.setState({
                     firstname: doc.data().firstname,

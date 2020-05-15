@@ -165,7 +165,7 @@ class Profile extends Component {
                 <Topbar/>
                 <div className="ProfileContainer">
                     <div className="Edit">
-                        <Link to="/profileEditor">
+                        <Link to="/profile-editor">
                             <button type="button" className="EditButton">🖊️</button>
                         </Link>
                     </div>
