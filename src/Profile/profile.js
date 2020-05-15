@@ -114,7 +114,9 @@ class Profile extends Component {
                     <img className="ProfilePicture" src={this.state.pfpurl} alt="profile-picture"></img>
                 </div>;
         }else{
-            pfp = <div></div>;
+            pfp = <div>
+                <img className="ProfilePicture" src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="profile-picture"></img>
+            </div>;
         }
 
         return pfp;
