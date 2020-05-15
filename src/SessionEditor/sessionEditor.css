@@ -35,7 +35,7 @@
     width: 430px;   
 }
 
-.BiographyTextArea{
+.descriptionTextArea{
     background-color: #3a3f4b;
     border-color: #4f5461;
     color: whitesmoke;
@@ -55,7 +55,7 @@
     margin-top: 2px;
 }
 
-.SubjectSelect{
+.editSubject{
     background-color: #3a3f4b;
     border-color: #4f5461;
     color: whitesmoke;
@@ -116,7 +116,7 @@
     color: whitesmoke;
     align-self: center;
     text-align: center;
-    width: 124px;
+    width: 160px;
     font-size: 16px;
     background-color: rgb(194, 78, 78);
     border-radius: 2px;
@@ -126,3 +126,24 @@
 }
 
 /**************************************************/
+
+
+.mapSessionEditor{
+    min-height: 60vh;
+    width: 40vw;
+}
+
+.location-parameterEditor{
+    margin-right:500px;
+}
+
+
+.geocoderEditor {
+    z-index: 1;
+    top: 10px;
+    margin-left: 50%;
+    margin-right: 50%;
+    }
+    .mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+    }

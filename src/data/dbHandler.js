@@ -99,8 +99,6 @@ class dbHandler{
 			longitude: lng
 		  }
 		  
-		  console.log(starttime);
-		  console.log(endtime);
 		this.studysessions.doc().set({
 			creator: localStorage.getItem("currentUser"),
 			startTime: starttime,
@@ -114,6 +112,14 @@ class dbHandler{
 	setCurrentSession(id){
 		let session = this.db.collection("study_session").doc(id);
 		return session;
+	}
+
+	removeSession(session){
+		this.db.collection("study_session").doc(session.id).delete().then(function() {
+		    console.log("Document successfully deleted!");
+		}).catch(function(error) {
+		    console.error("Error removing document: ", error);
+		});
 	}
 
 

@@ -82,7 +82,7 @@ class Profile extends Component {
                         <p className="SessionTitle">
                             <b>{title}</b>
                             <Link to="/edit-session">
-                                <button className="Info" onClick={modelInstance.setCurrentSession(currentSessionID)}>🛈</button>
+                                <button className="Info" value={this.state.studySessionID[i]} onClick={e => {modelInstance.setCurrentSession(e.target.value)}}>🖊️</button>
                             </Link>
                         </p>
                     </div>

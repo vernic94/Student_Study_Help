@@ -134,7 +134,28 @@ class Model extends ObservableModel {
 	}
 
 	getCurrentSession(){
+		console.log(this.currentSession);
 		return this.currentSession;
+	}
+
+	dateFromTimestamp(timestamp){
+		let t = timestamp.toDate();
+		let date = t.getFullYear() + "-" + ("0" + (t.getMonth() + 1)).slice(-2) + "-" + ("0" + t.getDate()).slice(-2);
+		return date;
+	}
+
+	timeFromTimestamp(timeStamptoTime){
+		console.log(timeStamptoTime);
+		let a = timeStamptoTime.toDate();
+		console.log(a);
+		let time = ("0" + a.getHours()).slice(-2) + ":" + ("0" + a.getMinutes()).slice(-2);
+		console.log(time);
+		return time;
+	}
+	
+	removeSession(session){
+		console.log("model");
+		dbHandlerInstance.removeSession(session);
 	}
 }	
 
