@@ -185,7 +185,7 @@ class SessionEditor extends Component {
                 <Topbar/>
                 <form className="SessionEditorContainer" onSubmit={this.submitHandler}>
                     <h1>Edit study session</h1>
-                    <p>Please just edit the property/properties you want to change, leave the other properties as they are!</p>
+                    <p>Please just edit the property/properties you want to change.</p>
                     
                     <div className="subject-div">
                         <label for="subject">Select subject : </label><br/>
