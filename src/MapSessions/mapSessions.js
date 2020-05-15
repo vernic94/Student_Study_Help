@@ -39,18 +39,20 @@ class MapSessions extends Component {
     componentDidMount() {
         mapboxgl.accessToken = token;
         var map = new mapboxgl.Map({
-            container: 'map',
+            container: 'mapSession',
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [18.063240, 59.334591],
             zoom: 12,
             })
             
-            var geocoder = new MapboxGeocoder({
+            map.addControl(
+                new MapboxGeocoder({
                 accessToken: mapboxgl.accessToken,
                 mapboxgl: mapboxgl
-            });
+                })
+                );
                
-        document.getElementById('geocoderMap').appendChild(geocoder.onAdd(map));
+        //document.getElementById('geocoderMap').appendChild(geocoder.onAdd(map));
 
         let db = global.firebase.firestore();
         var study_sessions = [];
@@ -138,7 +140,7 @@ class MapSessions extends Component {
             <div >
             <h1 className="infoText">Click on the markers to see more details</h1>
            <div id="geocoderMap" className="geocoderMap"></div>
-            <div id ="map"> </div>
+            <div id ="mapSession"> </div>
             </div>
       )
     }

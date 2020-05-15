@@ -168,7 +168,7 @@ getDateOfToday(){
         <div className="studysession-page">
         <Topbar/>
         <div className="studysession">
-          <h1>CREATE STUDY SESSION PAGE</h1>
+          <h1>CREATE STUDY SESSION</h1>
 
           <div className="studySessionParameters">
           <div className="div-parameter">
