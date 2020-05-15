@@ -35,3 +35,4 @@ package-lock.json
 *.json
 student-study-help.iml
 config.env
+src/data/mapboxConfig.js

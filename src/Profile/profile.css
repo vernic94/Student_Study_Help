@@ -12,6 +12,11 @@
     font-size: medium;
     margin-left: 25%;
     margin-right: 25%;
+    display: block;
+}
+
+.SignIn{
+    display: none;
 }
 
 .ProfilePicture{
@@ -131,7 +136,5 @@ hr{
     color: whitesmoke;
 }
 
-/************************************************/
-/*                    MODAL                     */
-/************************************************/
+
 

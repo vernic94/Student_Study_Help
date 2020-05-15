@@ -16,49 +16,57 @@ class ProfileEditor extends Component {
     constructor(props){
         super(props);
         this.state = {
-            username: "",
+            firstname: "",
+            lastname: "",
             biography: "",
             school: [],
             subject: [],
             allSubjects: [],
             allSchools: [],
-            pfpurl: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+            pfpurl: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+            loggedIn: true,
         }
     }
 
     componentDidMount(){
+        if(modelInstance.getCurrentUser() === null && localStorage.getItem("currentUser") === null){
+            console.log("Not logged in!")
+            this.setState({loggedIn: false,})
+        }
+        else {
+            // Set state
+            var docRef = modelInstance.getUser(localStorage.getItem("currentUser"));
+            docRef.get().then(doc => {
+                this.setState({
+                    firstname: doc.data().firstname,
+                    lastname: doc.data().lastname,
+                    biography: doc.data().bio,
+                    school: doc.data().school,
+                    subject: doc.data().subject,
+                    pfpurl: doc.data().pfpurl,
+                })
+            })
+            
+            let arrSub =[];
+            modelInstance.getSubjects().get().then(
+                (snapshot) => {
+                    snapshot.forEach((doc) => {
+                        arrSub.push(doc.id);
+                })
+            }).then(() => {
+                this.setState({allSubjects: arrSub})
+            })
 
-        // Set state
-        var docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
-        docRef.get().then(doc => {
-            this.setState({
-                username: doc.data().firstname,
-                biography: doc.data().bio,
-                school: doc.data().school,
-                subject: doc.data().subject,
-                pfpurl: doc.data().pfpurl,
+            let arrSch =[];
+            modelInstance.getSchools().get().then(
+                (snapshot) => {
+                    snapshot.forEach((doc) => {
+                        arrSch.push(doc.id);
+                })
+            }).then(() => {
+                this.setState({allSchools: arrSch})
             })
-        })
-        
-        let arrSub =[];
-        modelInstance.getSubjects().get().then(
-            (snapshot) => {
-                snapshot.forEach((doc) => {
-                    arrSub.push(doc.id);
-            })
-        }).then(() => {
-            this.setState({allSubjects: arrSub})
-        })
-
-        let arrSch =[];
-        modelInstance.getSchools().get().then(
-            (snapshot) => {
-                snapshot.forEach((doc) => {
-                    arrSch.push(doc.id);
-            })
-        }).then(() => {
-            this.setState({allSchools: arrSch})
-        })
+        }
     }
 
     //handles form submission
@@ -69,7 +77,8 @@ class ProfileEditor extends Component {
         const docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
 
         docRef.update({
-            firstname: this.state.username,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
             bio: this.state.biography,
             school: this.state.school,
             subject: this.state.subject,
@@ -165,6 +174,54 @@ class ProfileEditor extends Component {
         this.props.history.push('/');
     }
 
+    toggle = () => {
+        var del = document.getElementsByClassName("BtnRemoveUser");
+        var sc = document.getElementsByClassName("SaveCancel");
+        var pop = document.getElementsByClassName("DeleteUser");
+
+        for (var i=0;i<sc.length;i+=1){
+            sc[i].style.display = "none";
+        }
+        for (var i=0;i<del.length;i+=1){
+            del[i].style.display = "none";
+        }
+        for (var i=0;i<pop.length;i+=1){
+            pop[i].style.display = "block";
+        }
+    }
+
+    returnToEdit = () => {
+        var del = document.getElementsByClassName("BtnRemoveUser");
+        var sc = document.getElementsByClassName("SaveCancel");
+        var pop = document.getElementsByClassName("DeleteUser");
+
+        for (var i=0;i<sc.length;i+=1){
+            sc[i].style.display = "block";
+        }
+        for (var i=0;i<del.length;i+=1){
+            del[i].style.display = "block";
+        }
+        for (var i=0;i<pop.length;i+=1){
+            pop[i].style.display = "none";
+        }
+    }
+
+    toggleContainer(){
+        var cont = document.getElementsByClassName("ProfileEditorContainer");
+        var btn = document.getElementsByClassName("BtnRemoveUser");
+        var sign = document.getElementsByClassName("SignIn");
+
+        for (var i=0;i<btn.length;i+=1){
+            btn[i].style.display = "none";
+        }
+        for (var i=0;i<cont.length;i+=1){
+            cont[i].style.display = "none";
+        }
+        for (var i=0;i<sign.length;i+=1){
+            sign[i].style.display = "block";
+        }
+    }
+
     //create element with all selected schools buttons
     createSelectedSchools(){
         let selectedSchools = []
@@ -207,24 +264,38 @@ class ProfileEditor extends Component {
 	
 	render(){
 
-        let selectedSchools = this.createSelectedSchools();
-        let selectedSubjects = this.createSelectedSubjects();
-        let schoolOptions = this.allSchools();
-        let subjectOptions = this.allSubjects();
+        let selectedSchools;
+        let selectedSubjects;
+        let schoolOptions;
+        let subjectOptions;
+        if(this.state.loggedIn === false){
+            this.toggleContainer();
+        }else{
+            selectedSchools = this.createSelectedSchools();
+            selectedSubjects = this.createSelectedSubjects();
+            schoolOptions = this.allSchools();
+            subjectOptions = this.allSubjects();
+        }
 
 		return(
             <div className="profileEditor-page">
                 <Topbar/>
                 <form className="ProfileEditorContainer" onSubmit={this.submitHandler}>
                     <h1>Edit Profile</h1>
-                    <div className="UsernameEditor">
+                    <div className="NameEditor">
                         <label>
-                            Username:
-                            <input type="text" className="UsernameInput" name="username" value={this.state.username} onChange={this.inputHandler}></input>
+                            Firstname:
+                            <input type="text" className="NameInput" name="firstname" value={this.state.firstname} onChange={this.inputHandler}></input>
+                        </label>
+                    </div>
+                    <div className="LastnameEditor">
+                        <label>
+                            Lastname:
+                            <input type="text" className="NameInput" name="lastname" value={this.state.lastname} onChange={this.inputHandler}></input>
                         </label>
                     </div>
                     <div className="BiographyEditor">
-                        <label>Biography:
+                        <label>About me:
                             <br></br>
                             <textarea type="text" className="BiographyTextArea" name="biography" value={this.state.biography} rows="4" cols="50" onChange={this.inputHandler}></textarea>
                         </label>
@@ -266,7 +337,28 @@ class ProfileEditor extends Component {
                     </div>
                 </form>
                 <div className="RemoveUser">
-                    <button className="BtnRemoveUser" onClick={this.removeUser}>Delete Account</button>
+                    <button className="BtnRemoveUser" onClick={this.toggle}>Delete Account</button>
+                </div>
+                <div className="DeleteUser">
+                    <p>
+                        You are about to permanently delete your account with all of your created study sessions.
+                        <br></br><br></br>
+                        Would you like to proceed?
+                    </p>
+                    <p className="BtnsYesNo">
+                        <button className="BtnYes" onClick={this.removeUser}>Yes</button>
+                        <button className="BtnNo" onClick={this.returnToEdit}>No</button>
+                    </p>
+                </div>
+                <div className="SignIn">
+                    <p>
+                        You're not logged in. 
+                        <br></br>
+                        Sign in or create an account to view your profile.
+                    </p>
+                    <Link to="/">
+                        <button>Sign in</button>
+                    </Link>
                 </div>
             </div>
         );

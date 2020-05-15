@@ -2,18 +2,11 @@ import ObservableModel from "./ObservableModel";
 //import { firebaseConfig } from "./firebaseConfig";
 import dbHandlerInstance from "./dbHandler";
 
-//const bcrypt = require("bcryptjs");
-//const salt = bcrypt.genSaltSync(10);
 
 class Model extends ObservableModel {
 	constructor() {
 		super();
-
 		this.currentUser = null;
-	    // global.firebase.initializeApp(firebaseConfig);
-	    // this.db = global.firebase.firestore();
-		//this.users = this.db.collection("users");
-
 	}
 
 	getCurrentUser() {
@@ -93,20 +86,38 @@ class Model extends ObservableModel {
         }
     }
 
-    formatDate(date) {
-        try {
-            if (date != "") {
-                return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
-            }
-        } catch (error) {
-            return "";
-        }
-
-    }
-
     getStudySessions() {
         return dbHandlerInstance.getStudySessions();
     }
+	formatDay(date) {
+		try {
+			if (date !== "") {
+				return date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+			}
+		} catch (error) {
+			return "";
+		}
+	}
+	formatTime(startTime, endTime){
+		try {
+			if (startTime !== "" && endTime !== "") {
+				return " kl " + ("0" + startTime.getHours()).slice(-2) + ":" + ("0" + startTime.getMinutes()).slice(-2)
+					+" - " + ("0" + endTime.getHours()).slice(-2) + ":" +  ("0" + endTime.getMinutes()).slice(-2) ;
+			}
+		} catch (error) {
+			return "";
+		}
+	}
+	formatDate(date) {
+		try {
+			if (date !== "") {
+				return date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2)
+					+ " kl " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+			}
+		} catch (error) {
+			return "";
+		}
+	}
 
 }
 

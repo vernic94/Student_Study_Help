@@ -15,47 +15,56 @@ class Profile extends Component {
     constructor(props){
         super(props);
         this.state = {
-            username: "",
+            firstname: "",
+            lastname: "",
             biography: "",
             school: [],
             subject: [],
             pfpurl: "",
-            sessions: []
+            sessions: [],
+            loggedIn: true,
         }
     }
 
     componentDidMount(){
-
-        //set local storage
-        let user;
-        if(localStorage.getItem("currentUser") === "null" || localStorage.getItem("currentUser") === null){
-            console.log("In if!");
-            localStorage.setItem("currentUser", modelInstance.getCurrentUser());
+        if(modelInstance.getCurrentUser() === null && localStorage.getItem("currentUser") === null){
+            console.log("Not logged in!")
+            this.setState({loggedIn: false,})
         }
-        user = localStorage.getItem("currentUser");
+        else {
 
-        //set state
-        var docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
-        docRef.get().then(doc => {
-            this.setState({
-                username: doc.data().firstname,
-                biography: doc.data().bio,
-                school: doc.data().school,
-                subject: doc.data().subject,
-                pfpurl: doc.data().pfpurl,
-            })
-        })
+            //set local storage
+            let user;
+            if(localStorage.getItem("currentUser") === "null" || localStorage.getItem("currentUser") === null){
+                console.log("In if!");
+                localStorage.setItem("currentUser", modelInstance.getCurrentUser());
+            }
+            user = localStorage.getItem("currentUser");
 
-        //get the current user's study sessions
-        let study_sessions = [];
-        modelInstance.getUserStudySessions(user).get().then(
-            (snapshot) => {
-                snapshot.forEach((doc) => {
-                    study_sessions.push(doc.data());
+            //set state
+            var docRef = modelInstance.getUserProfile(localStorage.getItem("currentUser"));
+            docRef.get().then(doc => {
+                this.setState({
+                    firstname: doc.data().firstname,
+                    lastname: doc.data().lastname,
+                    biography: doc.data().bio,
+                    school: doc.data().school,
+                    subject: doc.data().subject,
+                    pfpurl: doc.data().pfpurl,
                 })
-            }).then(() => {
-                this.setState({sessions: study_sessions})
-            });
+            })
+
+            //get the current user's study sessions
+            let study_sessions = [];
+            modelInstance.getUserStudySessions(user).get().then(
+                (snapshot) => {
+                    snapshot.forEach((doc) => {
+                        study_sessions.push(doc.data());
+                    })
+                }).then(() => {
+                    this.setState({sessions: study_sessions})
+                });
+        }
     }
 
     //create study session element
@@ -123,12 +132,33 @@ class Profile extends Component {
         return bio;
 
     }
+
+    toggleContainer(){
+        var cont = document.getElementsByClassName("ProfileContainer");
+        var sign = document.getElementsByClassName("SignIn");
+
+        for (var i=0;i<cont.length;i+=1){
+            cont[i].style.display = "none";
+        }
+
+        for (var i=0;i<sign.length;i+=1){
+            sign[i].style.display = "block";
+        }
+    }
 	
 	render(){
 
-        let pfp = this.createPfpElement();
-        let bio = this.createBioElement();
-        let mySessions = this.createSessionElement();
+        let pfp;
+        let bio;
+        let mySessions;
+
+        if(this.state.loggedIn === false){
+            this.toggleContainer();
+        }else{
+            pfp = this.createPfpElement();
+            bio = this.createBioElement();
+            mySessions = this.createSessionElement();
+        }
         
 		return(
             <div className="profile-page">
@@ -140,7 +170,7 @@ class Profile extends Component {
                         </Link>
                     </div>
                     {pfp}
-                    <h1>{this.state.username}</h1>
+                        <h1>{this.state.firstname} {this.state.lastname}</h1>
                     <div className="ProfileInfo">
                         {bio}
                         <p className="ProfileParagraph">{"School: " + this.state.school.join(', ')}</p>
@@ -149,6 +179,16 @@ class Profile extends Component {
                         <p className="MySessions">My Study Sessions</p>
                         <div className="SessionDiv">{mySessions}</div>
                     </div>
+                </div>
+                <div className="SignIn">
+                    <p>
+                        You're not logged in. 
+                        <br></br>
+                        Sign in or create an account to view your profile.
+                    </p>
+                    <Link to="/">
+                        <button>Sign in</button>
+                    </Link>
                 </div>
             </div>
         );
