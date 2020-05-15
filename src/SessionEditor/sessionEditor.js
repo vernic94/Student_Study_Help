@@ -123,7 +123,6 @@ class SessionEditor extends Component {
     removeSession(){
         console.log("here");
         modelInstance.removeSession(modelInstance.getCurrentSession());
-        this.props.history.push('/');
     } 
 
       //create element with all subject options, agnes metod
@@ -229,7 +228,9 @@ class SessionEditor extends Component {
                     </div>
                 </form>
                 <div className="RemoveSession">
-                    <button className="BtnRemoveSession" onClick={this.removeSession}>Delete study session</button>
+                    <Link to="/">
+                        <button className="BtnRemoveSession" onClick={this.removeSession}>Delete study session</button>
+                    </Link>
                 </div>
             </div>
         );
