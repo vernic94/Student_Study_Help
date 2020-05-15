@@ -3,7 +3,7 @@
     margin-bottom: 50px;
 }
 
-.ProfileEditorContainer{
+.SessionEditorContainer{
     display: flex;
     flex-direction: column;
     text-align: left;

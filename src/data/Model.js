@@ -138,12 +138,11 @@ class Model extends ObservableModel {
 	}
 
 	timeFromTimestamp(timeStamptoTime){
-		console.log(timeStamptoTime);
-		let a = timeStamptoTime.toDate();
-		console.log(a);
-		let time = ("0" + a.getHours()).slice(-2) + ":" + ("0" + a.getMinutes()).slice(-2);
-		console.log(time);
-		return time;
+		//let t = new Date(timestamp * 1000);
+		let t = timeStamptoTime.toDate();
+        let minutes = "0" + t.getMinutes();
+        let date = eval(t.getFullYear()) + '-' + eval(t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + minutes.substr(-2);
+		return date;
 	}
 	
 	removeSession(session){

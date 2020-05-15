@@ -16,13 +16,32 @@ class SessionEditor extends Component {
             sessionDate: "",
             startTime: "",
             endTime: "",
-            location: "",
+            longitude: "",
+            latitude: "",
             description: "",
-            allSubjects: []
+            allSubjects: [],
+            startTimeClock: ""
         }
     }
 
     componentDidMount(){
+
+        // Set state
+        let docRef = modelInstance.getCurrentSession();
+
+        console.log(docRef);
+            docRef.get().then(doc => {
+            this.setState({
+                subject: doc.data().subject,
+                startTime: doc.data().startTime,
+                endTime: doc.data().endTime,
+                longitude: doc.data().location.longitude,
+                latitude: doc.data().location.latitude,
+                description: doc.data().description,
+                sessionDate: modelInstance.dateFromTimestamp(doc.data().startTime)
+            })
+        })
+
         var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
         mapboxgl.accessToken = 'pk.eyJ1IjoidmVybmljIiwiYSI6ImNrOWltOXJ0YjAwNjQzbnA4eXlmY293eWkifQ.dA5_3vrOMVMmIEThwLQlUg';    
         
@@ -35,12 +54,11 @@ class SessionEditor extends Component {
     
         map.addControl(
           new MapboxGeocoder({
-          accessToken: mapboxgl.accessToken,
-          mapboxgl: mapboxgl
-          })
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+            })
           );
     
-         
     
         // Add geolocate control to the map.
         map.addControl(
@@ -51,32 +69,22 @@ class SessionEditor extends Component {
             trackUserLocation: true
             })
           );
+          const currentPos: Project = {
+            longitude: this.state.longitude,
+			latitude: this.state.latitude
+		  }
           var markSessionPosition = new mapboxgl.Marker();
           map.on('click', e=> {
               this.setState({
                 longitude: e.lngLat.lng,
                 latitude: e.lngLat.lat
               });
+
+              console.log(this.state.longitude + "<state e> " + e.lngLat.lng);
     
               markSessionPosition.setLngLat([e.lngLat.lng, e.lngLat.lat])
               .addTo(map);
           });
-
-
-        // Set state
-        let docRef = modelInstance.getCurrentSession();
-        
-        console.log(docRef);
-            docRef.get().then(doc => {
-            this.setState({
-                subject: doc.data().subject,
-                startTime: doc.data().startTime,
-                endTime: doc.data().endTime,
-                location: doc.data().location,
-                description: doc.data().description,
-                sessionDate: modelInstance.dateFromTimestamp(doc.data().startTime)
-            })
-        })
 
             // agnes metod, hämtar alla subjects
             let arrSub =[];
@@ -102,7 +110,8 @@ class SessionEditor extends Component {
         description: this.state.description,
         startTime: this.state.startTime,
         endTime: this.state.endTime,
-        location: this.state.location
+        longitude: this.state.longitude,
+        latitude: this.state.latitude
     }).then(function() {
         console.log("Document successfully updated!");
     });
@@ -141,7 +150,6 @@ class SessionEditor extends Component {
             else if(today.getDate() < 10){
               date = today.getFullYear() + "-0" + (today.getMonth()+1) + "-0" + today.getDate();
             }
-            console.log(date);
           
             return date;
           }
@@ -175,8 +183,9 @@ class SessionEditor extends Component {
 		return(
             <div className="sessionEditor-page">
                 <Topbar/>
-                <form className="ProfileEditorContainer" onSubmit={this.submitHandler}>
+                <form className="SessionEditorContainer" onSubmit={this.submitHandler}>
                     <h1>Edit study session</h1>
+                    <p>Please just edit the property/properties you want to change, leave the other properties as they are!</p>
                     
                     <div className="subject-div">
                         <label for="subject">Select subject : </label><br/>
@@ -187,13 +196,13 @@ class SessionEditor extends Component {
 
                         <div className="timeBoxes">
                              <label for="sessionDate">Date : </label>
-                            <input type="date" id="sessionDate" name="sessionDate" className="sessionDate" defaultValue={this.state.sessionDate} min={today} max="2020-12-31" onChange={e => this.setState({sessionDate: e.target.value})}/> <br/>
+                            <input type="date" id="sessionDate" name="sessionDate" className="sessionDate" min={today} max="2020-12-31" onChange={e => this.setState({sessionDate: e.target.value})}/> <br/>
                             <label for="startTime">Start time : </label>
                             <input type="time" id="appt" name="appt" className="startTimeBox"
-                                min="06:00" max="23:00" defaultValue={this.state.startTime} onChange={e => this.setStartTime(e.target.value)}></input> <br/>
+                                min="06:00" max="23:00" onChange={e => this.setStartTime(e.target.value)}></input> <br/>
                             <label for="endTime">End time : </label>
                             <input type="time" id="appt" name="appt" className="endTimeBox"
-                                min={this.state.startTimeClock} max="23:00" onChange={e => this.setEndTime(e.target.value)}></input> <br/>
+                            min = "09:00" max="23:00" onChange={e => this.setEndTime(e.target.value)}></input> <br/>
                         </div>
                     </div>
                     <div className="location-parameterEditor">
@@ -214,7 +223,7 @@ class SessionEditor extends Component {
                     <br/>
                     <div className="SaveCancel">
                         <button className="ButtonSave" type="submit" onClick={this.submitHandler}>Save</button>
-                        <Link to="/profile">
+                        <Link to="/">
                             <button className="ButtonCancel" type="reset">Cancel</button>
                         </Link>
                     </div>

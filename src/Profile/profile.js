@@ -73,7 +73,6 @@ class Profile extends Component {
     createSessionElement(){
         let mySessions = [];
         for(let i = 0; i < this.state.sessions.length; i++){
-            console.log(this.state.sessions[i].startTime);
             let start = modelInstance.convertToTimeProfile(this.state.sessions[i].startTime);
             let end = modelInstance.convertToTimeProfile(this.state.sessions[i].endTime);
 
