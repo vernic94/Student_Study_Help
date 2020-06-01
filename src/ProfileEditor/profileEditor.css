@@ -10,9 +10,10 @@
     font-size: medium;
     margin-left: 400px; /*change later*/
     margin-top: 40px; /*change later*/
+    display: block;
 }
 
-.UsernameInput{
+.NameInput{
     background-color: #3a3f4b; 
     border-color: #4f5461;  
     color: whitesmoke;
@@ -44,12 +45,15 @@
     border-radius: 5px;
     padding: 8px;
     margin-top: 5px;
+    width: 430px;
 }
 
 .SchoolSelect{
     background-color: #3a3f4b;
     border-color: #4f5461;
     color: whitesmoke;
+    width: 430px;
+    margin-top: 2px;
 }
 
 .SubjectSelect{
@@ -57,11 +61,15 @@
     border-color: #4f5461;
     color: whitesmoke;
     margin-bottom: 15px;
+    width: 430px;
+    margin-top: 2px;
 }
 
 .Selected{
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 430px;
 }
 
 .RemoveSchool{
@@ -70,9 +78,9 @@
     background-color: #4f5461;
     border-radius: 5px;
     padding-left: 5px;
-    margin-top: 8px;
+    margin-top: 1px;
     margin-right: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     color: whitesmoke;
 }
 
@@ -82,10 +90,32 @@
     background-color: #4f5461;
     border-radius: 5px;
     padding-left: 5px;
-    margin-top: 8px;
+    margin-top: 1px;
     margin-right: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     color: whitesmoke;
+}
+
+.DeleteUser {
+    font-size: 16px;
+    width: 400px;
+    margin-left: 414px;
+    background-color: whitesmoke;
+    color: black;
+    border-color: rgb(240, 50, 50);
+    border-style: solid;
+    padding: 8px;
+    display: none;
+}
+
+.BtnsYesNo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.SignIn{
+    display: none;
 }
 
 /**************************************************/
@@ -102,6 +132,11 @@
     color: #6586da;
 }
 
+.ButtonCancel:hover{
+    background-color: rgb(221, 221, 221);
+    border-color: rgb(221, 221, 221);
+}
+
 .ButtonSave{
     align-self: center;
     text-align: center;
@@ -112,6 +147,11 @@
     margin-right: 2px;
 }
 
+.ButtonSave:hover{
+    background-color: rgb(221, 221, 221);
+    border-color: rgb(221, 221, 221);
+}
+
 .ButtonCancel{
     align-self: center;
     text-align: center;
@@ -120,6 +160,69 @@
     border-radius: 2px;
     border-style: solid;
     margin-left: 2px;
+}
+
+.RemoveUser{
+    text-align: left;   
+    margin-left: 400px;
+    margin-top: 10px;
+}
+
+.BtnRemoveUser{
+    color: whitesmoke;
+    align-self: center;
+    text-align: center;
+    width: 124px;
+    font-size: 16px;
+    background-color: rgb(194, 78, 78);
+    border-radius: 2px;
+    border-style: solid;
+    margin-right: 2px;
+    border-color: rgb(194, 78, 78);
+    display: block;
+}
+
+.BtnRemoveUser:hover{
+    background-color: rgb(180, 72, 72);
+    border-color: rgb(180, 72, 72);
+}
+
+.BtnYes{
+    color: whitesmoke;
+    text-align: center;
+    width: 100px;
+    font-size: 16px;
+    background-color: rgb(194, 78, 78);
+    border-radius: 2px;
+    border-style: solid;
+    margin-right: 2px;
+    border-color: rgb(194, 78, 78);
+    display: flex;
+    justify-content: center;
+}
+
+.BtnYes:hover{
+    background-color: rgb(180, 72, 72);
+    border-color: rgb(180, 72, 72);
+}
+
+.BtnNo{
+    color: whitesmoke;
+    text-align: center;
+    width: 100px;
+    font-size: 16px;
+    background-color: rgb(165, 165, 165);
+    border-radius: 2px;
+    border-style: solid;
+    margin-right: 2px;
+    border-color: rgb(165, 165, 165);
+    display: flex;
+    justify-content: center;
+}
+
+.BtnNo:hover{
+    background-color: rgb(139, 139, 139);
+    border-color: rgb(139, 139, 139);
 }
 
 /**************************************************/

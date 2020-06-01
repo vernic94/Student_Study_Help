@@ -1,13 +1,13 @@
 //import firebase from "firebase/app";
 //import "firebase/firestore";
 //import ObservableModel from "./ObservableModel";
-import {API_KEY} from "./firebaseConfig";
-//import * as firebase from "firebase";
+import modelInstance from "./Model";
+import * as firebase from "firebase";
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 
 export const firebaseConfig = {
-    apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
+    apiKey: process.env.firebaseAPIKey,
     authDomain: "student-study-help.firebaseapp.com",
     databaseURL: "https://student-study-help.firebaseio.com/",
     projectId: "student-study-help",
@@ -83,52 +83,70 @@ class dbHandler{
 		});
 	}
 
-	createStudySession(starttime, endtime, loc, descr){
+
+	removeUserStudySession(user){
+		var userSessions = this.db.collection("study_session").where("creator", "==", user);
+		userSessions.get().then(function(querySnapshot) {
+			querySnapshot.forEach(function(doc) {
+			  doc.ref.delete();
+			});
+		  });
+	}
+
+	createStudySession(subj, starttime, endtime, lat, lng, descr){
+		const geopoint: Project = {
+			latitude: lat,
+			longitude: lng
+		  }
+		  
 		this.studysessions.doc().set({
-			creator: this.currentUser,
+			creator: localStorage.getItem("currentUser"),
 			startTime: starttime,
 			endTime: endtime,
-			location: loc,
-			description: descr
+			location: geopoint,
+			description: descr,
+			subject: subj
 		});
+	}
+
+	setCurrentSession(id){
+		let session = this.db.collection("study_session").doc(id);
+		return session;
+	}
+
+	removeSession(session){
+		this.db.collection("study_session").doc(session.id).delete().then(function() {
+		    console.log("Document successfully deleted!");
+		}).catch(function(error) {
+		    console.error("Error removing document: ", error);
+		});
+	}
+
+
+    getStudySessions() {
+        return this.studysessions.get();
+    }
+
+    getUser(username){
+        return this.users.doc(username).get();
+    }
+
+	getUserProfile(user){
+		return this.db.collection("users").doc(user);
+	}
+
+	getUserStudySessions(user){
+		return this.db.collection("study_session").where("creator", "==", user);
+	}
+
+	getSubjects(){
+		return this.db.collection("subjects");
+	}
+
+	getSchools(){
+		return this.db.collection("universities");
 	}
 
 }
 const dbHandlerInstance = new dbHandler();
 export default dbHandlerInstance;
-/**
- var description=
- var endtime=
- var starttime=
- var subject=
-**/
-/**
-class dbHandler {
-    function
-    func() {
-        firebase.initializeApp(firebaseConfig);
-        var database = firebase.database();
-        //eller var database = firebase.firestore();?
-        var ref = database.ref('study_session');
-        ref.on('value', gotData, errData);
-    }
-    function
-    gotData(data) {
-        console.log(data);
-        alert(data);
-    }
-    function
-    errData(err) {
-        console.log('Error');
-        console.log(err);
-    }
-}
-var admin = require("firebase-admin");
-var db = admin.database();
-var ref = db.ref("study_session/X4pWzgb4EmSCT0gjc9Yh");
-ref.on("value", function(snapshot) {
-    console.log(snapshot.val());
-}, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
-});
-**/

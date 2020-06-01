@@ -1,89 +1,144 @@
-import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import React, {Component, Fragment} from "react";
 import "./studysessions.css";
-// import {firebaseConfig} from "../data/firebaseConfig";
+import SearchedSessions from "./searchedSessions";
+import modelInstance from "../data/Model";
+import uuid from 'react-uuid'
 
-export const firebaseConfig = {
-    apiKey: "AIzaSyDYL1p7zMpUYF4q0i7HLh6fvhFsQzOEoBM",
-    authDomain: "student-study-help.firebaseapp.com",
-    databaseURL: "https://student-study-help.firebaseio.com/",
-    projectId: "student-study-help",
-    storageBucket: "student-study-help.appspot.com",
-    messagingSenderId: "284363914579",
-    appId: "1:284363914579:web:7bec55fc128b5ab3cb35a6",
-    measurementId: "G-YPH7CP209E"
-};
+/**
+ * Responsible: Fariba
+ */
 
-class StudySessions extends React.Component {
+class StudySessions extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            originalSessions: [], //holds the original sessions
+            expandedRows: [],
+            userData: [],
             sessions: []
         }
+        this.populateTable();
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
+    async populateTable() {
+        let studySessions = [];
+        let userData = []
 
-    convertToTime(firebaseTimeStamp) {
-        if (firebaseTimeStamp != undefined) {
-            return firebaseTimeStamp.toDate();
+        await modelInstance.getStudySessions()
+            .then(snapshot => snapshot.forEach(doc => studySessions.push(doc.data())));
 
+        await studySessions
+            .forEach(session => this.fetchUserData(session.creator)
+                .then(user => userData.push(user)).catch((err) => console.log("no user." + err)));
+        this.setState({originalSessions: studySessions, userData: userData, sessions: studySessions});
+    }
+
+    /**
+     * Updates sessions with the new searched sessions
+     * @param newSessions is the new sessions after the filter/search
+     */
+    handleSearch(newSessions){
+        this.setState({sessions: newSessions});
+    }
+
+    handleRowClick(rowId) {
+        const expandedRows = this.state.expandedRows;
+        const isRowExpanded = expandedRows.includes(rowId);
+        const newExpandedRows = isRowExpanded ? expandedRows.filter(id => id !== rowId) : expandedRows.concat(rowId);
+        this.setState({expandedRows: newExpandedRows});
+    }
+
+    async fetchUserData(username) {
+        let user = null;
+        await modelInstance.getUser(username).then(snapshot => user = snapshot);
+        return user;
+    }
+
+    getUserInfoRow(session) {
+        let find = this.state.userData.find((user) => user.id === session.creator);
+        if (find != null) {
+            return <Fragment key={uuid()}>
+                <tr key={uuid()} className="table-secondary">
+                    <td className="tableCell" colSpan={1} key={uuid()}>Creators information:</td>
+                    <td className="tableCell" colSpan={3} key={uuid()}>
+                        <div key={uuid()} className="table-responsive table-borderless ">
+                            <table className="tableCellBig ">
+                                <tbody key={uuid()}>
+                                <tr key={uuid()} className="table-secondary">
+                                    <td className="tableCell" key={uuid()}>
+                                        {find.data().firstname} {find.data().lastname}
+                                    </td>
+                                </tr>
+                                <tr key={uuid()} className="table-secondary">
+                                    <td className="tableCell" key={uuid()}>
+                                        {find.data().school.toString()}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </Fragment>
+        } else {
+            return <td colSpan={4} key={uuid()}>User not found!</td>
         }
-        return "";
     }
 
-    formatDate(date) {
-        if (date != "") {
-            return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " kl " + date.getHours() + ":" + date.getMinutes();
+    renderItem(value, index) {
+        const clickCallback = () => this.handleRowClick(index);
+        const itemRows = [
+            <tr onClick={clickCallback} className="clickable justify-content-center" key={"row-data-" + index}>
+                <td className="tableCell" key={uuid()}>{value.subject}</td>
+                <td className="tableCell"
+                    key={uuid()}>{modelInstance.formatDay(modelInstance.convertToTime(value.startTime))}
+                </td>
+                <td className="tableCell"
+                    key={uuid()}>{modelInstance.formatTime(modelInstance.convertToTime(value.startTime), modelInstance.convertToTime(value.endTime))}
+                </td>
+                <td key={uuid()}>{value.description}</td>
+            </tr>
+        ];
+
+        if (this.state.expandedRows.includes(index)) {
+            itemRows.push(this.getUserInfoRow(value))
         }
-        return "";
-    }
 
-    componentDidMount() {
-        let db = global.firebase.firestore();
-        var study_sessions = [];
-        db.collection('study_session').get().then(
-            (snapshot) => {
-                snapshot.forEach((doc) => {
-                    study_sessions.push(doc.data());
-                })
-            }).then(() => {
-                this.setState({sessions: study_sessions})
-            }
-        );
+        return itemRows;
     }
 
     render() {
-        return (
-            <div className="studySessionsPage">
-                <div className="studySessionsContainer">
-                    <div>
-                        <table className="table table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">Creator</th>
-                                <th scope="col">Subject</th>
-                                <th scope="col">Start Time</th>
-                                <th scope="col">End Time</th>
-                                <th scope="col">Description</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+        let allItemRows = [];
 
-                            {this.state.sessions.map((value, index) => {
-                                return <tr key={index}>
-                                    <td>{value.creator}</td>
-                                    <td>{value.subject}</td>
-                                    <td>{this.formatDate(this.convertToTime(value.startTime))}</td>
-                                    <td>{this.formatDate(this.convertToTime(value.endTime))}</td>
-                                    <td>{value.description}</td>
-                                </tr>
-                            })}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>);
+        this.state.sessions.map((value, index) => {
+            if(modelInstance.formatDate(modelInstance.convertToTime(value.endTime)) > modelInstance.formatDate(new Date())) {
+                const perItemRows = this.renderItem(value, index);
+                allItemRows = allItemRows.concat(perItemRows);
+            }
+        });
+
+        return <div className="studySessionsContainer">
+        <SearchedSessions className="input-search" sessions={this.state.originalSessions}
+                          handleSearch={this.handleSearch}/>
+        <div key={uuid()} className="table-responsive ">
+                <table className="table table-dark" key={uuid()}>
+                    <thead>
+                    <tr key={uuid()} className="table-active">
+                        <th key={uuid()} className="tableCell" scope="col">Subject</th>
+                        <th key={uuid()} className="tableCell" scope="col">Day</th>
+                        <th key={uuid()} className="tableCell" scope="col">Time</th>
+                        <th key={uuid()} className="tableCell" scope="col">Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {allItemRows}
+                    </tbody>
+                </table>
+            </div>
+        </div>;
+
     }
 }
 

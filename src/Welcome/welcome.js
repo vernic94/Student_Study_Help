@@ -1,7 +1,7 @@
-/* Welcome page/Start page
+/** Welcome page/Start page
 
 Responsible: Fariba
-*/
+**/
 
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
@@ -78,8 +78,8 @@ class Welcome extends Component {
                     <label htmlFor="inputPassword" className="sr-only">Password</label>
                     <input type="password" id="inputPassword" className="form-control" placeholder="Password"
                     	required onChange={e=> this.setState({password: e.target.value})}/>
-                    <button className="btn btn-lg  btn-block"
-                            style={{backgroundColor: "#56CCF2"}} onClick={this.loginHandler}>Sign in</button>
+                    <button className="btnL btn btn-lg  btn-block"
+                             onClick={this.loginHandler}>Sign in</button>
 
                 <div className="mb-3">
                     <Link to="/create-account">

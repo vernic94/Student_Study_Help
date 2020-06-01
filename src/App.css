@@ -7,13 +7,13 @@
   pointer-events: none;
 }
 /*Button style*/
-.EditButton, .logBtn, .choice-btn, .button{
+.EditButton, .logBtn, .choice-btn, .button, .btnL.btn.btn-lg.btn-block{
   background-color: #56CCF2;
   color: black;
   border: 1px solid steelblue;
  }
 /*Button hover style*/
-.EditButton:hover, .logBtn:hover, .choice-btn:hover, .button:hover{
+.EditButton:hover, .logBtn:hover, .choice-btn:hover, .button:hover, .btnL.btn.btn-lg.btn-block:hover{
   background-color: steelblue;
   color: black;
   border: 1px solid steelblue;
@@ -31,7 +31,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
   min-width: 300px;

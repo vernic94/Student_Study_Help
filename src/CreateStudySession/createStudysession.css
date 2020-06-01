@@ -1,0 +1,80 @@
+.studysession-page{
+    width: 100%;
+}
+
+.choice-btns{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.studysession-description{
+    margin-bottom: 30px;
+}
+
+.description-box{
+    margin-top: 10px;
+    width: 400px;
+    height: 100px;
+}
+
+.studysession-btn{
+    margin-top: 30px;
+}
+
+.Notetext{
+    margin-bottom:0;
+}
+
+/* plan study session paramters */
+
+.time-box{
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+.timeBoxes{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#mapSession, #geocoder{
+    position: relative;
+}
+
+#mapSession{
+    min-height: 60vh;
+    width: 40vw;
+    margin: auto;
+}
+
+.subjectDiv{
+    margin-top: 20px;
+}
+.studySessionSubject{
+    background-color: #3a3f4b;
+    border-color: #4f5461;
+    color: whitesmoke;
+    margin-bottom: 15px;
+    width: 430px;
+    margin-top: 2px;
+}
+
+.sessionDate, .startTimeBox, .endTimeBox{
+    background-color: #3a3f4b;
+    margin-bottom: 15px;
+    margin-top: 2px;
+    appearance: none;
+    -webkit-appearance: none;
+    color: whitesmoke;
+    font-family: "Helvetica", arial, sans-serif;
+    font-size: 18px;
+    border:1px solid #4f5461;
+    padding:5px;
+    display: inline-block !important;
+    visibility: visible !important;
+    margin-left: 10px;
+}
+
+.btnDiv{
+    margin-bottom: 50px;
+}

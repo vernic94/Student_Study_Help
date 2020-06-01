@@ -1,1 +1,13 @@
+.tableCell{
+    width: 25%
+}
 
+.tableCellBig{
+    width: 100%
+}
+.input-search{
+    width: 100% !important;
+}
+.input-search::placeholder{
+    text-align: center;
+}
